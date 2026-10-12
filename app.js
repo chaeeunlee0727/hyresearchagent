@@ -169,6 +169,20 @@
         const rows = rater.querySelectorAll('.rater-row');
         const out = rater.querySelector('.rater-out');
         const val = { '상': 2, '중': 1, '하': 0 };
+        // subject line: type a task name, Enter -> becomes the card title
+        const subj = rater.querySelector('.rater-subject');
+        if (subj) {
+            const input = subj.querySelector('input');
+            const title = subj.querySelector('.rater-title');
+            const key = 'part4-rater-subject:' + (rater.closest('.page')?.id || 'x');
+            const show = name => { title.innerHTML = '<small>판정 대상</small>'; title.appendChild(document.createTextNode(name)); title.hidden = false; input.hidden = true; if (store) store.setItem(key, name); };
+            const edit = () => { input.value = title.textContent.replace('판정 대상', '').trim(); title.hidden = true; input.hidden = false; input.focus(); };
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const v = input.value.trim(); if (v) show(v); } });
+            input.addEventListener('blur', () => { const v = input.value.trim(); if (v) show(v); });
+            title.addEventListener('click', edit);
+            const saved = store && store.getItem(key);
+            if (saved) show(saved); else title.hidden = true;
+        }
         function update() {
             const picks = [...rows].map(r => r.querySelector('.is-picked')?.dataset.value);
             if (picks.some(p => !p)) { out.textContent = '다섯 기준을 모두 고르면 판정이 나옵니다.'; out.className = 'rater-out'; return; }
@@ -187,6 +201,79 @@
         })));
         update();
     });
+
+    // ---- fill-in fields: autosave every textarea.fill (per page + order)
+    const grow = t => { t.style.height = 'auto'; t.style.height = (t.scrollHeight + 2) + 'px'; };
+    document.querySelectorAll('.page').forEach(page => {
+        page.querySelectorAll('textarea.fill').forEach((t, i) => {
+            const key = `part4-fill:${page.id}:${i}`;
+            if (store && store.getItem(key)) t.value = store.getItem(key);
+            grow(t);
+            t.addEventListener('input', () => { grow(t); if (store) store.setItem(key, t.value); });
+            // Enter (no shift) or the 확인 button with text -> reveal the sample answer for this field, if any
+            const fieldBox = t.closest('.field');
+            const sample = fieldBox ? fieldBox.querySelector('.field-sample') : null;
+            if (sample) {
+                const skey = key + ':sample';
+                const reveal = () => { if (t.value.trim()) { sample.hidden = false; if (store) store.setItem(skey, '1'); } else { t.classList.add('shake'); setTimeout(() => t.classList.remove('shake'), 400); t.focus(); } };
+                t.addEventListener('keydown', e => {
+                    if (e.key !== 'Enter' || e.shiftKey || e.isComposing) return;
+                    e.preventDefault(); reveal();
+                });
+                const btn = fieldBox.querySelector('.field-check');
+                if (btn) btn.addEventListener('click', reveal);
+                if (store && store.getItem(skey)) sample.hidden = false;
+            }
+        });
+        // git / snapshot mode switch (chapter 04 practice)
+        page.querySelectorAll('.mode-switch').forEach(sw => {
+            const body = sw.closest('[data-mode]');
+            const key = `part4-mode:${page.id}`;
+            const set = m => { body.dataset.mode = m; sw.querySelectorAll('button').forEach(b => b.classList.toggle('is-picked', b.dataset.mode === m)); if (store) store.setItem(key, m); };
+            sw.querySelectorAll('button').forEach(b => b.addEventListener('click', () => set(b.dataset.mode)));
+            if (store && store.getItem(key)) set(store.getItem(key));
+        });
+        // verdict pills (통과 / 실패 / 보완 필요)
+        page.querySelectorAll('.verdict').forEach((v, i) => {
+            const key = `part4-verdict:${page.id}:${i}`;
+            const btns = v.querySelectorAll('button');
+            const set = val => { btns.forEach(b => b.classList.toggle('is-picked', b.dataset.value === val)); v.dataset.value = val || ''; if (store) { val ? store.setItem(key, val) : store.removeItem(key); } };
+            btns.forEach(b => b.addEventListener('click', () => set(v.dataset.value === b.dataset.value ? '' : b.dataset.value)));
+            if (store && store.getItem(key)) set(store.getItem(key));
+        });
+    });
+    // fill-card copy button
+    document.querySelectorAll('.fill-card').forEach(card => {
+        const wrap = card.closest('.table-scroll') || card;
+        const copy = wrap.nextElementSibling?.classList.contains('fill-foot') ? wrap.nextElementSibling.querySelector('.fill-copy') : null;
+        if (copy) copy.addEventListener('click', async () => {
+            const lines = [...card.querySelectorAll('tbody tr')].map(tr => {
+                const k = tr.children[0].innerText.trim();
+                const t = tr.querySelector('textarea.fill');
+                const v = t ? t.value.trim() : tr.children[1].innerText.trim();
+                return `- ${k}: ${v || '(비어 있음)'}`;
+            });
+            try { await navigator.clipboard.writeText(lines.join('\n')); copy.textContent = '복사됨'; }
+            catch (_) { copy.textContent = '복사 실패'; }
+            setTimeout(() => { copy.textContent = '카드 내용 복사'; }, 1600);
+        });
+    });
+    // test log export (chapter 04): scenarios -> markdown
+    document.querySelectorAll('.testlog-export').forEach(btn => btn.addEventListener('click', async () => {
+        const root = btn.closest('.practice-body');
+        const today = new Date().toISOString().slice(0, 10);
+        const md = ['# paper-reading 테스트 기록', `날짜: ${today}`, ''];
+        root.querySelectorAll('.scenario').forEach(sc => {
+            md.push(`## ${sc.dataset.name}`);
+            sc.querySelectorAll('.fill').forEach(t => md.push(`- ${t.dataset.label}: ${t.value.trim() || '(비어 있음)'}`));
+            const v = sc.querySelector('.verdict');
+            if (v) md.push(`- 판정: ${v.dataset.value || '(미정)'}`);
+            md.push('');
+        });
+        try { await navigator.clipboard.writeText(md.join('\n')); btn.textContent = '복사됨 — part4/paper-reading_테스트기록.md 에 붙여 넣기'; }
+        catch (_) { btn.textContent = '복사 실패'; }
+        setTimeout(() => { btn.textContent = '기록 내보내기 (markdown 복사)'; }, 2600);
+    }));
 
     route({ initial: true });
 })();

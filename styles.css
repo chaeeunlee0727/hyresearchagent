@@ -37,7 +37,7 @@ a:hover{color:var(--accent)}
 .prose h2{position:relative;margin:0 0 21px;font-size:clamp(26px,3vw,34px);font-weight:790;line-height:1.28;letter-spacing:-.035em;text-wrap:balance}
 .prose h3{margin:36px 0 14px;font-size:22px;font-weight:760;line-height:1.4;letter-spacing:-.02em}
 .heading-anchor{display:inline-block;margin-left:.35em;color:#bac1c7;text-decoration:none;font-size:.65em;opacity:0}.prose h2:hover .heading-anchor,.prose h3:hover .heading-anchor,.heading-anchor:focus{opacity:1}
-.prose p{margin:0 0 18px}.prose strong{font-weight:760;color:#11161b}.prose em{font-style:normal;background:linear-gradient(transparent 62%,#ffe4de 0)}
+.prose p{margin:0 0 18px}.prose strong{font-weight:760;color:#8f3a2c;background:linear-gradient(transparent 70%,#fbe6e1 0)}.prose em{font-style:normal;background:linear-gradient(transparent 62%,#ffe4de 0)}
 .prose ul,.prose ol{margin:14px 0 24px;padding-left:1.5em}.prose li{padding-left:.2em;margin:.45em 0}.prose li::marker{color:var(--accent);font-weight:750}
 .prose blockquote{margin:28px 0;padding:21px 24px;border-left:4px solid var(--accent);background:var(--accent-gradient);border-radius:0 12px 12px 0;color:#45312e}.prose blockquote p:last-child{margin-bottom:0}
 .prose code{padding:.12em .38em;border:1px solid #dfe4e7;background:#f4f6f7;border-radius:5px;color:#8e3e32;font-size:.91em;font-weight:620;word-break:break-word}
@@ -199,3 +199,66 @@ ul.check-list.forbid li.is-done::after{display:none}
 .rater-out.is-maybe{border-color:#c9a34a;background:#fcf7e8}
 .rater-out.is-no{border-color:var(--accent);background:var(--accent-soft)}
 @media(max-width:760px){.rater-row{grid-template-columns:1fr}.hero-meta{flex-wrap:wrap}}
+
+/* fill-in cards */
+.fill-card td:last-child{padding:6px 10px}
+.fill{display:block;width:100%;min-height:38px;padding:8px 10px;border:1px dashed #b9c5d0;border-radius:8px;background:#fffdfb;font:inherit;font-size:15px;line-height:1.5;color:var(--ink);resize:none;overflow:hidden}
+.fill:focus{outline:none;border-style:solid;border-color:var(--accent);background:#fff}
+.fill-foot{display:flex;align-items:center;gap:12px;margin:-10px 0 24px}
+.fill-foot small{flex:1;color:var(--muted)}
+.fill-copy{padding:7px 14px;border:1px solid #b9c5d0;border-radius:9px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+/* rater subject line */
+.rater-subject{display:flex;align-items:center;gap:10px;margin:0 0 14px!important}
+.rater-subject input{flex:1;padding:9px 12px;border:1px dashed #b9c5d0;border-radius:8px;background:#fffdfb;font:inherit;font-size:15.5px}
+.rater-subject input:focus{outline:none;border-style:solid;border-color:var(--accent);background:#fff}
+.rater-subject .rater-title{flex:1;margin:0;padding:6px 0 10px;border-bottom:2px solid var(--ink);font-size:21px;font-weight:800;letter-spacing:-.01em;cursor:text}
+.rater-subject .rater-title small{display:block;margin-bottom:2px;color:var(--muted);font-size:12.5px;font-weight:600;letter-spacing:.04em}
+.rater-subject .rater-title:hover{border-bottom-color:var(--accent)}
+.steps.steps-field li{margin-bottom:14px}
+.guide-table td:first-child{white-space:nowrap;font-weight:700}
+/* test scenarios (chapter 04) */
+.scenario{margin:26px 0;border:1px solid #c9d3dc;border-radius:14px;background:#fff;overflow:hidden}
+.scenario-head{display:flex;align-items:center;gap:12px;padding:14px 20px;background:#f3f6f8;border-bottom:1px solid #dde4ea}
+.scenario-head .num{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:800}
+.scenario-head h4{margin:0!important;font-size:17px}
+.scenario-head .time{margin-left:auto;color:var(--muted);font-size:13px}
+.scenario-body{padding:18px 20px 20px}
+.scenario-body>p{margin-bottom:12px}
+.scenario-body pre.prompt{margin:12px 0 18px}
+.field{margin:0 0 16px}
+.field-label{display:flex;align-items:baseline;gap:8px;margin:0 0 6px!important;font-size:14px;font-weight:750;color:#26313b}
+.field-label .step{color:var(--accent-dark);font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+.field-label small{font-weight:500;color:var(--muted)}
+.field textarea.fill{min-height:46px}
+.verdict{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.verdict span{font-size:14px;font-weight:750;margin-right:4px}
+.verdict button{padding:7px 14px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.verdict button.is-picked[data-value="통과"]{background:#2f6f4f;border-color:#2f6f4f;color:#fff}
+.verdict button.is-picked[data-value="실패"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.verdict button.is-picked[data-value="보완 필요"]{background:#c9a34a;border-color:#c9a34a;color:#fff}
+.testlog-export{padding:10px 18px;border:1px solid var(--ink);border-radius:10px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:750;cursor:pointer}
+.export-row{display:flex;align-items:center;gap:14px;margin:8px 0 24px}
+.export-row small{color:var(--muted)}
+.testlog-export{white-space:nowrap;flex-shrink:0}
+.field-sample{margin:10px 0 0;padding:12px 16px;border-left:3px solid var(--bluegray);border-radius:0 10px 10px 0;background:#f3f6fa;font-size:15px}
+.field-sample p{margin:0 0 8px}.field-sample p:last-child{margin-bottom:0}
+.field-sample-title{font-size:12.5px;font-weight:750;letter-spacing:.04em;color:var(--bluegray)}
+.fill.shake{animation:shake .4s}
+/* field row + check button */
+.field-row{display:flex;gap:8px;align-items:flex-start}
+.field-row textarea.fill{flex:1}
+.field-check{flex-shrink:0;padding:0 16px;height:46px;border:0;border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:750;cursor:pointer}
+.field-check:hover{background:#000}
+.field-sample ul{margin:0;padding-left:18px}.field-sample li{margin:0 0 6px}.field-sample li:last-child{margin-bottom:0}
+/* git / snapshot mode switch */
+.mode-switch{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 22px;padding:14px 18px;border:1px solid #dde4ea;border-radius:12px;background:#f7f9fb}
+.mode-switch>span{font-weight:750;font-size:15px;margin-right:4px}
+.mode-switch button{padding:8px 14px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.mode-switch button code{font-size:13px}
+.mode-switch button.is-picked{background:var(--ink);border-color:var(--ink);color:#fff}
+.mode-switch button.is-picked code{color:#fff;background:transparent}
+.mode-switch small{flex-basis:100%;color:var(--muted);font-size:13.5px}
+[data-mode="git"] .only-snap{display:none!important}
+[data-mode="snap"] .only-git{display:none!important}
+.mode-note{margin:0 0 14px!important;font-size:15px;color:#4a5560}
+.git-setup{flex-basis:100%;margin-top:6px;padding-top:14px;border-top:1px dashed #cbd5de}.git-setup .steps{margin:0}.git-setup .steps li p{font-size:15px}.git-setup pre{margin:8px 0 10px;font-size:14px}

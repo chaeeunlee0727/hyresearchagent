@@ -1,50 +1,35 @@
-<p>설계, 구현, 검증 사이클을 한 바퀴 돌았습니다. 이 장에서는 같은 사이클을 두 번째 업무인 실험 로그 정리에 반복합니다. 새로 배우는 것은 거의 없고, 바뀌는 것은 입력입니다. 논문에는 DOI라는 깔끔한 식별자가 있었지만 <strong>실험 메모에는 형식이 없습니다.</strong> 이 차이가 입력 게이트와 중지 조건을 어떻게 바꾸는지가 이 장의 핵심입니다. 산출물은 <code>experiment-log_실행계약.md</code>와 <code>.agents/skills/experiment-log/SKILL.md</code>, 그리고 실험 기록 두 건입니다.</p>
+<p>설계, 구현, 검증 사이클을 한 바퀴 돌았습니다. 이 장에서는 같은 사이클을 <strong>01장에서 고른 내 업무</strong>로 한 번 더 돕니다. 새로 배우는 절차는 없습니다. 대신 "입력이 달라지면 계약의 어디가 달라지는가"를 봅니다. 강의가 두 번째로 만든 experiment-log(실험 로그 정리) Skill이 그 사례입니다. 논문에는 DOI라는 깔끔한 식별자가 있었지만 <strong>실험 메모에는 형식이 없습니다.</strong> 이 차이 하나가 Input, Stop / Ask, Output을 어떻게 바꾸는지 보고, 같은 질문을 내 업무에 던집니다.</p>
 
 <!-- toc -->
 
-<h2>같은 패턴, 다른 입력</h2>
-<p>두 Skill의 뼈대는 같습니다. 입력을 확인하고, 기존 기록이 있는지 보고, 원본에서 사실을 뽑아 정해진 양식에 저장하고, 막히면 정해진 지점에서 멈추고, 끝내기 전에 실제 파일과 대조합니다. paper-reading 계약을 복사해 experiment-log로 고치면 됩니다.</p>
-<div class="table-scroll"><table class="compact"><thead><tr><th></th><th>paper-reading</th><th>experiment-log</th></tr></thead><tbody>
-<tr><td>입력</td><td>DOI·arXiv ID처럼 비교적 안정된 식별자</td><td>메모, config, 결과표처럼 형식이 다른 원본 여러 개</td></tr>
-<tr><td>식별</td><td>외부 서지 DB와 대조</td><td>run ID 또는 날짜+대상. 기존 기록과 ID 충돌 검사</td></tr>
-<tr><td>사실 확인</td><td>요약을 원문과 대조</td><td>설정값은 config, 측정값은 결과표, 목적·관찰·가설은 메모로 원천을 나눔</td></tr>
-<tr><td>출력</td><td><code>papers/</code>의 논문 페이지</td><td><code>research/&lt;프로젝트&gt;/experiments/&lt;run_id&gt;.md</code></td></tr>
-<tr><td>갱신</td><td>허브, index, 프로젝트 <code>literature.md</code>, log</td><td>프로젝트 <code>index.md</code>의 실험 기록 목록, log</td></tr>
-<tr><td>재실행</td><td>같은 논문이면 기존 페이지 갱신</td><td>같은 run ID면 변경분만 갱신</td></tr>
-<tr><td>범위 밖</td><td>연구 질문 변경, 프로젝트 생성</td><td>실패 원인 확정, 다음 실험 우선순위, 실험 실행과 승인</td></tr>
+<h2>뼈대는 같고, 입력이 다르다</h2>
+<p>두 Skill의 뼈대는 같습니다. 입력을 확인하고, 기존 기록이 있는지 보고, 원본에서 사실을 뽑아 정해진 양식에 저장하고, 막히면 정해진 지점에서 멈추고, 끝내기 전에 실제 파일과 대조합니다. 다른 점은 여섯 가지이고, 전부 입력의 성격에서 나옵니다. 오른쪽 열이 <strong>내 업무로 Skill을 짤 때 스스로에게 물을 질문</strong>입니다.</p>
+<div class="table-scroll"><table class="compact"><thead><tr><th>차이</th><th>paper-reading</th><th>experiment-log</th><th>내 Skill에서 물을 것 → 바뀌는 필드</th></tr></thead><tbody>
+<tr><td>식별자</td><td>DOI·arXiv ID 하나로 특정. 외부 DB에 대조해 확정</td><td>식별자 없음. run ID나 날짜+대상으로 이름 붙이고, 기존 기록과 충돌만 검사</td><td>입력을 외부에서 확인할 수 있나, 아니면 이름을 내가 붙여야 하나 → <strong>Input</strong></td></tr>
+<tr><td>사실의 원천</td><td>원문 하나. 요약과 원문을 대조하면 끝</td><td>메모·config·결과표로 갈라짐. 설정값은 config, 측정값은 결과표, 목적·관찰·가설은 메모</td><td>원본이 여럿이면 어느 값은 어디서 가져오나, 충돌하면 어떻게 하나 → <strong>Input, Stop / Ask</strong></td></tr>
+<tr><td>출력 위치</td><td>공통 Wiki의 <code>papers/</code>. 프로젝트 없이도 성립</td><td>프로젝트 안 <code>experiments/</code>만. 프로젝트 미지정이 중지 사유</td><td>결과가 공통 자산인가, 특정 프로젝트 소유인가 → <strong>Output, Stop / Ask</strong></td></tr>
+<tr><td>재실행 단위</td><td>같은 논문 → 새 정보 없으면 변경 없음</td><td>같은 run ID → 변경분만 갱신. 결과표가 나중에 오는 일이 흔해 부분 갱신이 정상 경로</td><td>같은 입력이 다시 오는 경우가 "중복"인가 "보강"인가 → <strong>Process</strong></td></tr>
+<tr><td>원본 수정 위험</td><td>원문은 원래 읽기 전용</td><td>메모·config는 연구자 파일. "정리하면서 고쳐 주는" 유혹이 있어 원본 불변을 명시</td><td>Skill이 읽는 파일 중 사람이 직접 쓰는 것이 있나 → <strong>Output(쓰지 않는 곳)</strong></td></tr>
+<tr><td>범위 밖</td><td>연구 질문 변경, 프로젝트 생성</td><td>실패 원인 확정, 다음 실험 우선순위, 실험 실행·승인</td><td>절차 중간에 끼어드는 연구자 판단은 무엇인가, 그것을 어떻게 "비워 두나" → <strong>Trigger(범위), Output</strong></td></tr>
 </tbody></table></div>
+<p>한 줄로 줄이면 paper-reading은 <strong>맞는지 확인하는 Skill</strong>, experiment-log는 <strong>섞인 것을 칸으로 나누되 판단은 남겨 두는 Skill</strong>입니다. 내 업무가 둘 중 어느 쪽에 가까운지부터 정하면 계약의 절반은 결정됩니다.</p>
 
-<h2>Run 17 메모 해부하기</h2>
-<p>이 Skill이 받는 입력은 이런 메모입니다. 실험을 끝낸 날 급하게 적은 글이라 그날의 나에게는 다 이해되지만 3주 뒤의 나에게는 그렇지 않고, 다른 실험과 비교할 수도 없습니다.</p>
+<h2>사례: Run 17 메모 해부하기</h2>
+<p>experiment-log가 받는 입력은 이런 메모입니다. 실험을 끝낸 날 급하게 적은 글이라 그날의 나에게는 다 이해되지만 3주 뒤의 나에게는 그렇지 않고, 다른 실험과 비교할 수도 없습니다.</p>
 <blockquote><p>합성 야간 2000장을 넣었다. 야간이 오르고 주간이 유지되는지 보려는 실험. Run 15 대비 야간은 +4.3, 주간은 -0.3. 주간이 낮아진 이유는 아직 모른다. 비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지. 다음 실험은 1000장으로 줄이거나, 재분할이 낮은 장만 빼고 2000장을 유지하거나. GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다.</p></blockquote>
 <p>한 문단에 <strong>측정된 사실, 추측, 아직 정하지 않은 판단이 섞여 있습니다.</strong> Skill이 하는 일은 이것을 풀어서 칸이 나뉜 기록으로 저장하는 것입니다. 풀기 전에 사람이 먼저 분류해 봐야 Skill이 무엇을 하는지 알 수 있습니다.</p>
 
 <div class="drill">
 <p class="drill-title">눌러 보기: 메모의 문장을 칸으로 나누기</p>
-<p class="drill-lead">Run 17 메모의 문장 다섯 개입니다. 각각 어느 칸에 들어가야 할지 고르세요.</p>
+<p class="drill-lead">Run 17 메모의 문장 일곱 개입니다. 각각 기록의 어느 칸에 들어가야 할지 고르세요.</p>
 <div class="drill-item" data-answer="fact"><p class="drill-q">"합성 야간 2000장을 넣었다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>설정 사실. 단, 원천은 메모가 아니라 config입니다. 메모의 "2000장"과 <code>run17.yaml</code>의 값이 같은지 Skill이 대조하고, 다르면 config 쪽을 적고 불일치를 표시합니다.</p></div>
-<div class="drill-item" data-answer="fact"><p class="drill-q">"Run 15 대비 야간은 +4.3, 주간은 -0.3"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>측정 사실. 원천은 결과표(<code>results.csv</code>)입니다. 기록에는 차이값만이 아니라 두 run의 절대값과 평가 조건이 같았다는 확인까지 함께 적습니다.</p></div>
-<div class="drill-item" data-answer="guess"><p class="drill-q">"비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>가설. "가설·열린 질문" 칸에 두 후보를 그대로 적습니다. Skill이 어느 쪽이 맞는지 판정하면 범위 밖("실패 원인 확정")입니다.</p></div>
+<div class="drill-item" data-answer="fact"><p class="drill-q">"Run 15 대비 야간은 +4.3, 주간은 -0.3"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>측정 사실이지만 <strong>메모에 적힌 숫자는 "연구자 서술"로 관찰 칸에</strong> 넣고, 대비 칸에는 결과표(<code>results.csv</code>)에서 직접 계산한 값만 적습니다. 두 run의 절대값과 평가 조건이 같았다는 확인도 함께 남깁니다.</p></div>
+<div class="drill-item" data-answer="guess"><p class="drill-q">"비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>가설(원인 후보). 후보마다 <strong>확인 방법을 한 줄씩 붙여</strong> 적습니다. 비율 0.4 → "합성을 1000장으로 줄여 본다", 라벨 어긋남 → "재분할 낮은 장만 빼고 2000장 유지". 어느 쪽이 맞는지 Skill이 판정하면 범위 밖입니다.</p></div>
+<div class="drill-item" data-answer="goal"><p class="drill-q">"야간이 오르고 주간이 유지되는지 보려는 실험"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="goal">실험 목적</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button></div><p class="drill-why" hidden>실험 목적. 기록 맨 위의 "목적" 칸에 그대로 들어갑니다. 결과가 아니라 "무엇을 보려 했는가"라서 사실도 가설도 아닙니다. 이 칸이 있어야 나중에 "그래서 봤는가"를 판정할 수 있습니다.</p></div>
+<div class="drill-item" data-answer="next"><p class="drill-q">"다음 실험은 1000장으로 줄이거나, 재분할이 낮은 장만 빼고 2000장을 유지하거나"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="next">다음 실험 후보</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button></div><p class="drill-why" hidden>다음 실험 후보. "승인 대기 후보" 칸에 <strong>두 건을 나란히, 우선순위 없이</strong> 적습니다. 어느 것을 먼저 할지는 바로 아래 문장에서 연구자가 자기 몫이라고 선언했으므로 Skill은 순서를 매기지 않습니다.</p></div>
 <div class="drill-item" data-answer="decide"><p class="drill-q">"GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>사람이 정할 일. 기록에는 "다음 후보 두 가지"까지만 적고 우선순위는 비워 둡니다. Skill이 "1000장부터 하자"고 적으면 계약 위반입니다.</p></div>
 <div class="drill-item" data-answer="guess"><p class="drill-q">"주간이 낮아진 이유는 아직 모른다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>열린 질문. "모른다"는 그 자체로 기록할 가치가 있는 상태입니다. 비워 두지 말고 "원인 미확인"으로 적어야 3주 뒤에 다시 볼 수 있습니다.</p></div>
 <div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
-</div>
-
-<div class="qa" id="qa-05-1">
-<p class="qa-q"><span class="qa-label">Q 5-1</span>위 메모의 문장들을 네 묶음으로 나눠 보세요. (가) 설정 또는 변경 변수, (나) 관찰된 값이나 연구자 서술, (다) 원인 후보, (라) 다음 실험 후보. 그리고 네 묶음 어디에도 넣으면 안 되는 문장이 하나 있다면 무엇일까요?</p>
-<textarea class="qa-input" rows="3" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
-<div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
-<div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
-<div class="table-scroll"><table class="compact"><thead><tr><th>문장</th><th>묶음</th><th>기록의 어느 칸으로</th></tr></thead><tbody>
-<tr><td>합성 야간 2000장을 넣었다</td><td>(가) 변경 변수</td><td>변경 변수. 단, 진짜 값은 config에서 확인</td></tr>
-<tr><td>야간이 오르고 주간이 유지되는지 보려는 실험</td><td>목적</td><td>목적</td></tr>
-<tr><td>Run 15 대비 야간 +4.3, 주간 -0.3</td><td>(나) 연구자 서술</td><td>관찰 칸에 "연구자 서술"로. 대비 칸에는 결과표로 직접 계산한 값만</td></tr>
-<tr><td>비율 0.4 때문인지</td><td>(다) 원인 후보 1</td><td>원인 후보 + 확인 방법(합성을 1000장으로 줄여 본다)</td></tr>
-<tr><td>라벨 어긋남 때문인지</td><td>(다) 원인 후보 2</td><td>원인 후보 + 확인 방법(재분할 낮은 장만 빼고 2000장 유지)</td></tr>
-<tr><td>1000장으로 줄이거나 / 낮은 장만 빼거나</td><td>(라) 다음 실험 후보</td><td>승인 대기 후보 두 건. 우선순위 없음</td></tr>
-</tbody></table></div>
-<p><strong>넣으면 안 되는 문장은 마지막 줄입니다.</strong> "어느 쪽을 먼저 할지는 내가 고를 일이다"는 연구자의 결정 영역을 선언한 것이고, Skill은 이것을 기록의 어느 칸에도 옮기지 않습니다. 우선순위를 매기지 않고 후보를 나란히 두는 것으로 이 문장을 존중합니다.</p>
-</div></div></div>
 
 <h2>입력 네 종류와 신뢰 수준, 그리고 원본 불변</h2>
 <p>이 Skill의 입력은 네 종류이고 각각 믿을 수 있는 정도가 다릅니다. <strong>메모에 "2000장"이라고 적혀 있어도 진짜 조건은 config에 있습니다.</strong></p>
@@ -82,7 +67,7 @@
 
 <rect x="320" y="20" width="540" height="70" rx="10" class="d-box blue"/>
 <text x="336" y="44" class="d-t">관찰된 사실 (값 + 근거 위치)</text>
-<text x="336" y="64" class="d-t small">변경 변수 2000장 [run17.yaml:L12] · dj_val 야간 22.9 [results.csv:r3] · 대비 +4.3 (평가 조건 동일 확인)</text>
+<text x="336" y="64" class="d-t small">2000장 [run17.yaml:L12] · 야간 22.9 [results.csv:r3] · +4.3 (평가 조건 동일)</text>
 <text x="336" y="80" class="d-t small">주간 -0.3은 "연구자 서술"로 관찰 칸에. Cityscapes 대비는 평가 조건 미확인 → 확인 필요</text>
 <rect x="320" y="110" width="540" height="70" rx="10" class="d-box"/>
 <text x="336" y="134" class="d-t">설명이 필요한 관찰 → 원인 후보 → 확인 방법</text>
@@ -106,8 +91,8 @@
 <p>실행 요청은 "run15, run17을 정리해 줘"였습니다. 프로젝트를 지정하지 않았는데, 에이전트는 config에 적힌 프로젝트명을 읽어 그 프로젝트를 찾아 진행했습니다. 의존 순서대로 run15(baseline)를 먼저 구조화한 뒤 run17을 처리했고, 대비를 계산한 지표는 dark-junction validation mIoU 하나뿐이었습니다. 나머지는 config의 evaluation 블록에 야간 데이터셋만 적혀 있어 평가 조건이 같다고 말할 수 없으므로 "확인 필요"로 남겼습니다. 실제로 config에는 dark-junction만 있는데 결과 CSV에는 Cityscapes 값도 들어 있어 원본 간 불일치가 있는 상태였습니다. run15는 기준선이라 다음 실험 후보를 만들지 않았고, run17에는 메모의 후보 두 건이 우선순위 없이 승인 대기로 남았습니다.</p>
 <p>프로젝트를 묻지 않고 config에서 읽어 진행한 부분은 06장에서 다시 봅니다.</p></div>
 
-<div class="qa" id="qa-05-2">
-<p class="qa-q"><span class="qa-label">Q 5-2</span>결과 CSV에는 run15와 run17 모두 Cityscapes validation mIoU 값이 있습니다. config의 evaluation 블록에는 dark-junction만 적혀 있습니다. 에이전트가 Cityscapes 대비(run17 − run15)를 계산해 대비 칸에 넣어도 될까요?</p>
+<div class="qa" id="qa-05-1">
+<p class="qa-q"><span class="qa-label">Q 5-1</span>결과 CSV에는 run15와 run17 모두 Cityscapes validation mIoU 값이 있습니다. config의 evaluation 블록에는 dark-junction만 적혀 있습니다. 에이전트가 Cityscapes 대비(run17 − run15)를 계산해 대비 칸에 넣어도 될까요?</p>
 <textarea class="qa-input" rows="2" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
 <div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
 <div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
@@ -115,11 +100,65 @@
 <p>이것은 중지 사유도 아닙니다. 그 지표의 대비 칸만 비우고 나머지 기록은 그대로 진행합니다. 다만 "config에는 없는 지표가 CSV에 있다"는 원본 간 불일치는 완료 보고의 "원본에서 확인하지 못한 값"에 적어 연구자가 보게 합니다. 메모에 연구자가 적어 둔 "주간 -0.3"은 대비 칸이 아니라 관찰 칸에 연구자 서술로 옮깁니다.</p>
 </div></div></div>
 
+
 <div class="practice">
-<div class="practice-head"><span class="badge">실습 5</span><h3>experiment-log 계약 → SKILL.md → 실행</h3><span class="time">약 25분</span></div>
+<div class="practice-head"><span class="badge">실습 5</span><h3>내 업무로 두 번째 Skill 만들기</h3><span class="time">약 30분</span></div>
 <div class="practice-body">
 <h4>목표</h4>
-<p>paper-reading에서 쓴 사이클을 그대로 반복합니다. 시간이 짧으므로 계약은 복사해서 고치고, 생성과 실행에 시간을 씁니다. 실행은 두 번 합니다. 프로젝트를 빼고 보내 중지를 확인한 뒤, 프로젝트를 지정해 보냅니다.</p>
+<p>01장 선정 기준표에서 고른 <strong>두 번째 업무</strong>로 계약 → SKILL.md → 실행을 한 번 더 합니다. 이번에는 교재가 계약을 대신 써 주지 않습니다. 대신 위 표의 여섯 질문을 먼저 답하고, 그 답으로 paper-reading 계약을 고칩니다. 절차와 요청문은 02~04장 것을 그대로 다시 씁니다.</p>
+<div class="callout callout-key"><span class="callout-title">정 막막하다면</span>
+<p>내 업무가 아직 흐릿하거나 원본 파일이 손에 없다면, 이 실습 맨 아래의 <strong>"B. experiment-log를 이어서 실습하기"</strong>를 펼쳐 강의의 두 번째 Skill을 가상 원본으로 따라 만듭니다. 결과물과 체크리스트 재료는 같습니다. 다만 A를 먼저 10분이라도 시도해 보고 넘어가기를 권합니다. 여섯 질문에 답해 보는 것 자체가 이 장의 핵심입니다.</p></div>
+
+<h4>A-1. 업무 정하고 여섯 질문에 답하기 (8분, 사람)</h4>
+<p>01장 판정기에서 "1순위감"이나 "설계 더 필요"가 나온 업무 중 paper-reading이 아닌 것을 하나 고릅니다. 이름은 "실험 로그 정리"처럼 넓게 쓰지 말고 "실험 메모·config·결과표를 experiments/ 기록 한 장으로"처럼 어디까지 자동화인지 드러나게 적습니다. 그다음 표의 질문에 한 줄씩 답합니다. 이 카드가 계약에서 고칠 곳의 목록이 됩니다.</p>
+<div class="table-scroll"><table class="compact fill-card"><thead><tr><th>질문</th><th>내 업무의 답 (자동 저장)</th></tr></thead><tbody>
+<tr><td>Skill 이름과 한 줄 범위</td><td><textarea class="fill" rows="1" placeholder="예: experiment-log — 메모·config·결과표를 experiments/run_id.md 한 장으로"></textarea></td></tr>
+<tr><td>① 입력을 무엇으로 특정하나? 외부에서 확인 가능한가?</td><td><textarea class="fill" rows="1" placeholder="예: run ID. 외부 확인 불가, 기존 기록과 ID 충돌만 검사"></textarea></td></tr>
+<tr><td>② 원본이 여럿이면 어느 값은 어디서? 충돌하면?</td><td><textarea class="fill" rows="1" placeholder="예: 설정값은 config, 수치는 결과표, 서술은 메모. 다르면 멈추고 묻기"></textarea></td></tr>
+<tr><td>③ 결과는 어디에? 공통 자산인가 프로젝트 소유인가?</td><td><textarea class="fill" rows="1" placeholder="예: research/[프로젝트]/experiments/. 프로젝트 없으면 중지"></textarea></td></tr>
+<tr><td>④ 같은 입력이 다시 오면 중복인가 보강인가?</td><td><textarea class="fill" rows="1" placeholder="예: 같은 run ID면 변경분만 갱신"></textarea></td></tr>
+<tr><td>⑤ Skill이 읽는 파일 중 사람이 직접 쓰는 것은? (원본 불변)</td><td><textarea class="fill" rows="1" placeholder="예: 메모·config·CSV 전부. 읽기만, 결과는 별도 파일"></textarea></td></tr>
+<tr><td>⑥ 중간에 끼어드는 연구자 판단은? 어떻게 비워 두나?</td><td><textarea class="fill" rows="1" placeholder="예: 실패 원인 확정, 다음 실험 순서. 후보만 나란히 적고 순위 없음"></textarea></td></tr>
+</tbody></table></div>
+<div class="fill-foot"><small>복사해서 계약 파일 맨 위에 붙여 두면 A-2에서 고칠 곳이 바로 보입니다.</small><button type="button" class="fill-copy">카드 내용 복사</button></div>
+
+<h4>A-2. 계약 고치기 (8분, 사람)</h4>
+<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>[skill-name]_실행계약.md</code>로 복사합니다. 처음부터 쓰지 않습니다. 카드의 답이 가리키는 필드만 고칩니다. ①②는 Input과 Stop / Ask, ③은 Output과 Stop / Ask, ④는 Process의 재실행 줄, ⑤는 Output의 "쓰지 않는 곳", ⑥은 Trigger의 범위 밖과 Output의 비워 두는 칸입니다. 고치지 않은 필드가 많아도 괜찮습니다. 그것이 "뼈대는 같다"의 뜻입니다. 끝나면 02장 2-3의 검토 요청문을 Skill 이름만 바꿔 보내 빈틈을 받습니다.</p>
+
+<h4>A-3. SKILL.md 생성과 승인 (7분)</h4>
+<p>03장 3-1의 생성 요청문에서 계약 파일명과 Skill 이름만 바꿉니다. 참조할 규칙 파일도 바뀔 수 있습니다. 결과가 프로젝트 안으로 가는 Skill이면 <code>llm_wiki/research/AGENTS.md</code>와 그 템플릿을, 공통 Wiki로 가는 Skill이면 <code>llm_wiki/AGENTS.md</code>를 적습니다.</p>
+<pre class="prompt"><code>작업공간 루트의 [skill-name]_실행계약.md 와 [참조할 규칙 파일·템플릿]을 바탕으로
+.agents/skills/[skill-name]/SKILL.md 를 만들어줘.
+
+조건:
+1. 규칙 파일과 템플릿의 내용은 복제하지 말고 필요한 순서에서 해당 절을 참조해.
+2. 생성 전에 만들 파일과 고칠 파일을 먼저 보여줘. 새 파일은 SKILL.md 하나여야 해.
+3. description에 호출하는 요청과 호출하지 않는 요청을 모두 담아줘.
+4. 계약에 없는 정책을 추가하지 말고, 계약이 정하지 않은 것은 "모호한 지점"으로 보고해.
+5. 만든 뒤 계약의 각 조항이 SKILL.md 어느 절에 반영됐는지 대조표를 보여주고,
+   계약과 규칙 파일이 서로 반대되는 조항이 있으면 알려줘.
+6. 내 승인 전에는 계약 파일을 지우지 마.</code></pre>
+<p>모호한 지점은 03장 3-3과 같은 요청문으로 결정·반영·승인하고, 계약은 <code>part4/[skill-name]_실행계약_생성시점.md</code>로 옮깁니다.</p>
+
+<h4>A-4. 두 번 실행하기 (7분)</h4>
+<p>04장의 세 시나리오 중 둘만 합니다. 요청문은 내 업무에 맞게 직접 씁니다.</p>
+<ol>
+<li><strong>중지 확인</strong>: 카드 ①이나 ③에서 "없으면 멈춘다"고 한 입력을 일부러 빼고 보냅니다. 묻고 멈추는지, 파일이 하나도 안 생기는지 봅니다.</li>
+<li><strong>정상 실행</strong>: 필수 입력을 다 넣어 보냅니다. 실행 전 계획과 실행 후 보고(생성·수정 파일, 확인하지 못한 값, 사람이 볼 항목)를 요구하는 것은 04장 요청문과 같습니다. 끝나면 보고와 실제 변경(<code>git status --short</code> 또는 스냅샷)을 대조하고, <strong>카드 ⑤의 원본 파일이 바뀌지 않았는지</strong> 따로 확인합니다.</li>
+</ol>
+<p>재실행 시나리오는 06장 체크리스트에서 두 Skill을 같이 볼 때 돌립니다.</p>
+
+<h4>확인할 것</h4>
+<ul class="check-list">
+<li>카드의 여섯 질문에 모두 답이 있고, 그 답이 계약의 어느 필드로 갔는지 말할 수 있다</li>
+<li>계약에서 고친 필드가 paper-reading과 다른 이유를 한 줄씩 설명할 수 있다</li>
+<li>중지 확인 실행에서 파일 변경이 0개였다</li>
+<li>정상 실행에서 보고 = 실제 변경이고, 원본 파일은 그대로다</li>
+<li>연구자 판단 자리(카드 ⑥)가 기록에서 비어 있거나 "후보"로만 적혀 있다</li>
+</ul>
+
+<details><summary>B. 막막하다면: experiment-log를 이어서 실습하기 (강의의 두 번째 Skill, 가상 원본 제공)</summary><div class="detail-body">
+<p>강의가 만든 experiment-log를 그대로 따라 만듭니다. 위 A와 같은 사이클이고, 계약을 고칠 곳은 이 장 첫 표의 experiment-log 열이 알려 줍니다. 실행은 두 번 합니다. 프로젝트를 빼고 보내 중지를 확인한 뒤, 프로젝트를 지정해 보냅니다.</p>
 <h4>준비: 실험 원본</h4>
 <p>자기 실험 기록이 있으면 그것을 씁니다. 메모 하나, config 하나, 결과표 하나, 그리고 비교할 기준 실험이 있으면 좋습니다. 없으면 아래 가상 원본을 <code>part4/fixtures/</code>에 저장해 씁니다. 숫자는 설명용이며 실제 실험이 아닙니다. 가상 원본은 작업공간의 기존 프로젝트 하나를 골라 그 프로젝트의 실험으로 다루고, 프로젝트가 없으면 research 규칙의 승인 절차로 연습용 프로젝트를 하나 만든 뒤 진행합니다.</p>
 <details><summary>가상 원본 네 파일 (펼치기)</summary><div class="detail-body">
@@ -153,9 +192,9 @@ evaluation:
 run15,18.6,76.4,71.2,
 run17,22.9,76.1,70.8,54.7</code></pre>
 </div></details>
-<h4>5-1. 계약 복사해서 고치기 (8분, 사람)</h4>
-<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>experiment-log_실행계약.md</code>로 복사하고 여섯 필드를 고칩니다. 바뀌는 것은 위 비교표의 오른쪽 열입니다. 그리고 "원본 불변" 절을 하나 더 둡니다. 필드가 일곱이 되어도 됩니다. Stop / Ask에는 이 장의 안전 규칙 중 4번과 5번, 그리고 "결과표 수치와 로그 서술이 다를 때", "핵심 설정을 어떤 입력에서도 찾을 수 없을 때", "실험 ID가 충돌하는데 같은 실험인지 판단할 수 없을 때"가 들어가야 합니다.</p>
-<h4>5-2. SKILL.md 생성 (5분)</h4>
+<h4>B-1. 계약 복사해서 고치기 (8분, 사람)</h4>
+<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>experiment-log_실행계약.md</code>로 복사하고 여섯 필드를 고칩니다. 바뀌는 것은 이 장 첫 표의 experiment-log 열입니다. 그리고 "원본 불변" 절을 하나 더 둡니다. 필드가 일곱이 되어도 됩니다. Stop / Ask에는 이 장의 안전 규칙 중 4번과 5번, 그리고 "결과표 수치와 로그 서술이 다를 때", "핵심 설정을 어떤 입력에서도 찾을 수 없을 때", "실험 ID가 충돌하는데 같은 실험인지 판단할 수 없을 때"가 들어가야 합니다.</p>
+<h4>B-2. SKILL.md 생성 (5분)</h4>
 <pre class="prompt"><code>작업공간 루트의 experiment-log_실행계약.md 를 바탕으로
 .agents/skills/experiment-log/SKILL.md 를 만들어줘.
 
@@ -170,13 +209,13 @@ run17,22.9,76.1,70.8,54.7</code></pre>
    서로 반대되는 조항이 있으면 알려줘. 계약에 없는 정책은 추가하지 말고 보고해.
 7. 내 승인 전에는 계약 파일을 지우지 마.</code></pre>
 <p>충돌 보고가 오면 어느 쪽이 더 정형화된 절차인지 보고 결정합니다. 대개 규칙 파일에 맞춥니다. 승인 후 계약은 <code>part4/experiment-log_실행계약_생성시점.md</code>로 옮깁니다.</p>
-<h4>5-3. 중지 확인 실행: 프로젝트 없이 (5분)</h4>
+<h4>B-3. 중지 확인 실행: 프로젝트 없이 (5분)</h4>
 <pre class="prompt"><code>run15와 run17을 정리해줘.
 원본은 part4/fixtures/run15_memo.md, part4/fixtures/run17_memo.md,
 part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv 야.
 비교할 기준 실험은 run15야.</code></pre>
 <p>기대 행동은 "저장할 프로젝트를 정할 수 없으니 어느 프로젝트인지 알려 달라"고 묻고 멈추는 것입니다. 단, 가상 config에 <code>project:</code> 줄이 있으므로 에이전트가 그것을 읽어 진행할 수 있습니다. 강의에서도 그랬습니다. 그렇게 되면 멈추지 않은 이유를 묻고 결과를 기록해 둡니다. 이것이 06장의 재료입니다. 어느 쪽이든 원본 파일이 바뀌지 않았는지 확인합니다.</p>
-<h4>5-4. 프로젝트를 지정해 실행 (7분)</h4>
+<h4>B-4. 프로젝트를 지정해 실행 (7분)</h4>
 <pre class="prompt"><code>run15와 run17을 정리해줘. 프로젝트는 [프로젝트명]이야.
 원본은 part4/fixtures/run15_memo.md, part4/fixtures/run17_memo.md,
 part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv 야.
@@ -201,5 +240,7 @@ part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv
 <h4>참고본과 비교하기</h4>
 <p><code>part4/참고/experiment-log_실행계약.md</code>와 <code>experiment-log_SKILL.md</code>를 엽니다. 입력 절의 "사실 원천" 표와 Process 2번(baseline 의존 순서), 그리고 "원본에 후보가 없거나 후보를 만들지 않는다고 적혀 있으면 <code>없음</code>과 근거 위치를 남긴다"는 조항을 확인합니다. 내 것에 없으면 계약을 거쳐 반영합니다.</p>
 <h4>실패하면</h4>
-<p>Cityscapes 대비가 계산돼 들어왔으면 Process 4번(평가 조건 확인)이 SKILL.md에 약하게 옮겨진 것입니다. 그 문장만 고치고 5-4를 다시 돌립니다. 후보에 우선순위가 매겨졌거나 "추천"이 붙었으면 Scope 위반입니다. 원본이 수정됐으면 다른 모든 것에 앞서 원본 불변 절을 고치고, 가능하면 원본을 백업에서 복구합니다. 가상 원본이라면 위 코드 블록에서 다시 저장하면 됩니다.</p>
+<p>Cityscapes 대비가 계산돼 들어왔으면 Process 4번(평가 조건 확인)이 SKILL.md에 약하게 옮겨진 것입니다. 그 문장만 고치고 B-4를 다시 돌립니다. 후보에 우선순위가 매겨졌거나 "추천"이 붙었으면 Scope 위반입니다. 원본이 수정됐으면 다른 모든 것에 앞서 원본 불변 절을 고치고, 가능하면 원본을 백업에서 복구합니다. 가상 원본이라면 위 코드 블록에서 다시 저장하면 됩니다.</p>
+
+</div></details>
 </div></div>

@@ -46,7 +46,7 @@ a:hover{color:var(--accent)}
 .prose h2{position:relative;margin:0 0 21px;font-size:clamp(26px,3vw,34px);font-weight:790;line-height:1.28;letter-spacing:-.035em;text-wrap:balance}
 .prose h3{margin:36px 0 14px;font-size:22px;font-weight:760;line-height:1.4;letter-spacing:-.02em}
 .heading-anchor{display:inline-block;margin-left:.35em;color:#bac1c7;text-decoration:none;font-size:.65em;opacity:0}.prose h2:hover .heading-anchor,.prose h3:hover .heading-anchor,.heading-anchor:focus{opacity:1}
-.prose p{margin:0 0 18px}.prose strong{font-weight:760;color:#11161b}.prose em{font-style:normal;background:linear-gradient(transparent 62%,#ffe4de 0)}
+.prose p{margin:0 0 18px}.prose strong{font-weight:760;color:#8f3a2c;background:linear-gradient(transparent 70%,#fbe6e1 0)}.prose em{font-style:normal;background:linear-gradient(transparent 62%,#ffe4de 0)}
 .prose ul,.prose ol{margin:14px 0 24px;padding-left:1.5em}.prose li{padding-left:.2em;margin:.45em 0}.prose li::marker{color:var(--accent);font-weight:750}
 .prose blockquote{margin:28px 0;padding:21px 24px;border-left:4px solid var(--accent);background:var(--accent-gradient);border-radius:0 12px 12px 0;color:#45312e}.prose blockquote p:last-child{margin-bottom:0}
 .prose code{padding:.12em .38em;border:1px solid #dfe4e7;background:#f4f6f7;border-radius:5px;color:#8e3e32;font-size:.91em;font-weight:620;word-break:break-word}
@@ -209,6 +209,69 @@ ul.check-list.forbid li.is-done::after{display:none}
 .rater-out.is-no{border-color:var(--accent);background:var(--accent-soft)}
 @media(max-width:760px){.rater-row{grid-template-columns:1fr}.hero-meta{flex-wrap:wrap}}
 
+/* fill-in cards */
+.fill-card td:last-child{padding:6px 10px}
+.fill{display:block;width:100%;min-height:38px;padding:8px 10px;border:1px dashed #b9c5d0;border-radius:8px;background:#fffdfb;font:inherit;font-size:15px;line-height:1.5;color:var(--ink);resize:none;overflow:hidden}
+.fill:focus{outline:none;border-style:solid;border-color:var(--accent);background:#fff}
+.fill-foot{display:flex;align-items:center;gap:12px;margin:-10px 0 24px}
+.fill-foot small{flex:1;color:var(--muted)}
+.fill-copy{padding:7px 14px;border:1px solid #b9c5d0;border-radius:9px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+/* rater subject line */
+.rater-subject{display:flex;align-items:center;gap:10px;margin:0 0 14px!important}
+.rater-subject input{flex:1;padding:9px 12px;border:1px dashed #b9c5d0;border-radius:8px;background:#fffdfb;font:inherit;font-size:15.5px}
+.rater-subject input:focus{outline:none;border-style:solid;border-color:var(--accent);background:#fff}
+.rater-subject .rater-title{flex:1;margin:0;padding:6px 0 10px;border-bottom:2px solid var(--ink);font-size:21px;font-weight:800;letter-spacing:-.01em;cursor:text}
+.rater-subject .rater-title small{display:block;margin-bottom:2px;color:var(--muted);font-size:12.5px;font-weight:600;letter-spacing:.04em}
+.rater-subject .rater-title:hover{border-bottom-color:var(--accent)}
+.steps.steps-field li{margin-bottom:14px}
+.guide-table td:first-child{white-space:nowrap;font-weight:700}
+/* test scenarios (chapter 04) */
+.scenario{margin:26px 0;border:1px solid #c9d3dc;border-radius:14px;background:#fff;overflow:hidden}
+.scenario-head{display:flex;align-items:center;gap:12px;padding:14px 20px;background:#f3f6f8;border-bottom:1px solid #dde4ea}
+.scenario-head .num{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:14px;font-weight:800}
+.scenario-head h4{margin:0!important;font-size:17px}
+.scenario-head .time{margin-left:auto;color:var(--muted);font-size:13px}
+.scenario-body{padding:18px 20px 20px}
+.scenario-body>p{margin-bottom:12px}
+.scenario-body pre.prompt{margin:12px 0 18px}
+.field{margin:0 0 16px}
+.field-label{display:flex;align-items:baseline;gap:8px;margin:0 0 6px!important;font-size:14px;font-weight:750;color:#26313b}
+.field-label .step{color:var(--accent-dark);font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+.field-label small{font-weight:500;color:var(--muted)}
+.field textarea.fill{min-height:46px}
+.verdict{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.verdict span{font-size:14px;font-weight:750;margin-right:4px}
+.verdict button{padding:7px 14px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.verdict button.is-picked[data-value="통과"]{background:#2f6f4f;border-color:#2f6f4f;color:#fff}
+.verdict button.is-picked[data-value="실패"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.verdict button.is-picked[data-value="보완 필요"]{background:#c9a34a;border-color:#c9a34a;color:#fff}
+.testlog-export{padding:10px 18px;border:1px solid var(--ink);border-radius:10px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:750;cursor:pointer}
+.export-row{display:flex;align-items:center;gap:14px;margin:8px 0 24px}
+.export-row small{color:var(--muted)}
+.testlog-export{white-space:nowrap;flex-shrink:0}
+.field-sample{margin:10px 0 0;padding:12px 16px;border-left:3px solid var(--bluegray);border-radius:0 10px 10px 0;background:#f3f6fa;font-size:15px}
+.field-sample p{margin:0 0 8px}.field-sample p:last-child{margin-bottom:0}
+.field-sample-title{font-size:12.5px;font-weight:750;letter-spacing:.04em;color:var(--bluegray)}
+.fill.shake{animation:shake .4s}
+/* field row + check button */
+.field-row{display:flex;gap:8px;align-items:flex-start}
+.field-row textarea.fill{flex:1}
+.field-check{flex-shrink:0;padding:0 16px;height:46px;border:0;border-radius:9px;background:var(--ink);color:#fff;font-size:14px;font-weight:750;cursor:pointer}
+.field-check:hover{background:#000}
+.field-sample ul{margin:0;padding-left:18px}.field-sample li{margin:0 0 6px}.field-sample li:last-child{margin-bottom:0}
+/* git / snapshot mode switch */
+.mode-switch{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 22px;padding:14px 18px;border:1px solid #dde4ea;border-radius:12px;background:#f7f9fb}
+.mode-switch>span{font-weight:750;font-size:15px;margin-right:4px}
+.mode-switch button{padding:8px 14px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.mode-switch button code{font-size:13px}
+.mode-switch button.is-picked{background:var(--ink);border-color:var(--ink);color:#fff}
+.mode-switch button.is-picked code{color:#fff;background:transparent}
+.mode-switch small{flex-basis:100%;color:var(--muted);font-size:13.5px}
+[data-mode="git"] .only-snap{display:none!important}
+[data-mode="snap"] .only-git{display:none!important}
+.mode-note{margin:0 0 14px!important;font-size:15px;color:#4a5560}
+.git-setup{flex-basis:100%;margin-top:6px;padding-top:14px;border-top:1px dashed #cbd5de}.git-setup .steps{margin:0}.git-setup .steps li p{font-size:15px}.git-setup pre{margin:8px 0 10px;font-size:14px}
+
 </style>
 </head>
 <body>
@@ -261,7 +324,7 @@ ul.check-list.forbid li.is-done::after{display:none}
 <text x="36" y="208" class="d-t">llm_wiki/research/AGENTS.md</text>
 <text x="36" y="228" class="d-t small">프로젝트 선택 · 문헌 비교 · 연구 질문 변경 규칙</text>
 <rect x="20" y="256" width="300" height="56" rx="10" class="d-box blue"/>
-<text x="36" y="280" class="d-t">_template.md (papers·concepts·research)</text>
+<text x="36" y="280" class="d-t">_template.md (papers·concepts…)</text>
 <text x="36" y="300" class="d-t small">빈 양식 + 각 칸을 채우는 규칙(schema)</text>
 
 <text x="370" y="28" class="d-t accent">기록 (규칙대로 쌓인다)</text>
@@ -273,7 +336,7 @@ ul.check-list.forbid li.is-done::after{display:none}
 <text x="576" y="84" class="d-t small">papers/연도_저자_키워드</text>
 <rect x="770" y="40" width="110" height="56" rx="10" class="d-box"/>
 <text x="786" y="64" class="d-t">허브·개념</text>
-<text x="786" y="84" class="d-t small">topics · years…</text>
+<text x="786" y="84" class="d-t small">topics·years…</text>
 <rect x="560" y="130" width="180" height="56" rx="10" class="d-box"/>
 <text x="576" y="154" class="d-t">Literature Matrix</text>
 <text x="576" y="174" class="d-t small">research/…/literature.md</text>
@@ -420,9 +483,9 @@ ul.check-list.forbid li.is-done::after{display:none}
 <tr><td>01</td><td><code>part4/skill_선정기준표.md</code></td><td>내 반복 업무를 다섯 기준으로 평가한 표</td></tr>
 <tr><td>02</td><td><code>paper-reading_실행계약.md</code></td><td>논문 읽기 Skill의 여섯 필드 계약 (승인 후 <code>part4/</code>로 이동)</td></tr>
 <tr><td>03</td><td><code>.agents/skills/paper-reading/SKILL.md</code></td><td>첫 번째 Skill</td></tr>
-<tr><td>04</td><td><code>part4/paper-reading_테스트기록.md</code></td><td>정상·누락·재실행 테스트 기록</td></tr>
-<tr><td rowspan="2">05</td><td><code>experiment-log_실행계약.md</code> → <code>.agents/skills/experiment-log/SKILL.md</code></td><td>두 번째 Skill</td></tr>
-<tr><td><code>llm_wiki/research/[프로젝트]/experiments/run15.md</code>, <code>run17.md</code></td><td>두 번째 Skill로 만든 실험 기록</td></tr>
+<tr><td>04</td><td><code>part4/paper-reading_테스트기록.md</code></td><td>정상·누락·재실행 테스트 기록. 04장 페이지에 적고 내보내기로 저장</td></tr>
+<tr><td rowspan="2">05</td><td><code>[내 업무]_실행계약.md</code> → <code>.agents/skills/[내 업무]/SKILL.md</code></td><td>두 번째 Skill. 01장에서 고른 내 업무로 직접 설계 (막막하면 강의의 experiment-log를 따라 만듦)</td></tr>
+<tr><td>두 번째 Skill의 실행 결과 (experiment-log라면 <code>experiments/run15.md</code>, <code>run17.md</code>)</td><td>중지 확인 1회 + 정상 실행 1회</td></tr>
 <tr><td>06</td><td><code>part4/skill_품질_체크리스트.md</code></td><td>두 Skill을 여덟 기준으로 점검한 표와 수정 기록</td></tr>
 </tbody></table></div>
 
@@ -507,7 +570,7 @@ codex</code></pre></li>
 <p>차이 목록에서 내가 Part 3 때 직접 바꾼 규칙이 지워지지 않는지 봅니다. 그 부분만 유지하라고 지정한 뒤 나머지를 적용합니다. 이미 만든 프로젝트의 <code>index.md</code>에는 "실험 기록" 절만 추가하고, 프로젝트명이나 연구 질문을 빈 템플릿으로 덮어쓰지 않습니다.</p>
 </section><section class="content-section">
 <h2 id="setup--section-5">세팅 3. 작업 문서 폴더 만들기<a class="heading-anchor" href="#setup--section-5" aria-label="이 제목으로 이동">#</a></h2>
-<p>실행 계약 템플릿, 선정 기준표, 체크리스트, 생성 프롬프트, 테스트 기록표는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
+<p>실행 계약 템플릿, 선정 기준표, 체크리스트, 생성 프롬프트는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
 <pre class="file-tree"><code>작업공간/
 ├── AGENTS.md
 ├── <span class="new">.agents/skills/</span>              ← 03장과 05장에서 SKILL.md가 생긴다 (지금은 비어 있음)
@@ -523,8 +586,6 @@ codex</code></pre></li>
     ├── skill_후보목록_예시.md
     ├── skill_품질_체크리스트.md
     ├── paper-reading_생성프롬프트.md
-    ├── paper-reading_테스트기록표.md
-    ├── paper-reading_테스트기록_완성예시.md
     ├── experiment-log_생성프롬프트.md
     └── 참고/                    ← 강의에서 완성한 계약과 SKILL.md. 내 것을 만든 뒤에만 연다
         ├── paper-reading_실행계약.md · paper-reading_SKILL.md
@@ -560,8 +621,6 @@ codex</code></pre></li>
 - 루트에 part4/ 와 .agents/skills/ 폴더를 만들어.
 - 실습파일에서 복사: 실행계약_템플릿.md, 공통/ 아래 세 파일 → part4/
   paper-reading/생성_프롬프트.md → part4/paper-reading_생성프롬프트.md
-  paper-reading/테스트_기록표.md → part4/paper-reading_테스트기록표.md
-  paper-reading/테스트_기록_완성예시.md → part4/paper-reading_테스트기록_완성예시.md
   experiment-log/생성_프롬프트.md → part4/experiment-log_생성프롬프트.md
   두 실행계약과 두 SKILL.md → part4/참고/ (SKILL.md는 paper-reading_SKILL.md,
   experiment-log_SKILL.md 로 이름을 붙여)
@@ -705,7 +764,8 @@ llm_wiki 아래 모든 _template.md를 실제로 읽어줘.
 <p>표를 쓸 때 두 가지를 지킵니다. 첫째, <strong>업무 이름을 "논문 읽기"처럼 넓게 쓰지 않습니다.</strong> "원문을 페이지로 구조화하고 허브와 index를 갱신하기"처럼 어디까지가 자동화 대상인지 드러나게 좁혀 적어야 평가가 됩니다. 둘째, <strong>합계가 같으면 입력 안정성과 검증 가능성을 먼저 봅니다.</strong> 이 둘이 낮으면 02장에서 입력 게이트와 중지 조건을 훨씬 많이 설계해야 합니다.</p>
 <div class="rater">
 <p class="drill-title">눌러 보기: 내 업무 하나를 다섯 기준으로 판정하기</p>
-<p class="drill-lead">머릿속 업무 하나를 떠올리고 상·중·하를 고르세요. 실습 1에서 표를 채우기 전 예열입니다.</p>
+<p class="drill-lead">판정할 업무를 한 줄로 적고 Enter를 누른 뒤 상·중·하를 고르세요. 실습 1에서 표를 채우기 전 예열입니다.</p>
+<div class="rater-subject"><input type="text" placeholder="예: 학회 발표 논문의 서지를 Wiki에 넣고 허브 갱신하기" aria-label="판정할 업무"><p class="rater-title" hidden></p></div>
 <div class="rater-row"><span>반복성<small>같은 형태의 요청이 계속 들어오는가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
 <div class="rater-row"><span>입력 안정성<small>시작에 필요한 입력의 종류·형식이 매번 비슷한가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
 <div class="rater-row"><span>출력 안정성<small>결과가 들어갈 파일·위치·형식이 정해져 있는가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
@@ -755,6 +815,22 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <h4>실패하면</h4>
 <p>에이전트가 지적한 "섞인 업무"를 나눈 뒤 다시 평가합니다. 다섯 칸이 모두 "중"인 행은 거의 항상 이름이 넓은 것입니다. 02장으로 넘어가기 전에 1순위 한 줄을 다른 사람에게 읽어 주고 "무엇을 자동화하는 건지" 되물어 보면 이름이 충분히 좁은지 알 수 있습니다.</p>
 </div></div>
+
+<div class="qa" id="qa-01-3">
+<p class="qa-q"><span class="qa-label">Q 1-3</span>Skill 문서의 여섯 요소를 작성하시오. 각 요소가 무엇을 정하는지 한 줄씩 붙여 보세요.</p>
+<textarea class="qa-input" rows="3" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
+<div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
+<div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
+<ol>
+<li><strong>Trigger</strong>: 어떤 요청에서 열리고, 비슷하지만 어떤 요청에서는 열리지 않는가. 모호하면 어떻게 하는가.</li>
+<li><strong>Input</strong>: 시작에 꼭 있어야 하는 것과 있으면 좋은 것. 필수가 없을 때의 동작.</li>
+<li><strong>Process</strong>: 단계와 각 단계의 출구, 재실행 시 동작. 규칙 파일·템플릿은 복사하지 않고 참조.</li>
+<li><strong>Output</strong>: 어떤 파일을 어디에 남기는가, 어떤 조건에서 갱신하는가, 완료 보고에 무엇을 넣는가.</li>
+<li><strong>Stop / Ask</strong>: 멈추고 사람에게 물을 조건과, 답을 받기 전까지 하지 않는 행동.</li>
+<li><strong>Validation</strong>: 끝내기 전에 실제 파일과 대조할 항목.</li>
+</ol>
+<p>여섯 개의 이름보다 중요한 것은 <strong>경계를 정하는 넷(Trigger, Input, Stop / Ask, Validation)이 Part 3 규칙 파일에는 비어 있었다</strong>는 점입니다. 02장에서 이 넷부터 채웁니다.</p>
+</div></div></div>
 </section>
 </div>
 <nav class="page-pager" aria-label="앞뒤 페이지"><a href="#setup"><span>이전</span>00. 수업 흐름과 세팅</a><a href="#chapter-02"><span>다음</span>02. 실행 경계와 실행 계약</a></nav>
@@ -768,8 +844,9 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <li><a href="#chapter-02--section-1">설계, 구현, 검증: 한 사이클</a></li>
 <li><a href="#chapter-02--section-2">Trigger: 언제 호출하고 언제 호출하지 않는가</a></li>
 <li><a href="#chapter-02--section-3">Input: 무엇이 있어야 시작하는가</a></li>
-<li><a href="#chapter-02--section-4">Output: 입력 상태에 따라 어디까지 가는가</a></li>
-<li><a href="#chapter-02--section-5">Stop / Ask와 Validation</a></li>
+<li><a href="#chapter-02--section-4">Process: 입력 상태에 따라 어디까지 가는가</a></li>
+<li><a href="#chapter-02--section-5">Output: 무엇을 어디에 남기는가</a></li>
+<li><a href="#chapter-02--section-6">Stop / Ask와 Validation</a></li>
 </ol></nav>
 
 
@@ -785,7 +862,7 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <rect x="310" y="30" width="240" height="80" rx="12" class="d-box"/>
 <text x="328" y="58" class="d-t">구현 — 03장</text>
 <text x="328" y="80" class="d-t small">계약을 SKILL.md로 옮긴다 (에이전트)</text>
-<text x="328" y="98" class="d-t small">.agents/skills/paper-reading/SKILL.md</text>
+<text x="328" y="98" class="d-t small">.agents/skills/…/SKILL.md</text>
 <rect x="600" y="30" width="240" height="80" rx="12" class="d-box"/>
 <text x="618" y="58" class="d-t">검증 — 04장</text>
 <text x="618" y="80" class="d-t small">정상 · 누락 · 재실행으로 시험한다</text>
@@ -837,71 +914,85 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 </ul>
 <p>DB에 논문이 없는 것과 DB에 접근하지 못한 것도 구분합니다. 네트워크가 끊겨 Crossref에 못 갔다면 "이 논문은 DB에 없다"가 아니라 "접근 실패"라고 밝히고 멈춥니다. 둘을 섞으면 멀쩡한 논문이 식별 실패로 기록됩니다.</p>
 </section><section class="content-section">
-<h2 id="chapter-02--section-4">Output: 입력 상태에 따라 어디까지 가는가<a class="heading-anchor" href="#chapter-02--section-4" aria-label="이 제목으로 이동">#</a></h2>
-<p>입력 상태에 따라 어디까지 진행하고 어떤 상태로 남길지를 미리 정합니다. 이 표가 있어야 <strong>에이전트가 중간에 막혔을 때 추측으로 메우지 않고 정해진 상태로 멈춥니다.</strong></p>
+<h2 id="chapter-02--section-4">Process: 입력 상태에 따라 어디까지 가는가<a class="heading-anchor" href="#chapter-02--section-4" aria-label="이 제목으로 이동">#</a></h2>
+<p>절차는 세 단계입니다. 서지를 확정하고, 원문을 확보하고, 요약해서 원문과 대조합니다. 각 단계에는 "여기서 끝날 수 있는" 출구가 있고, 출구마다 남길 상태값이 정해져 있습니다. 이 그림이 있어야 <strong>에이전트가 중간에 막혔을 때 추측으로 메우지 않고 정해진 상태로 멈춥니다.</strong></p>
 <figure class="diagram">
-<svg viewBox="0 0 880 330" role="img" aria-label="paper-reading 상태 전이">
+<svg viewBox="0 0 880 470" role="img" aria-label="paper-reading 처리 흐름과 출구">
 <defs><marker id="arrow4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#8a96a3"/></marker></defs>
-<rect x="20" y="20" width="200" height="50" rx="10" class="d-box"/>
-<text x="36" y="43" class="d-t">서지 식별·DB 대조</text>
-<text x="36" y="61" class="d-t small">기존 페이지 중복 검사 포함</text>
-<rect x="20" y="120" width="200" height="50" rx="10" class="d-box"/>
-<text x="36" y="143" class="d-t">원문 확보 판정</text>
-<text x="36" y="161" class="d-t small">접근 가능한 판본 찾기</text>
-<rect x="20" y="220" width="200" height="50" rx="10" class="d-box"/>
-<text x="36" y="243" class="d-t">요약 → 원문 대조</text>
-<text x="36" y="261" class="d-t small">fulltext_available → summarized → 최종</text>
-<path d="M120 70 V118" class="d-line" style="marker-end:url(#arrow4)"/>
-<path d="M120 170 V218" class="d-line" style="marker-end:url(#arrow4)"/>
-
-<rect x="300" y="12" width="270" height="66" rx="10" class="d-box human"/>
-<text x="316" y="36" class="d-t">식별 실패 · 중복 모호</text>
-<text x="316" y="56" class="d-t small">파일을 만들지 않고 묻는다 (Stop / Ask)</text>
-<text x="316" y="71" class="d-t small">받은 PDF만 _unidentified/에 보관</text>
-<rect x="610" y="12" width="250" height="66" rx="10" class="d-box"/>
-<text x="626" y="36" class="d-t">연도·제1저자 중 하나만 확인</text>
-<text x="626" y="56" class="d-t small">파일명에 unknown-year/author</text>
-<text x="626" y="71" class="d-t small">needs_review / unreviewed</text>
-<path d="M220 45 H298" class="d-line" style="marker-end:url(#arrow4)"/>
-<path d="M570 45 H608" class="d-line dashed" style="marker-end:url(#arrow4)"/>
-
-<rect x="300" y="112" width="270" height="66" rx="10" class="d-box"/>
-<text x="316" y="136" class="d-t">원문 미확보</text>
-<text x="316" y="156" class="d-t small">확인된 서지와 실패 사유만 기록</text>
-<text x="316" y="171" class="d-t small">metadata_only / unreviewed</text>
-<rect x="610" y="112" width="250" height="66" rx="10" class="d-box"/>
-<text x="626" y="136" class="d-t">원문은 있는데 추출 실패</text>
-<text x="626" y="156" class="d-t small">사유를 기록하고 멈춤</text>
-<text x="626" y="171" class="d-t small">needs_review / needs_review</text>
-<path d="M220 145 H298" class="d-line" style="marker-end:url(#arrow4)"/>
-<path d="M570 145 H608" class="d-line dashed" style="marker-end:url(#arrow4)"/>
-
-<rect x="300" y="212" width="270" height="66" rx="10" class="d-box accent"/>
-<text x="316" y="236" class="d-t">정상 완료</text>
-<text x="316" y="256" class="d-t small">허브·index·log 갱신, 지정 프로젝트만 갱신</text>
-<text x="316" y="271" class="d-t small">critically_reviewed / verified</text>
-<rect x="610" y="212" width="250" height="66" rx="10" class="d-box"/>
-<text x="626" y="236" class="d-t">일부만 뒷받침 · 근거 없음</text>
-<text x="626" y="256" class="d-t small">needs_review / partial 또는 unsupported</text>
-<text x="626" y="271" class="d-t small">도달 상태로 인정하고 종료</text>
-<path d="M220 245 H298" class="d-line" style="marker-end:url(#arrow4)"/>
-<path d="M570 245 H608" class="d-line dashed" style="marker-end:url(#arrow4)"/>
-<text x="20" y="315" class="d-t small">실선: 정상 흐름 / 점선: 같은 단계에서 갈라지는 다른 결과. 어디서 끝나든 도달한 상태를 저장하고 종료한다.</text>
+<!-- column labels -->
+<text x="20" y="22" class="d-t small">단계 (위에서 아래로)</text>
+<text x="340" y="22" class="d-t small">그 단계에서 끝나는 경우 → 남기는 상태</text>
+<!-- stage 1 -->
+<rect x="20" y="40" width="250" height="56" rx="10" class="d-box dark"/>
+<text x="36" y="63" class="d-t white">1. 서지 확정</text>
+<text x="36" y="83" class="d-t small white">DB 대조 · 기존 페이지 중복 검사</text>
+<rect x="340" y="34" width="520" height="30" rx="8" class="d-box human"/>
+<text x="352" y="54" class="d-t small">식별 실패 · 중복 모호 → <tspan font-weight="700">파일 없이 묻고 멈춤</tspan> (Stop / Ask, 받은 PDF는 _unidentified/에만)</text>
+<rect x="340" y="70" width="520" height="30" rx="8" class="d-box"/>
+<text x="352" y="90" class="d-t small">연도·제1저자 중 하나만 확인 → 자리표시자 파일명으로 계속, <tspan font-weight="700">needs_review / unreviewed</tspan></text>
+<path d="M270 52 H338" class="d-line" style="marker-end:url(#arrow4)"/>
+<path d="M270 84 H338" class="d-line dashed" style="marker-end:url(#arrow4)"/>
+<!-- down -->
+<path d="M145 96 V138" class="d-line" style="marker-end:url(#arrow4)"/>
+<text x="156" y="122" class="d-t small">서지 확정됨</text>
+<!-- stage 2 -->
+<rect x="20" y="140" width="250" height="56" rx="10" class="d-box dark"/>
+<text x="36" y="163" class="d-t white">2. 원문 확보</text>
+<text x="36" y="183" class="d-t small white">접근 가능한 판본 찾기 · 텍스트 추출</text>
+<rect x="340" y="134" width="520" height="30" rx="8" class="d-box"/>
+<text x="352" y="154" class="d-t small">원문 미확보 → 서지와 실패 사유만 저장하고 종료, <tspan font-weight="700">metadata_only / unreviewed</tspan></text>
+<rect x="340" y="170" width="520" height="30" rx="8" class="d-box"/>
+<text x="352" y="190" class="d-t small">원문은 있는데 추출 실패 → 사유 기록 후 종료, <tspan font-weight="700">needs_review / needs_review</tspan></text>
+<path d="M270 149 H338" class="d-line dashed" style="marker-end:url(#arrow4)"/>
+<path d="M270 185 H338" class="d-line dashed" style="marker-end:url(#arrow4)"/>
+<path d="M145 196 V238" class="d-line" style="marker-end:url(#arrow4)"/>
+<text x="156" y="222" class="d-t small">원문 확보됨 → fulltext_available</text>
+<!-- stage 3 -->
+<rect x="20" y="240" width="250" height="56" rx="10" class="d-box dark"/>
+<text x="36" y="263" class="d-t white">3. 요약 → 원문 대조</text>
+<text x="36" y="283" class="d-t small white">summarized를 거쳐 2-pass 검증</text>
+<rect x="340" y="234" width="520" height="30" rx="8" class="d-box accent"/>
+<text x="352" y="254" class="d-t small">모든 판단에 원문 근거 있음 → <tspan font-weight="700">critically_reviewed / verified</tspan></text>
+<rect x="340" y="270" width="520" height="30" rx="8" class="d-box"/>
+<text x="352" y="290" class="d-t small">일부만 뒷받침 · 근거 없음 → <tspan font-weight="700">needs_review / partial 또는 unsupported</tspan></text>
+<path d="M270 249 H338" class="d-line" style="marker-end:url(#arrow4)"/>
+<path d="M270 285 H338" class="d-line dashed" style="marker-end:url(#arrow4)"/>
+<!-- common finish -->
+<path d="M600 300 V338" class="d-line" style="marker-end:url(#arrow4)"/>
+<text x="612" y="320" class="d-t small">어느 출구로 끝나든 (묻고 멈춘 경우만 제외)</text>
+<rect x="340" y="340" width="520" height="62" rx="10" class="d-box blue"/>
+<text x="356" y="364" class="d-t">4. 마무리는 항상 같다</text>
+<text x="356" y="384" class="d-t small">도달한 상태값 저장 → 허브·index·log 갱신 → 완료 보고 (사람 확인 필요 항목 표시)</text>
+<text x="20" y="430" class="d-t small">실선: 다음 단계로 가는 정상 흐름 / 점선: 그 단계에서 갈라지는 출구</text>
+<text x="20" y="450" class="d-t small">사람에게 묻는 출구는 1단계의 식별 실패·중복 모호 하나뿐. 나머지 출구는 묻지 않고 상태를 저장한 뒤 끝낸다.</text>
 </svg>
-<figcaption>그림 2-2. 처리가 어디에서 끝나든 "도달한 상태"를 저장합니다. 사람에게 묻는 경우는 왼쪽 위 하나뿐이고, 나머지는 묻지 않고 정해진 상태로 저장한 뒤 종료합니다.</figcaption>
+<figcaption>그림 2-2. paper-reading의 처리 흐름. 왼쪽 세 단계를 위에서 아래로 내려가며, 각 단계의 출구(오른쪽)마다 어떤 상태로 남길지 미리 정해 둡니다.</figcaption>
 </figure>
-<div class="table-scroll"><table class="compact"><thead><tr><th>입력 상태</th><th>동작</th><th>결과 상태</th></tr></thead><tbody>
-<tr><td>서지를 외부 DB에서 확인 못 함 (식별 실패)</td><td>아무 파일도 만들지 않고 어떤 논문인지 묻는다</td><td>멈춤</td></tr>
+<div class="table-scroll"><table class="compact"><thead><tr><th>단계</th><th>입력 상태</th><th>동작</th><th>결과 상태</th></tr></thead><tbody>
+<tr><td rowspan="3">1. 서지 확정</td><td>외부 DB에서 확인 못 함 (식별 실패)</td><td>아무 파일도 만들지 않고 어떤 논문인지 묻는다</td><td>멈춤</td></tr>
 <tr><td>기존 페이지와 중복인지 모호</td><td>새 페이지를 만들지 않고 묻는다</td><td>멈춤</td></tr>
-<tr><td>연도·제1저자 중 한 값만 확인</td><td>자리표시자 파일명으로 저장</td><td><code>needs_review / unreviewed</code></td></tr>
-<tr><td>서지는 확정, 원문 미확보</td><td>확인된 서지와 실패 사유만 저장</td><td><code>metadata_only / unreviewed</code></td></tr>
-<tr><td>원문 확보, 텍스트 추출 불가</td><td>실패 사유를 남기고 멈춤</td><td><code>needs_review / needs_review</code></td></tr>
+<tr><td>연도·제1저자 중 한 값만 확인</td><td>자리표시자 파일명으로 저장하고 계속</td><td><code>needs_review / unreviewed</code></td></tr>
+<tr><td rowspan="3">2. 원문 확보</td><td>서지는 확정, 원문 미확보</td><td>확인된 서지와 실패 사유만 저장</td><td><code>metadata_only / unreviewed</code></td></tr>
+<tr><td>원문 확보, 텍스트 추출 불가</td><td>실패 사유를 남기고 종료</td><td><code>needs_review / needs_review</code></td></tr>
 <tr><td>원문 확보, 아직 요약 전</td><td>중간 상태로 기록하고 계속 진행</td><td><code>fulltext_available / unreviewed</code></td></tr>
-<tr><td>정상</td><td>요약(<code>summarized</code>) → 원문 대조까지 진행, 허브·index·log 갱신</td><td><code>critically_reviewed / verified</code> 또는 <code>partial</code>·<code>unsupported</code></td></tr>
+<tr><td rowspan="2">3. 요약·대조</td><td>요약 완료, 모든 판단에 근거 있음</td><td>허브·index·log 갱신 후 종료</td><td><code>critically_reviewed / verified</code></td></tr>
+<tr><td>요약 완료, 일부만 뒷받침되거나 근거 없음</td><td>도달 상태로 인정하고 종료</td><td><code>needs_review / partial</code> 또는 <code>unsupported</code></td></tr>
 </tbody></table></div>
-<p>출력과 갱신 범위도 계약에 적습니다. 논문 페이지는 <code>_template.md</code> 형식을 따르고, 연도·저장소·학회·토픽 허브와 index를 갱신하고, 프로젝트를 지정했을 때만 그 프로젝트의 <code>literature.md</code>를 갱신하고, <code>log.md</code>에 변경 기록을 남깁니다. <strong>이 목록에 없는 경로는 출력에 넣지 않습니다.</strong> 단, <code>_template.md</code>의 내용과 규칙 파일의 절차를 계약에 복사하지는 않습니다. 필요한 시점에 원본을 참조하도록 가리키기만 합니다. <strong>같은 규칙이 두 곳에 있으면 한쪽을 고쳤을 때 다른 쪽이 낡습니다.</strong></p>
+<p>Process에는 한 가지가 더 들어갑니다. <strong>같은 논문이 다시 들어왔을 때의 동작</strong>입니다. 기존 페이지부터 확인해 새 정보가 있는 부분만 갱신하고, 새 정보가 없으면 "변경 없음"으로 끝냅니다. 이것이 재실행 규칙이고 04장에서 따로 시험합니다.</p>
 </section><section class="content-section">
-<h2 id="chapter-02--section-5">Stop / Ask와 Validation<a class="heading-anchor" href="#chapter-02--section-5" aria-label="이 제목으로 이동">#</a></h2>
+<h2 id="chapter-02--section-5">Output: 무엇을 어디에 남기는가<a class="heading-anchor" href="#chapter-02--section-5" aria-label="이 제목으로 이동">#</a></h2>
+<p>Process가 "어디까지 가는가"였다면 Output은 "끝났을 때 어떤 파일이 어떻게 달라져 있는가"입니다. 쓰는 곳을 목록으로 못 박아 두면 에이전트가 그 밖의 파일을 건드렸을 때 바로 계약 위반으로 잡힙니다.</p>
+<div class="table-scroll"><table class="compact"><thead><tr><th>남기는 것</th><th>위치</th><th>조건</th></tr></thead><tbody>
+<tr><td>논문 페이지</td><td><code>llm_wiki/papers/연도_저자_키워드.md</code></td><td>항상. <code>_template.md</code> 형식, frontmatter에 두 상태값</td></tr>
+<tr><td>원문 사본</td><td><code>llm_wiki/sources/</code> (미식별은 <code>_unidentified/</code>)</td><td>사용자가 PDF를 준 경우만. <code>source_file</code>로 연결</td></tr>
+<tr><td>허브 갱신</td><td><code>years/ venues/ topics/ authors/</code>와 <code>index.md</code></td><td>확인된 서지 항목만. topic은 원문을 읽은 뒤</td></tr>
+<tr><td>프로젝트 문헌표</td><td><code>research/[프로젝트]/literature.md</code></td><td><strong>프로젝트를 지정했을 때만</strong>, 그 프로젝트만</td></tr>
+<tr><td>변경 기록</td><td><code>llm_wiki/log.md</code></td><td>실제 변경이 있을 때 한 줄. 변경 없음은 남기지 않음</td></tr>
+<tr><td>완료 보고</td><td>대화창 (파일 아님)</td><td>생성·수정 파일, 건너뛴 항목과 이유, 도달 상태와 근거, 사람 확인 필요 항목</td></tr>
+</tbody></table></div>
+<p><strong>이 목록에 없는 경로는 출력에 넣지 않습니다.</strong> 단, <code>_template.md</code>의 내용과 규칙 파일의 절차를 계약에 복사하지는 않습니다. 필요한 시점에 원본을 참조하도록 가리키기만 합니다. <strong>같은 규칙이 두 곳에 있으면 한쪽을 고쳤을 때 다른 쪽이 낡습니다.</strong> 완료 보고는 파일이 아니지만 Output의 일부입니다. 보고 항목이 "파일 경로와 상태값"처럼 대조 가능한 것으로 적혀 있어야 04장에서 테스트할 수 있습니다.</p>
+</section><section class="content-section">
+<h2 id="chapter-02--section-6">Stop / Ask와 Validation<a class="heading-anchor" href="#chapter-02--section-6" aria-label="이 제목으로 이동">#</a></h2>
 <p>Skill이 안전하게 반복되려면 멈춰야 할 때 확실히 멈춰야 합니다. 위 표에서 "묻는다"로 끝나는 두 경우에 프로젝트 대상이 모호한 경우를 더한 것이 Stop / Ask입니다. 새 프로젝트 생성과 논문 추가를 함께 요청받으면 논문은 공통 Wiki까지만 처리하고, 프로젝트 생성은 research 규칙의 승인 절차를 안내한 뒤 승인 전에는 하지 않습니다.</p>
 <p><strong>그 밖의 중지는 묻지 않습니다.</strong> 원문을 못 구했다고 매번 사람을 부르면 Skill을 쓰는 의미가 없습니다. 정해진 상태로 저장하고 종료한 뒤 완료 보고에서 "사람 확인 필요"로 표시합니다. 프로젝트를 지정하지 않은 단순 논문 추가는 중지 사유가 아닙니다.</p>
 <p><strong>같은 논문이 다시 들어오면 기존 페이지부터 확인해 새 정보가 있는 부분만 갱신하고, 새 정보가 없으면 "변경 없음"으로 끝냅니다.</strong> 이것이 재실행 규칙입니다.</p>
@@ -939,24 +1030,40 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <h4>목표</h4>
 <p><code>part4/실행계약_템플릿.md</code>를 복사해 작업공간 루트에 <code>paper-reading_실행계약.md</code>를 만들고 여섯 필드를 채웁니다. 완벽하게 채우려 하지 않습니다. 03장에서 에이전트가 모호한 지점을 보고하면 그때 메웁니다.</p>
 <h4>2-1. 범위 카드부터 (5분, 사람)</h4>
-<p>계약을 쓰기 전에 아래 일곱 줄을 메모장에 먼저 적습니다. 긴 Process부터 쓰기 시작하면 규칙 파일을 그대로 베끼게 됩니다. 경계부터 정하고 절차는 마지막에 씁니다.</p>
-<div class="table-scroll"><table class="compact"><thead><tr><th>항목</th><th>내 결정</th></tr></thead><tbody>
+<p>계약을 쓰기 전에 아래 일곱 줄을 먼저 적습니다. 긴 Process부터 쓰기 시작하면 규칙 파일을 그대로 베끼게 됩니다. 경계부터 정하고 절차는 마지막에 씁니다.</p>
+<div class="table-scroll"><table class="compact fill-card"><thead><tr><th>항목</th><th>내 결정 (직접 적습니다. 자동 저장)</th></tr></thead><tbody>
 <tr><td>Skill 이름</td><td><code>paper-reading</code></td></tr>
-<tr><td>호출하는 요청 (3개)</td><td></td></tr>
-<tr><td>호출하지 않는 비슷한 요청 (2개)</td><td></td></tr>
-<tr><td>없으면 시작하지 않을 필수 입력</td><td></td></tr>
-<tr><td>있으면 좋은 선택 입력</td><td></td></tr>
-<tr><td>먼저 물어봐야 하는 상황 (3개)</td><td></td></tr>
-<tr><td>절대 하지 않을 행동 (2개)</td><td></td></tr>
+<tr><td>호출하는 요청 (3개)</td><td><textarea class="fill" rows="1" placeholder="예: 이 DOI 논문 Wiki에 추가해 줘 / …"></textarea></td></tr>
+<tr><td>호출하지 않는 비슷한 요청 (2개)</td><td><textarea class="fill" rows="1" placeholder="예: 이 논문 핵심만 말로 알려 줘 / …"></textarea></td></tr>
+<tr><td>없으면 시작하지 않을 필수 입력</td><td><textarea class="fill" rows="1" placeholder="예: 논문을 특정할 수 있는 식별자 하나"></textarea></td></tr>
+<tr><td>있으면 좋은 선택 입력</td><td><textarea class="fill" rows="1" placeholder="예: 연결할 프로젝트, 특별히 볼 부분"></textarea></td></tr>
+<tr><td>먼저 물어봐야 하는 상황 (3개)</td><td><textarea class="fill" rows="1" placeholder="예: 제목으로 검색했더니 후보가 여럿일 때 / …"></textarea></td></tr>
+<tr><td>절대 하지 않을 행동 (2개)</td><td><textarea class="fill" rows="1" placeholder="예: 원문 없이 Summary를 채우는 것 / …"></textarea></td></tr>
 </tbody></table></div>
+<div class="fill-foot"><small>적은 내용은 이 브라우저에 남습니다. 복사해서 계약 파일 맨 위에 붙여 두면 2-2가 편합니다.</small><button type="button" class="fill-copy">카드 내용 복사</button></div>
 <h4>2-2. 계약 채우기 (15분, 사람)</h4>
-<p>템플릿을 복사한 뒤 이 순서로 채웁니다. Trigger → Input → Output(상태 전이표와 갱신 범위) → Stop / Ask → Process → Validation. 다음을 지킵니다.</p>
-<ul>
-<li>규칙 파일에 이미 있는 형식은 복사하지 않고 "<code>llm_wiki/AGENTS.md</code>의 서지 확정 절을 따른다"처럼 가리킵니다.</li>
-<li>모든 상대 경로는 <code>AGENTS.md</code>가 있는 작업공간 루트 기준이라고 첫머리에 적습니다.</li>
-<li>Output에는 위 상태 전이표를 자기 말로 옮깁니다. 표를 그대로 붙여도 됩니다.</li>
-<li>Process에는 재실행 동작("같은 논문이 다시 오면 기존 페이지부터 확인")을 반드시 넣습니다.</li>
-</ul>
+<p><code>part4/실행계약_템플릿.md</code>를 작업공간 루트에 <code>paper-reading_실행계약.md</code>로 복사합니다. 파일 첫 줄에 "모든 상대 경로는 <code>AGENTS.md</code>가 있는 작업공간 루트 기준"이라고 한 줄 적어 둡니다. 그다음 템플릿 순서(Trigger → Input → Process → Output → Stop / Ask → Validation)가 아니라 <strong>경계가 되는 필드부터 이 순서로 채웁니다.</strong> 2-1 카드의 줄이 그대로 재료가 됩니다.</p>
+<ol class="steps steps-field">
+<li><strong>① Trigger</strong>카드의 "호출하는 요청 3개"와 "호출하지 않는 요청 2개"를 옮기고, 모호할 때 어떻게 할지 한 줄을 붙입니다.</li>
+<li><strong>② Input</strong>필수 입력과 선택 입력, 그리고 필수가 없을 때 무엇을 하는지 적습니다.</li>
+<li><strong>③ Stop / Ask</strong>카드의 "먼저 물어봐야 하는 상황 3개"를 옮기고, 상황마다 답을 받기 전까지 하지 않는 행동을 붙입니다.</li>
+<li><strong>④ Process</strong>위 그림의 세 단계와 출구를 자기 말로 옮깁니다. 재실행 때의 동작도 한 줄 넣습니다.</li>
+<li><strong>⑤ Output</strong>어떤 파일을 어디에 남기는지, 어떤 조건에서 갱신하는지, 완료 보고에 무엇을 넣는지 적습니다.</li>
+<li><strong>⑥ Validation</strong>끝내기 전에 실제 파일과 대조할 항목을 적습니다.</li>
+</ol>
+<p>먼저 혼자 써 보세요. 막히는 필드가 있으면 그때 아래를 엽니다.</p>
+<details><summary>너무 어렵다면? 필드별 힌트 (예시 문장과 흔한 실수)</summary><div class="detail-body">
+<p>각 필드에 들어갈 문장의 모양과, 처음 쓸 때 자주 나오는 실수입니다. 예시를 그대로 베끼기보다 "이 정도 구체성"을 기준으로 삼으세요.</p>
+<div class="table-scroll"><table class="compact guide-table"><thead><tr><th>순서</th><th>적을 것</th><th>이렇게 쓰면 됩니다</th><th>이러면 안 됩니다</th></tr></thead><tbody>
+<tr><td>① Trigger</td><td>카드의 "호출하는 요청 3개"와 "호출하지 않는 요청 2개"를 그대로 옮기고, 모호할 때 어떻게 할지 한 줄</td><td>"호출: 식별자와 함께 추가·요약·프로젝트 반영 요청. 호출 안 함: 내용만 묻는 질문, 허브 정리. 모호하면 추가인지 질문인지 먼저 확인"</td><td>"논문 관련 요청이면 호출"처럼 넓게 쓰기</td></tr>
+<tr><td>② Input</td><td>필수 입력, 선택 입력, 그리고 <strong>필수가 없을 때의 동작</strong></td><td>"필수: DOI/arXiv ID/공식 URL 중 하나. 없으면 파일을 만들지 않고 묻는다. DB에 없는 것과 DB 접근 실패는 구분해 보고"</td><td>입력 목록만 쓰고 "없으면 어떻게"를 빼기</td></tr>
+<tr><td>③ Stop / Ask</td><td>카드의 "먼저 물어봐야 하는 상황 3개" + 각각 <strong>"답을 받기 전까지 하지 않는 행동"</strong></td><td>"제목으로 후보가 여럿: 어느 것인지 묻고, 답 전에는 페이지를 만들지 않는다"</td><td>물을 상황만 적고 그동안 뭘 하면 안 되는지 빼기</td></tr>
+<tr><td>④ Process</td><td>위 그림의 세 단계와 출구. 표를 자기 말로 옮기거나 그대로 붙여도 됩니다. 재실행 동작 한 줄은 꼭 넣습니다</td><td>"1. 서지 확정(<code>llm_wiki/AGENTS.md</code> 서지 절을 따른다) … 같은 논문이 다시 오면 기존 페이지부터 확인"</td><td>규칙 파일의 서지 확정 절차나 템플릿 본문을 통째로 복사해 넣기. 가리키기만 합니다</td></tr>
+<tr><td>⑤ Output</td><td>위 Output 표의 여섯 줄. 특히 <strong>프로젝트 문헌표는 지정했을 때만</strong>, 그리고 완료 보고에 들어갈 항목</td><td>"쓰는 곳: papers/, sources/, 허브·index, (지정 시) literature.md, log.md. 그 외 경로는 쓰지 않는다"</td><td>"관련 파일을 갱신한다"처럼 어디인지 없는 문장</td></tr>
+<tr><td>⑥ Validation</td><td>끝내기 전에 실제 파일과 대조할 항목. 위 Stop / Ask 절의 네 줄에서 시작하면 됩니다</td><td>"페이지·허브·log 중복 없음 / 상태값이 도달 단계와 일치 / 보고한 파일 = 실제 변경"</td><td>"결과를 검토한다"처럼 무엇과 무엇을 대조하는지 없는 문장</td></tr>
+</tbody></table></div>
+</div></details>
+<p>15분 안에 다 못 채워도 됩니다. 각 필드에 한두 줄이라도 들어가 있으면 2-3에서 에이전트가 빈틈을 짚어 주고, 03장에서 모호한 지점을 보고합니다. <strong>비어 있는 것보다 틀린 것이 낫습니다.</strong> 틀린 문장은 지적을 받지만 빈 칸은 에이전트가 알아서 채워 버립니다.</p>
 <h4>2-3. 에이전트에게 계약 검토 맡기기 (5분)</h4>
 <p>계약을 저장한 뒤 에이전트에게 읽히고 빈틈을 묻습니다. 아직 SKILL.md를 만들지 않습니다.</p>
 <pre class="prompt"><code>작업공간 루트의 paper-reading_실행계약.md 를 읽어줘.
@@ -981,7 +1088,22 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <li>완료 보고 항목이 실제 파일과 대조 가능한 것들(파일 경로, 상태값)로 적혀 있다</li>
 </ul>
 <h4>참고본과 비교하기</h4>
-<p>여기까지 하고 나서 <code>part4/참고/paper-reading_실행계약.md</code>를 엽니다. 강의에서 완성한 계약입니다. 내 계약에 없는 조항을 찾아 "왜 이게 필요했을까"를 생각해 봅니다. 미식별 PDF를 <code>_unidentified/</code>에 보관하는 규칙, 여러 편을 받았을 때 한 편의 중지가 다른 편을 막지 않게 하는 규칙, "간단히 정리해 줘"를 검증 생략으로 해석하지 않는 규칙이 아마 빠져 있을 것입니다. 필요하다고 판단한 것만 내 계약에 옮깁니다. 참고본을 통째로 바꿔치기하면 03장에서 에이전트가 보고하는 모호한 지점이 내 것이 아니게 됩니다.</p>
+<p>여기까지 하고 나서 <code>part4/참고/paper-reading_실행계약.md</code>를 엽니다. 강의에서 완성한 계약입니다. 내 계약에 없는 조항을 찾아 "왜 이게 필요했을까"를 생각해 봅니다. 미식별 PDF를 <code>_unidentified/</code>에 보관하는 규칙, 여러 편을 받았을 때 한 편의 중지가 다른 편을 막지 않게 하는 규칙, "간단히 정리해 줘"를 검증 생략으로 해석하지 않는 규칙이 아마 빠져 있을 것입니다. 필요하다고 판단한 것만 내 계약에 옮깁니다. <strong>참고본을 통째로 바꿔치기하면 03장에서 에이전트가 보고하는 모호한 지점이 내 것이 아니게 됩니다.</strong></p>
+<details><summary>원한다면: 에이전트에게 비교를 맡기기</summary><div class="detail-body">
+<p>눈으로 두 파일을 오가는 대신 에이전트에게 차이를 뽑게 할 수 있습니다. 단, "참고본대로 고쳐 줘"가 아니라 <strong>차이를 보여 주고 결정은 내가 하는</strong> 요청입니다.</p>
+<pre class="prompt"><code>작업공간 루트의 paper-reading_실행계약.md (내 계약)와
+part4/참고/paper-reading_실행계약.md (참고본)를 둘 다 읽어줘.
+
+여섯 필드(Trigger, Input, Process, Output, Stop / Ask, Validation)별로
+1. 참고본에는 있는데 내 계약에 없는 조항
+2. 내 계약에는 있는데 참고본에 없는 조항
+3. 둘 다 있지만 내용이 다른 조항
+을 표로 보여줘. 각 줄에 "이 차이가 실행 결과를 어떻게 바꾸는지" 한 문장을 붙여줘.
+예: "이 조항이 없으면 미식별 PDF를 받았을 때 어디에 둘지 정해지지 않는다"
+
+어느 쪽이 낫다고 판단하지 말고, 내 계약 파일도 고치지 마. 차이만 보여줘.</code></pre>
+<p>표를 보고 옮길 조항을 고른 뒤 직접 계약에 적습니다. 에이전트가 "참고본이 더 완전하니 교체를 권한다"고 해도 따르지 않습니다. 03장의 모호한 지점 보고가 내 설계에서 나와야 배우는 것이 있습니다.</p>
+</div></details>
 <h4>실패하면</h4>
 <p>에이전트가 5번(복사해 온 문장)을 여러 곳 지적하면 그 문장을 지우고 참조로 바꿉니다. 6번(반대되는 조항)이 나오면 규칙 파일 쪽이 더 정형화된 절차인지 확인하고, 대개 계약을 규칙 파일에 맞춥니다. 규칙 파일을 고쳐야 한다고 판단되면 계약이 아니라 규칙 파일을 고치되 그 이유를 <code>log.md</code>에 남깁니다.</p>
 </div></div>
@@ -1028,7 +1150,7 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <text x="328" y="114" class="d-t small" style="fill:#c8d2dc">실행 규칙의 유일한 출처</text>
 <rect x="600" y="30" width="240" height="90" rx="12" class="d-box blue"/>
 <text x="618" y="58" class="d-t">규칙 파일 · 템플릿</text>
-<text x="618" y="80" class="d-t small">llm_wiki/AGENTS.md, research/AGENTS.md</text>
+<text x="618" y="80" class="d-t small">AGENTS.md (llm_wiki · research)</text>
 <text x="618" y="98" class="d-t small">papers/_template.md</text>
 <text x="618" y="114" class="d-t small">Skill 없이도 계속 읽히는 공용 문서</text>
 <path d="M260 75 H308" class="d-line" style="marker-end:url(#arrow5)"/>
@@ -1161,41 +1283,49 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
 </article><article class="page" id="chapter-04" data-page="chapter-04" tabindex="-1">
 <header class="page-hero"><div class="hero-meta"><span>검증</span><span>04</span></div><h1>정상·누락·재실행, 세 시나리오로 시험한다</h1></header>
 <div class="prose">
-<p>Skill을 만들었으면 돌려 봐야 합니다. 그런데 "돌려 보고 결과가 그럴듯하면 통과"는 테스트가 아닙니다. <strong>실행하기 전에 기대 행동과 실패 신호를 적어 두고, 실행 후 실제 행동과 대조하는 것</strong>이 테스트입니다. 이 장에서는 세 시나리오로 paper-reading을 시험하고 <code>part4/paper-reading_테스트기록.md</code>를 남깁니다.</p>
+<p>Skill을 만들었으면 돌려 봐야 합니다. 그런데 "돌려 보고 결과가 그럴듯하면 통과"는 테스트가 아닙니다. <strong>실행하기 전에 기대 행동과 실패 신호를 적어 두고, 실행 후 실제 행동과 대조하는 것</strong>이 테스트입니다. 이 장에서는 세 시나리오로 paper-reading을 시험하고, 기대와 결과를 이 페이지에 바로 적어 기록으로 남깁니다.</p>
 
 
 <nav class="on-this-page" aria-label="이 페이지의 내용"><p>이 페이지에서 다루는 내용</p><ol>
-<li><a href="#chapter-04--section-1">테스트는 예측에서 시작한다</a></li>
+<li><a href="#chapter-04--section-1">무엇을 시험하는가</a></li>
 <li><a href="#chapter-04--section-2">세 시나리오</a></li>
-<li><a href="#chapter-04--section-3">완료 보고를 읽는 법</a></li>
+<li><a href="#chapter-04--section-3">실행하기 전에 답을 적어 둔다</a></li>
+<li><a href="#chapter-04--section-4">완료 보고는 믿지 말고 대조한다</a></li>
 </ol></nav>
 
 
 <section class="content-section">
-<h2 id="chapter-04--section-1">테스트는 예측에서 시작한다<a class="heading-anchor" href="#chapter-04--section-1" aria-label="이 제목으로 이동">#</a></h2>
-<p>Part 3의 퀴즈가 "실습 직전에 상황 판단을 묻는" 장치였다면, Part 4의 테스트는 그것을 "실행 직전에 기대 행동을 적는" 것으로 바꾼 것입니다. 적어 두지 않으면 에이전트가 무엇을 하든 사후에 "그럴 만하네"라고 받아들이게 됩니다. 예측이 있어야 차이가 보이고, 차이가 있어야 고칠 곳이 보입니다.</p>
-<p>시험할 것은 결과물의 품질이 아닙니다. 요약이 잘 됐는지는 Part 2~3에서 만든 내용 검증 규칙(근거 위치, 원문 대조, 상태값)이 맡습니다. 여기서 묻는 것은 실행의 안전성입니다. <strong>필요할 때 호출되는가, 재료가 없을 때 멈추는가, 같은 입력을 다시 넣어도 중복이 생기지 않는가.</strong></p>
+<h2 id="chapter-04--section-1">무엇을 시험하는가<a class="heading-anchor" href="#chapter-04--section-1" aria-label="이 제목으로 이동">#</a></h2>
+<p>이 장에서 보는 것은 요약의 품질이 아닙니다. 요약이 맞는지는 Part 3의 원문 대조 규칙이 이미 맡고 있습니다. 여기서는 <strong>Skill이 안전하게 돌아가는지</strong>만 봅니다. 질문은 세 개입니다.</p>
+<ul>
+<li>논문을 추가해 달라고 하면 paper-reading이 <strong>호출되는가</strong>?</li>
+<li>어떤 논문인지 알 수 없는 요청이 오면 추측하지 않고 <strong>멈추는가</strong>?</li>
+<li>같은 요청을 한 번 더 보내면 <strong>중복 없이</strong> 끝나는가?</li>
+</ul>
+<p>질문 하나가 시나리오 하나입니다. 그래서 세 시나리오입니다.</p>
 </section><section class="content-section">
 <h2 id="chapter-04--section-2">세 시나리오<a class="heading-anchor" href="#chapter-04--section-2" aria-label="이 제목으로 이동">#</a></h2>
-<div class="table-scroll"><table><thead><tr><th>시나리오</th><th>입력</th><th>통과 조건</th><th>실패 신호</th></tr></thead><tbody>
-<tr><td>정상</td><td>식별 가능한 논문(arXiv ID 또는 DOI)과 "요약하고 [프로젝트]에 추가해 줘"</td><td>서지 대조, 원문 검증, 페이지 생성, 허브·index·log 갱신, 지정 프로젝트의 <code>literature.md</code> 갱신, 완료 보고가 실제 변경과 일치</td><td>잘못된 위치에 저장, 허브·index·log 갱신 누락, 완료 보고에 없는 파일이 바뀜</td></tr>
-<tr><td>누락</td><td>"어제 학회에서 들은 저조도 탐지 논문 추가해 줘" (식별 정보 없음)</td><td>어떤 논문인지 묻고 그 자리에서 멈춤. 페이지를 만들지 않음. 실행 전후 Wiki 파일이 그대로</td><td>추측으로 논문을 골라 진행, 확인하지 않은 메타데이터 기록, 질문 없이 빈 파일 생성</td></tr>
-<tr><td>재실행</td><td>정상 시나리오와 완전히 같은 요청을 한 번 더</td><td>기존 페이지부터 확인, 새 정보가 없으면 "변경 없음"으로 종료. 중복 페이지·링크·log 항목 없음</td><td>페이지 파일이 하나 더 생김, 허브에 같은 링크 두 줄, <code>log.md</code>에 새 항목</td></tr>
+<div class="table-scroll"><table><thead><tr><th>시나리오</th><th>보내는 요청</th><th>이렇게 되면 통과</th><th>이렇게 되면 실패</th></tr></thead><tbody>
+<tr><td>정상</td><td>arXiv ID나 DOI를 주고 "Wiki에 추가하고 [프로젝트]에도 반영해 줘"</td><td>논문 페이지가 생기고, 허브·index·log와 그 프로젝트의 <code>literature.md</code>가 갱신되고, 완료 보고의 파일 목록이 실제 변경과 같다</td><td>엉뚱한 위치에 저장 / 허브·log 갱신 빠짐 / 보고에 없는 파일이 바뀜 / 다른 프로젝트까지 갱신</td></tr>
+<tr><td>누락</td><td>"어제 학회에서 들은 저조도 탐지 논문 추가해 줘" (식별 정보 없음)</td><td>어떤 논문인지 묻고 멈춘다. 파일은 하나도 생기거나 바뀌지 않는다</td><td>비슷한 논문을 골라 진행 / 묻지도 않고 빈 페이지 생성</td></tr>
+<tr><td>재실행</td><td>정상 시나리오의 요청을 글자 하나 안 바꾸고 한 번 더</td><td>"이미 처리한 논문"이라고 확인하고 변경 없이 끝난다</td><td>페이지가 하나 더 생김 / 허브에 같은 링크 두 줄 / <code>log.md</code>에 새 항목</td></tr>
 </tbody></table></div>
-<p>정상 입력에는 자기 연구와 관련된 논문 한 편을 씁니다. 테스트 전에 예상 파일명(<code>연도_저자_키워드.md</code> 규칙으로 직접 만들어 봅니다)과 도달할 상태를 적어 둡니다. 누락 입력에는 PDF도 식별 정보도 없는 요청을 씁니다. 재실행은 정상 요청을 그대로 다시 보냅니다.</p>
+<p>정상 시나리오의 논문은 자기 연구와 관련된 것으로 고릅니다. 그래야 결과가 실제로 쓸모 있고, 테스트가 끝나면 Wiki에 논문 한 편이 남습니다.</p>
+</section><section class="content-section">
+<h2 id="chapter-04--section-3">실행하기 전에 답을 적어 둔다<a class="heading-anchor" href="#chapter-04--section-3" aria-label="이 제목으로 이동">#</a></h2>
+<p>세 시나리오를 실행하기 전에 <strong>실습의 "① 기대 행동" 칸부터 채웁니다.</strong> 정상 시나리오라면 "파일명은 <code>2022_Lee_nightlab.md</code>, 상태는 <code>critically_reviewed / verified</code>까지"처럼 구체적으로, 누락과 재실행이라면 "바뀌는 파일 0개"처럼 적습니다.</p>
+<p>이유는 단순합니다. 미리 적어 두지 않으면 에이전트가 무엇을 하든 "그럴 수도 있지"하고 넘어가게 됩니다. 예상한 것이 있어야 실제와 다른 점이 눈에 띄고, 다른 점이 있어야 SKILL.md에서 고칠 줄을 찾을 수 있습니다.</p>
 
 <div class="callout callout-lecture"><span class="callout-title">강의에서 확인한 결과</span>
-<p>강의 실습은 NightLab 논문의 arXiv ID로 진행했습니다. 정상 시나리오에서 에이전트는 Crossref API로 2022년 정식 게재를 확인해 arXiv 판과 대조했고, 논문 페이지를 만들면서 저자 페이지 4개를 새로 만들고 토픽 페이지 5개를 갱신했습니다. 도달 상태는 <code>critically_reviewed / verified</code>, 프로젝트의 <code>literature.md</code>와 <code>log.md</code>까지 갱신됐습니다.</p>
-<p>누락 시나리오에서는 "논문을 특정할 정보가 없어서 파일을 만들지 않고 멈췄습니다"라며 arXiv ID, 서지 정보, 정확한 제목, PDF 중 하나를 요청했고, "이번 요청으로 Wiki와 프로젝트 문서는 아무것도 바꾸지 않았습니다"라고 보고했습니다. 재실행에서는 "동일한 논문을 이미 처리했습니다. 중복 생성 없이 현재 상태부터 확인하겠습니다"라고 한 뒤 새로 만들거나 고친 파일이 없었고 <code>log.md</code>에도 새 항목이 없었습니다.</p>
-<p>세 시나리오 모두 관측된 실패가 없어 SKILL.md는 그대로 두고 다음 장으로 넘어갔습니다. 여러분의 결과는 다를 수 있고, 다르면 그것이 이 장의 수확입니다.</p></div>
+<p>강의에서는 NightLab 논문의 arXiv ID로 돌렸습니다. 정상: Crossref로 정식 게재를 확인하고, 논문 페이지 1개와 저자 페이지 4개를 만들고 토픽 페이지 5개를 갱신했으며, 상태는 <code>critically_reviewed / verified</code>, 프로젝트의 <code>literature.md</code>와 <code>log.md</code>까지 갱신. 누락: "특정할 정보가 없어 파일을 만들지 않고 멈췄다"며 ID·서지·제목·PDF 중 하나를 요청. 재실행: "이미 처리한 논문"이라고 확인한 뒤 변경 파일 0개, <code>log.md</code> 새 항목 없음.</p>
+<p>세 시나리오 모두 통과해서 SKILL.md는 그대로 두었습니다. 여러분의 결과는 다를 수 있고, 다르면 그것이 이 장의 수확입니다.</p></div>
 </section><section class="content-section">
-<h2 id="chapter-04--section-3">완료 보고를 읽는 법<a class="heading-anchor" href="#chapter-04--section-3" aria-label="이 제목으로 이동">#</a></h2>
-<p>에이전트의 완료 보고는 네 묶음으로 옵니다. 생성한 파일, 수정한 파일, 건너뛴 항목과 이유, 사람 확인이 필요한 항목. 이 보고를 읽는 방법은 하나입니다. <strong>보고와 실제 파일을 대조하는 것</strong>입니다.</p>
+<h2 id="chapter-04--section-4">완료 보고는 믿지 말고 대조한다<a class="heading-anchor" href="#chapter-04--section-4" aria-label="이 제목으로 이동">#</a></h2>
+<p>실행이 끝나면 에이전트가 "이런 파일을 만들고 고쳤다"고 보고합니다. 이 보고를 그대로 믿으면 테스트가 아닙니다. <strong>보고와 실제 파일을 나란히 놓고 맞춰 봅니다.</strong> 볼 곳은 세 군데입니다.</p>
 <ul>
-<li>git을 쓰고 있다면 실행 전후에 <code>git status</code>를 찍어 변경 파일 목록을 보고와 맞춥니다. 보고에 없는 파일이 바뀌었으면 출력 계약 위반입니다.</li>
-<li>git이 없으면 실행 전에 에이전트에게 "<code>llm_wiki/</code> 아래 파일 목록과 수정 시각을 저장해 둬"라고 하고, 실행 후 비교하게 합니다.</li>
-<li>논문 페이지를 열어 frontmatter의 두 상태값이 보고한 도달 상태와 같은지 봅니다. 보고는 <code>verified</code>인데 페이지는 <code>unreviewed</code>면 Validation이 작동하지 않은 것입니다.</li>
-<li><code>log.md</code>의 마지막 항목이 이번 실행 한 건인지 봅니다. 두 건이면 재실행 규칙이나 일괄 처리 규칙에 문제가 있습니다.</li>
+<li><strong>변경 파일 목록</strong>: <code>git status</code>(또는 실행 전 저장해 둔 스냅샷)의 목록과 보고의 목록이 같은가. 보고에 없는 파일이 바뀌었으면 실패입니다.</li>
+<li><strong>논문 페이지의 상태값</strong>: 페이지를 열어 frontmatter의 두 상태가 보고한 상태와 같은가. 보고는 <code>verified</code>인데 페이지는 <code>unreviewed</code>면 Validation이 작동하지 않은 것입니다.</li>
+<li><strong><code>log.md</code> 마지막 줄</strong>: 이번 실행 한 건만 추가됐는가. 재실행 뒤에 새 줄이 있으면 재실행 규칙이 깨진 것입니다.</li>
 </ul>
 
 <div class="drill">
@@ -1228,59 +1358,104 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
 
 <div class="practice">
 <div class="practice-head"><span class="badge">실습 4</span><h3>세 시나리오로 paper-reading 시험하기</h3><span class="time">약 30분</span></div>
-<div class="practice-body">
-<h4>목표</h4>
-<p><code>part4/paper-reading_테스트기록표.md</code>를 <code>part4/paper-reading_테스트기록.md</code>로 복사해 기대 행동을 먼저 적고, 세 시나리오를 실행한 뒤 실제 행동과 통과 여부, 수정 내용을 채웁니다.</p>
-<h4>4-1. 예측표 쓰기 (5분, 사람)</h4>
-<p>기록표의 "기대 행동" 칸을 자기 말로 채웁니다. 정상 시나리오에는 예상 파일명과 도달할 상태를 적습니다. 누락과 재실행에는 "바뀌면 안 되는 파일"을 적습니다. </p>
-<p>스냅샷은 따로 요청하지 않고 4-2의 요청문 첫 줄에 넣습니다. git을 쓰고 있다면 그 줄은 지우고 실행 전후 <code>git status</code>로 대신해도 됩니다.</p>
-<h4>4-2. 정상 시나리오 (10분)</h4>
-<pre class="prompt"><code>시작하기 전에 llm_wiki/ 아래 모든 파일의 경로·수정 시각과 log.md 마지막 항목을
+<div class="practice-body" data-mode="git">
+<p>시나리오마다 순서는 같습니다. <strong>① 기대 행동을 적는다 → ② 요청문을 보낸다 → ③ 실제 결과를 적고 판정한다.</strong> 칸은 이 페이지 안에 있고 브라우저에 저장됩니다. 적고 Enter(또는 확인)를 누르면 예시 답안이 열립니다.</p>
+<div class="mode-switch"><span>변경 파일을 무엇으로 확인하나요?</span>
+<button type="button" data-mode="git" class="is-picked">git을 쓴다 → <code>git status</code></button>
+<button type="button" data-mode="snap">git이 없다 → 스냅샷 파일</button>
+<small class="only-git">실행 후 <code>git status --short</code>에 나오는 파일(<code>M</code> 수정, <code>??</code> 새 파일)을 보고와 대조합니다. add나 commit을 하지 않아도 보입니다. 단, "마지막 커밋과 지금"을 비교하는 것이라 <strong>작업공간이 git 저장소여야 하고, 테스트 직전 상태가 커밋되어 있어야</strong> 합니다. 아래 순서로 한 번만 준비하면 됩니다.</small>
+<div class="only-git git-setup">
+<ol class="steps">
+<li><strong>터미널을 작업공간 루트에서 엽니다</strong><p>VS Code라면 메뉴 터미널 → 새 터미널. <code>AGENTS.md</code>가 보이는 폴더여야 합니다(<code>ls</code> 또는 <code>dir</code>로 확인).</p></li>
+<li><strong>git 저장소인지 확인합니다</strong><p><code>git status</code>를 칩니다. 변경 목록이나 "nothing to commit"이 나오면 이미 저장소입니다 → 3번으로. <code>fatal: not a git repository</code>가 나오면 아직 아닙니다 → 아래 세 줄을 순서대로 칩니다.</p>
+<pre><code class="language-bash">git init
+git add -A
+git commit -m "Part 4 테스트 전 상태"</code></pre>
+<p>git을 처음 쓰는 컴퓨터라면 commit에서 이름과 메일을 묻습니다. <code>git config --global user.name "이름"</code>, <code>git config --global user.email "메일"</code>을 한 번 실행하고 다시 commit합니다. GitHub에 올리는 것이 아니라 내 컴퓨터 안에서 변경을 추적하는 용도이므로 계정은 필요 없습니다.</p></li>
+<li><strong>테스트 직전 상태를 깨끗하게 만듭니다</strong><p>이미 저장소였는데 <code>git status</code>에 파일이 나온다면 지금까지의 작업을 한 번 묶어 둡니다.</p>
+<pre><code class="language-bash">git add -A
+git commit -m "Part 4 테스트 전 상태"
+git status</code></pre>
+<p>마지막 <code>git status</code>가 "nothing to commit, working tree clean"이면 준비 끝입니다.</p></li>
+<li><strong>시나리오가 끝날 때마다</strong><p><code>git status --short</code>로 변경 목록을 보고 기록한 뒤, 다음 시나리오 전에 다시 <code>git add -A &amp;&amp; git commit -m "시나리오 1 결과"</code>처럼 커밋합니다. 그래야 다음 시나리오의 변경만 따로 보입니다. 특히 시나리오 3(재실행)은 "변경 0개"가 통과 조건이라 시나리오 1의 변경이 남아 있으면 판정할 수 없습니다.</p></li>
+</ol>
+</div>
+<small class="only-snap">요청문 첫 줄에서 에이전트가 <code>part4/테스트_스냅샷_before.md</code>에 파일 목록을 저장하고, 실행 후 스스로 비교합니다.</small>
+</div>
+
+<div class="scenario" data-name="정상 시나리오">
+<div class="scenario-head"><span class="num">1</span><h4>정상: 식별자가 있는 논문 한 편</h4><span class="time">10분</span></div>
+<div class="scenario-body">
+<div class="field"><p class="field-label"><span class="step">① 기대 행동</span>실행 전에 적기 <small>예상 파일명과 도달할 상태, 바뀌어야 할 파일을 구체적으로</small></p><div class="field-row"><textarea class="fill" rows="2" data-label="기대 행동" placeholder="예: 2022_Lee_nightlab.md 생성, verified 도달, 허브·log·literature.md 갱신"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li>Skill <code>paper-reading</code>이 호출되고, 실행 전 계획에 예상 파일명(<code>papers/연도_제1저자_키워드.md</code>)과 멈출 조건이 나온다</li><li>생성: 논문 페이지 1개 · 수정: 관련 허브, <code>index.md</code>, 지정 프로젝트의 <code>literature.md</code>, <code>log.md</code> 한 줄</li><li>도달 상태 <code>critically_reviewed / verified</code> (원문을 못 구하면 <code>metadata_only / unreviewed</code>)</li><li>다른 프로젝트 문서는 그대로. 보고의 파일 목록 = 실제 변경 파일</li></ul></div></div>
+<p class="field-label"><span class="step">② 요청문</span>논문은 자기 연구와 관련된 것으로. 식별자와 프로젝트명만 바꿔 보냅니다.</p>
+<pre class="prompt only-git"><code>다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
+논문 식별자: [arXiv ID 또는 DOI]
+
+실행 전에 먼저 보여줘: 어떤 Skill을 쓸지, 읽을 파일, 만들거나 수정할 파일(예상 파일명), 멈출 조건.
+실행 후에 보고해줘: 생성·수정한 파일, 건너뛴 항목과 이유, 도달한 processing_status / evidence_status,
+사람이 확인할 항목.</code></pre>
+<p class="only-git mode-note">보내기 전에 <code>git status</code>가 깨끗한지 보고(아니면 위 준비 3번처럼 먼저 커밋), 끝나면 <code>git status --short</code>로 변경 파일 목록을 받아 보고와 맞춥니다.</p>
+<pre class="prompt only-snap"><code>시작하기 전에 llm_wiki/ 아래 모든 파일의 경로·수정 시각과 log.md 마지막 항목을
 part4/테스트_스냅샷_before.md 에 저장해 둬. 그다음 아래 요청을 처리해.
 
 다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
 논문 식별자: [arXiv ID 또는 DOI]
 
-실행하기 전에 먼저 보여줘:
-1. 어떤 Skill을 쓸 것인지
-2. 읽을 파일
-3. 만들거나 수정할 파일 (예상 파일명 포함)
-4. 실행을 멈출 조건
+실행 전에 먼저 보여줘: 어떤 Skill을 쓸지, 읽을 파일, 만들거나 수정할 파일(예상 파일명), 멈출 조건.
+실행 후에 보고해줘: 생성·수정한 파일, 건너뛴 항목과 이유, 도달한 processing_status / evidence_status,
+스냅샷과 비교한 실제 변경 파일 목록(보고와 다르면 그 차이), 사람이 확인할 항목.</code></pre>
+<div class="field"><p class="field-label"><span class="step">③ 실제 결과</span>실행 후에 적기 <small>보고와 실제 변경 파일을 대조한 결과. 다른 점이 있으면 그것부터</small></p><div class="field-row"><textarea class="fill" rows="2" data-label="실제 결과" placeholder="예: 보고 = 실제(생성 1·수정 5), 상태 verified / 보고에 없던 수정 1건 발견"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li><strong>보고와 실제가 다른 점부터</strong> 적는다. 예: "보고 생성 1·수정 4 / 실제 생성 1·수정 6. 차이 2개는 저자 허브 → 완료 보고 실패"</li><li>차이가 없으면 확인한 항목을 나열한다. 예: "보고 = 실제, 상태값 verified, literature.md 행 1개 추가"</li><li>"잘 됨" 같은 인상은 적지 않는다</li></ul></div></div>
+<div class="verdict"><span>판정</span><button type="button" data-value="통과">통과</button><button type="button" data-value="실패">실패</button><button type="button" data-value="보완 필요">보완 필요</button></div>
+</div></div>
 
-실행 후에는 보고해줘:
-1. 생성한 파일, 수정한 파일, 건너뛴 항목과 이유
-2. 도달한 processing_status / evidence_status 와 그 근거
-3. 서지를 어느 DB에서 대조했는지, 어느 판본을 읽었는지
-4. 마지막 점검 항목별 결과
-5. 사람이 확인해야 할 항목
-6. 스냅샷(또는 git status)과 비교한 실제 변경 파일 목록. 보고와 다르면 그 차이</code></pre>
-<p>실행 전 계획에서 Skill 이름이 paper-reading으로 나오는지 봅니다. 다른 이름이 나오거나 Skill 없이 진행하겠다고 하면 트리거 실패입니다. 실행 후에는 보고의 파일 목록과 실제 변경(<code>git status</code> 또는 스냅샷 비교)을 맞춥니다.</p>
-<h4>4-3. 누락 시나리오 (5분)</h4>
+<div class="scenario" data-name="누락 시나리오">
+<div class="scenario-head"><span class="num">2</span><h4>누락: 어떤 논문인지 알 수 없는 요청</h4><span class="time">5분</span></div>
+<div class="scenario-body">
+<div class="field"><p class="field-label"><span class="step">① 기대 행동</span>실행 전에 적기</p><div class="field-row"><textarea class="fill" rows="2" data-label="기대 행동" placeholder="예: 어떤 논문인지 묻고 멈춤, 변경 파일 0개"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li>입력 게이트에서 멈추고 arXiv ID·DOI·정확한 제목·PDF 중 하나를 요청한다</li><li>후보 논문을 검색해서 대신 골라 주지 않는다</li><li>답을 받기 전까지 <code>llm_wiki/</code> 아래 파일을 만들거나 고치지 않는다 → 변경 파일 0개</li></ul></div></div>
+<p class="field-label"><span class="step">② 요청문</span>이 한 줄만 보냅니다. 설명을 덧붙이면 테스트가 아닙니다.</p>
 <pre class="prompt"><code>어제 학회에서 들은 저조도 탐지 논문을 Wiki에 추가해줘.</code></pre>
-<p>통과 기준은 넷입니다. 논문을 추측하지 않는다, 파일을 만들지 않는다, 필요한 식별 정보를 묻는다, 질문 전까지 저장소를 수정하지 않는다. 에이전트가 물으면 답하지 말고 스냅샷과 비교합니다.</p>
-<pre class="prompt"><code>방금 요청은 테스트였어. 답은 하지 않을게.
-part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
-새로 생기거나 바뀐 파일이 있는지 알려줘. 비교만 하고 아무것도 고치지 마.</code></pre>
-<h4>4-4. 재실행 시나리오 (5분)</h4>
-<p>4-2의 요청문을 한 글자도 바꾸지 않고 다시 보냅니다. 요청문에 이미 "실제 변경 파일 목록" 보고가 들어 있으므로 따로 묻지 않아도 됩니다. 보고에서 변경 파일이 0개인지, <code>log.md</code>의 마지막 항목이 4-2 때와 같은지, 논문 페이지의 두 상태값이 그대로인지 봅니다. 보고를 믿기 어려우면 Obsidian에서 <code>log.md</code>를 직접 엽니다.</p>
+<p class="only-git mode-note">에이전트가 물어 오면 답하지 않고 <code>git status --short</code>를 칩니다. 아무것도 안 나와야 통과입니다.</p>
+<p class="only-snap mode-note">에이전트가 물어 오면 답하지 않고, 대신 이렇게 보내 변경 여부를 확인합니다.</p>
+<pre class="prompt only-snap"><code>방금 요청은 테스트였어. 답은 하지 않을게.
+part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서 새로 생기거나 바뀐 파일이 있는지만 알려줘.
+비교만 하고 아무것도 고치지 마.</code></pre>
+<div class="field"><p class="field-label"><span class="step">③ 실제 결과</span>실행 후에 적기</p><div class="field-row"><textarea class="fill" rows="2" data-label="실제 결과" placeholder="예: ID·제목·PDF 중 하나를 요청하며 멈춤, 변경 0개"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li>무엇을 물었는가</li><li>묻기 전에 추측으로 진행한 흔적은 없는가 (후보를 말로 보여 주는 것은 괜찮지만 파일로 남겼으면 실패)</li><li>변경 파일 수. 예: "ID·제목·PDF 중 하나를 요청하고 멈춤, 변경 0개 → 통과" / "물었지만 <code>papers/_candidates.md</code> 생성 → 저장 위치 실패"</li></ul></div></div>
+<div class="verdict"><span>판정</span><button type="button" data-value="통과">통과</button><button type="button" data-value="실패">실패</button><button type="button" data-value="보완 필요">보완 필요</button></div>
+</div></div>
 
-<h4>4-5. 기록표 채우기 (5분, 사람)</h4>
-<p>세 행의 "실제 행동", "통과", "수정" 칸을 채웁니다. 통과하지 못한 행은 실패 원인을 넷 중 하나로 분류합니다. 호출 조건, 입력 게이트, 저장 위치, 완료 보고. <code>part4/paper-reading_테스트기록_완성예시.md</code>가 적는 방식의 예시입니다.</p>
-<h4>확인할 것</h4>
-<ul class="check-list">
-<li>정상: 보고한 파일 목록과 실제 변경이 일치하고, 페이지의 상태값이 보고와 같다</li>
-<li>정상: 프로젝트를 지정했으므로 <code>literature.md</code>에 행이 추가됐고, 다른 프로젝트는 그대로다</li>
-<li>누락: 스냅샷 대비 변경 파일이 0개다</li>
-<li>재실행: 변경 파일이 0개이고 <code>log.md</code> 마지막 항목이 4-2 때와 같다</li>
-<li>기록표의 "통과" 칸에 "애매함"이 없다. 애매하면 "보완 필요"로 적었다</li>
-</ul>
-<h4>실패하면: 수정 루프</h4>
+<div class="scenario" data-name="재실행 시나리오">
+<div class="scenario-head"><span class="num">3</span><h4>재실행: 같은 요청을 한 번 더</h4><span class="time">5분</span></div>
+<div class="scenario-body">
+<div class="field"><p class="field-label"><span class="step">① 기대 행동</span>실행 전에 적기</p><div class="field-row"><textarea class="fill" rows="2" data-label="기대 행동" placeholder="예: 이미 처리한 논문 확인 후 변경 없음, log.md 새 줄 0"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li>기존 페이지를 먼저 찾고 "이미 처리한 논문"임을 밝힌다</li><li>새 정보가 없으면 변경 없이 끝난다: 새 파일 0, 허브에 같은 링크 두 줄 없음, <code>log.md</code> 새 줄 없음</li><li>논문 페이지의 두 상태값은 시나리오 1 종료 시점과 같다</li></ul></div></div>
+<p class="field-label"><span class="step">② 요청문</span>시나리오 1의 요청문을 <strong>글자 하나 바꾸지 않고</strong> 다시 보냅니다. 같은 것을 아래에 두었습니다.</p>
+<pre class="prompt only-git"><code>다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
+논문 식별자: [arXiv ID 또는 DOI]
+
+실행 전에 먼저 보여줘: 어떤 Skill을 쓸지, 읽을 파일, 만들거나 수정할 파일(예상 파일명), 멈출 조건.
+실행 후에 보고해줘: 생성·수정한 파일, 건너뛴 항목과 이유, 도달한 processing_status / evidence_status,
+사람이 확인할 항목.</code></pre>
+<p class="only-git mode-note">보내기 전에 <code>git status</code>가 깨끗한지 보고(아니면 위 준비 3번처럼 먼저 커밋), 끝나면 <code>git status --short</code>로 변경 파일 목록을 받아 보고와 맞춥니다.</p>
+<pre class="prompt only-snap"><code>시작하기 전에 llm_wiki/ 아래 모든 파일의 경로·수정 시각과 log.md 마지막 항목을
+part4/테스트_스냅샷_before.md 에 저장해 둬. 그다음 아래 요청을 처리해.
+
+다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
+논문 식별자: [arXiv ID 또는 DOI]
+
+실행 전에 먼저 보여줘: 어떤 Skill을 쓸지, 읽을 파일, 만들거나 수정할 파일(예상 파일명), 멈출 조건.
+실행 후에 보고해줘: 생성·수정한 파일, 건너뛴 항목과 이유, 도달한 processing_status / evidence_status,
+스냅샷과 비교한 실제 변경 파일 목록(보고와 다르면 그 차이), 사람이 확인할 항목.</code></pre>
+<div class="field"><p class="field-label"><span class="step">③ 실제 결과</span>실행 후에 적기</p><div class="field-row"><textarea class="fill" rows="2" data-label="실제 결과" placeholder="예: 변경 0 / 또는 log.md에 '재실행, 변경 없음' 한 줄 추가됨"></textarea><button type="button" class="field-check">확인</button></div><div class="field-sample" hidden><p class="field-sample-title">예시 답안 (일반적인 경우)</p><ul><li>변경 파일 수 (0이어야 함) · <code>log.md</code> 마지막 줄이 시나리오 1 때와 같은지 · 페이지 상태값이 그대로인지</li><li>흔한 "애매한 통과": 파일은 그대로인데 <code>log.md</code>에 "재실행, 변경 없음" 한 줄 추가 → 통과가 아니라 <strong>보완 필요</strong>. SKILL.md에 "변경 없음은 로그에 남기지 않는다" 추가</li></ul></div></div>
+<div class="verdict"><span>판정</span><button type="button" data-value="통과">통과</button><button type="button" data-value="실패">실패</button><button type="button" data-value="보완 필요">보완 필요</button></div>
+</div></div>
+
+<div class="export-row"><button type="button" class="testlog-export">기록 내보내기 (markdown 복사)</button><small>세 시나리오의 기대·결과·판정을 markdown으로 복사합니다. <code>part4/paper-reading_테스트기록.md</code>로 저장해 두면 06장 체크리스트의 근거가 됩니다.</small></div>
+<h4>실패가 나왔다면: 수정 루프</h4>
+<p>세 시나리오 중 하나라도 "실패"나 "보완 필요"면 SKILL.md를 고치고 그 시나리오만 다시 돌립니다. 통째로 다시 쓰지 않습니다.</p>
 <ol>
-<li>기대 행동과 실제 파일을 비교해 차이를 한 문장으로 적습니다.</li>
-<li>실패 원인을 호출 조건, 입력 게이트, 저장 위치, 완료 보고 중 하나로 특정합니다.</li>
-<li>SKILL.md에서 그 원인에 해당하는 문장만 최소 수정합니다. 다른 절은 건드리지 않습니다. 계약 사본(<code>part4/paper-reading_실행계약_생성시점.md</code>)에는 "SKILL.md v2에서 변경"이라고만 적어 둡니다.</li>
-<li>실패한 시나리오만 같은 입력으로 다시 실행합니다.</li>
-<li>결과를 기록표의 "수정"과 "재검증" 칸에 적습니다. 다시 실패하면 1번으로 돌아갑니다.</li>
+<li>기대와 실제의 차이를 한 문장으로 적습니다.</li>
+<li>원인을 넷 중 하나로 고릅니다. <strong>호출 조건</strong>(Skill이 안 열림) / <strong>입력 게이트</strong>(없는 입력을 추측, 재실행 규칙 무시) / <strong>저장 위치</strong>(쓰면 안 되는 곳을 씀) / <strong>완료 보고</strong>(보고와 실제가 다름).</li>
+<li>아래 요청문으로 그 원인에 해당하는 문장만 고칩니다.</li>
+<li>실패한 시나리오만 같은 입력으로 다시 실행하고, 위 "③ 실제 결과" 칸에 재검증 결과를 덧붙입니다.</li>
 </ol>
 <pre class="prompt"><code>테스트에서 다음 차이가 나왔어.
 시나리오: [정상/누락/재실행]
@@ -1291,6 +1466,14 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 .agents/skills/paper-reading/SKILL.md 에서 이 원인에 해당하는 문장을 찾아
 최소한으로 고치는 수정안을 보여줘. 다른 절은 건드리지 마.
 내가 승인하면 적용하고, 적용한 뒤 어떤 줄이 바뀌었는지 보여줘.</code></pre>
+<h4>확인할 것</h4>
+<ul class="check-list">
+<li>세 시나리오 모두 ①을 ②보다 먼저 적었다</li>
+<li>정상: 보고한 파일 목록과 실제 변경이 같고, 페이지의 상태값이 보고와 같다</li>
+<li>누락: 변경 파일이 0개다</li>
+<li>재실행: 변경 파일이 0개이고 <code>log.md</code>에 새 줄이 없다</li>
+<li>판정에 "애매한 통과"가 없다. 애매하면 "보완 필요"로 두었다</li>
+</ul>
 </div></div>
 </section>
 </div>
@@ -1298,61 +1481,46 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 </article><article class="page" id="chapter-05" data-page="chapter-05" tabindex="-1">
 <header class="page-hero"><div class="hero-meta"><span>재사용</span><span>05</span></div><h1>같은 패턴으로 실험 로그 Skill을 만든다</h1></header>
 <div class="prose">
-<p>설계, 구현, 검증 사이클을 한 바퀴 돌았습니다. 이 장에서는 같은 사이클을 두 번째 업무인 실험 로그 정리에 반복합니다. 새로 배우는 것은 거의 없고, 바뀌는 것은 입력입니다. 논문에는 DOI라는 깔끔한 식별자가 있었지만 <strong>실험 메모에는 형식이 없습니다.</strong> 이 차이가 입력 게이트와 중지 조건을 어떻게 바꾸는지가 이 장의 핵심입니다. 산출물은 <code>experiment-log_실행계약.md</code>와 <code>.agents/skills/experiment-log/SKILL.md</code>, 그리고 실험 기록 두 건입니다.</p>
+<p>설계, 구현, 검증 사이클을 한 바퀴 돌았습니다. 이 장에서는 같은 사이클을 <strong>01장에서 고른 내 업무</strong>로 한 번 더 돕니다. 새로 배우는 절차는 없습니다. 대신 "입력이 달라지면 계약의 어디가 달라지는가"를 봅니다. 강의가 두 번째로 만든 experiment-log(실험 로그 정리) Skill이 그 사례입니다. 논문에는 DOI라는 깔끔한 식별자가 있었지만 <strong>실험 메모에는 형식이 없습니다.</strong> 이 차이 하나가 Input, Stop / Ask, Output을 어떻게 바꾸는지 보고, 같은 질문을 내 업무에 던집니다.</p>
 
 
 <nav class="on-this-page" aria-label="이 페이지의 내용"><p>이 페이지에서 다루는 내용</p><ol>
-<li><a href="#chapter-05--section-1">같은 패턴, 다른 입력</a></li>
-<li><a href="#chapter-05--section-2">Run 17 메모 해부하기</a></li>
+<li><a href="#chapter-05--section-1">뼈대는 같고, 입력이 다르다</a></li>
+<li><a href="#chapter-05--section-2">사례: Run 17 메모 해부하기</a></li>
 <li><a href="#chapter-05--section-3">입력 네 종류와 신뢰 수준, 그리고 원본 불변</a></li>
 <li><a href="#chapter-05--section-4">출력: 관찰, 원인 후보, 확인 방법을 열로 나눈다</a></li>
 </ol></nav>
 
 
 <section class="content-section">
-<h2 id="chapter-05--section-1">같은 패턴, 다른 입력<a class="heading-anchor" href="#chapter-05--section-1" aria-label="이 제목으로 이동">#</a></h2>
-<p>두 Skill의 뼈대는 같습니다. 입력을 확인하고, 기존 기록이 있는지 보고, 원본에서 사실을 뽑아 정해진 양식에 저장하고, 막히면 정해진 지점에서 멈추고, 끝내기 전에 실제 파일과 대조합니다. paper-reading 계약을 복사해 experiment-log로 고치면 됩니다.</p>
-<div class="table-scroll"><table class="compact"><thead><tr><th></th><th>paper-reading</th><th>experiment-log</th></tr></thead><tbody>
-<tr><td>입력</td><td>DOI·arXiv ID처럼 비교적 안정된 식별자</td><td>메모, config, 결과표처럼 형식이 다른 원본 여러 개</td></tr>
-<tr><td>식별</td><td>외부 서지 DB와 대조</td><td>run ID 또는 날짜+대상. 기존 기록과 ID 충돌 검사</td></tr>
-<tr><td>사실 확인</td><td>요약을 원문과 대조</td><td>설정값은 config, 측정값은 결과표, 목적·관찰·가설은 메모로 원천을 나눔</td></tr>
-<tr><td>출력</td><td><code>papers/</code>의 논문 페이지</td><td><code>research/&lt;프로젝트&gt;/experiments/&lt;run_id&gt;.md</code></td></tr>
-<tr><td>갱신</td><td>허브, index, 프로젝트 <code>literature.md</code>, log</td><td>프로젝트 <code>index.md</code>의 실험 기록 목록, log</td></tr>
-<tr><td>재실행</td><td>같은 논문이면 기존 페이지 갱신</td><td>같은 run ID면 변경분만 갱신</td></tr>
-<tr><td>범위 밖</td><td>연구 질문 변경, 프로젝트 생성</td><td>실패 원인 확정, 다음 실험 우선순위, 실험 실행과 승인</td></tr>
+<h2 id="chapter-05--section-1">뼈대는 같고, 입력이 다르다<a class="heading-anchor" href="#chapter-05--section-1" aria-label="이 제목으로 이동">#</a></h2>
+<p>두 Skill의 뼈대는 같습니다. 입력을 확인하고, 기존 기록이 있는지 보고, 원본에서 사실을 뽑아 정해진 양식에 저장하고, 막히면 정해진 지점에서 멈추고, 끝내기 전에 실제 파일과 대조합니다. 다른 점은 여섯 가지이고, 전부 입력의 성격에서 나옵니다. 오른쪽 열이 <strong>내 업무로 Skill을 짤 때 스스로에게 물을 질문</strong>입니다.</p>
+<div class="table-scroll"><table class="compact"><thead><tr><th>차이</th><th>paper-reading</th><th>experiment-log</th><th>내 Skill에서 물을 것 → 바뀌는 필드</th></tr></thead><tbody>
+<tr><td>식별자</td><td>DOI·arXiv ID 하나로 특정. 외부 DB에 대조해 확정</td><td>식별자 없음. run ID나 날짜+대상으로 이름 붙이고, 기존 기록과 충돌만 검사</td><td>입력을 외부에서 확인할 수 있나, 아니면 이름을 내가 붙여야 하나 → <strong>Input</strong></td></tr>
+<tr><td>사실의 원천</td><td>원문 하나. 요약과 원문을 대조하면 끝</td><td>메모·config·결과표로 갈라짐. 설정값은 config, 측정값은 결과표, 목적·관찰·가설은 메모</td><td>원본이 여럿이면 어느 값은 어디서 가져오나, 충돌하면 어떻게 하나 → <strong>Input, Stop / Ask</strong></td></tr>
+<tr><td>출력 위치</td><td>공통 Wiki의 <code>papers/</code>. 프로젝트 없이도 성립</td><td>프로젝트 안 <code>experiments/</code>만. 프로젝트 미지정이 중지 사유</td><td>결과가 공통 자산인가, 특정 프로젝트 소유인가 → <strong>Output, Stop / Ask</strong></td></tr>
+<tr><td>재실행 단위</td><td>같은 논문 → 새 정보 없으면 변경 없음</td><td>같은 run ID → 변경분만 갱신. 결과표가 나중에 오는 일이 흔해 부분 갱신이 정상 경로</td><td>같은 입력이 다시 오는 경우가 "중복"인가 "보강"인가 → <strong>Process</strong></td></tr>
+<tr><td>원본 수정 위험</td><td>원문은 원래 읽기 전용</td><td>메모·config는 연구자 파일. "정리하면서 고쳐 주는" 유혹이 있어 원본 불변을 명시</td><td>Skill이 읽는 파일 중 사람이 직접 쓰는 것이 있나 → <strong>Output(쓰지 않는 곳)</strong></td></tr>
+<tr><td>범위 밖</td><td>연구 질문 변경, 프로젝트 생성</td><td>실패 원인 확정, 다음 실험 우선순위, 실험 실행·승인</td><td>절차 중간에 끼어드는 연구자 판단은 무엇인가, 그것을 어떻게 "비워 두나" → <strong>Trigger(범위), Output</strong></td></tr>
 </tbody></table></div>
+<p>한 줄로 줄이면 paper-reading은 <strong>맞는지 확인하는 Skill</strong>, experiment-log는 <strong>섞인 것을 칸으로 나누되 판단은 남겨 두는 Skill</strong>입니다. 내 업무가 둘 중 어느 쪽에 가까운지부터 정하면 계약의 절반은 결정됩니다.</p>
 </section><section class="content-section">
-<h2 id="chapter-05--section-2">Run 17 메모 해부하기<a class="heading-anchor" href="#chapter-05--section-2" aria-label="이 제목으로 이동">#</a></h2>
-<p>이 Skill이 받는 입력은 이런 메모입니다. 실험을 끝낸 날 급하게 적은 글이라 그날의 나에게는 다 이해되지만 3주 뒤의 나에게는 그렇지 않고, 다른 실험과 비교할 수도 없습니다.</p>
+<h2 id="chapter-05--section-2">사례: Run 17 메모 해부하기<a class="heading-anchor" href="#chapter-05--section-2" aria-label="이 제목으로 이동">#</a></h2>
+<p>experiment-log가 받는 입력은 이런 메모입니다. 실험을 끝낸 날 급하게 적은 글이라 그날의 나에게는 다 이해되지만 3주 뒤의 나에게는 그렇지 않고, 다른 실험과 비교할 수도 없습니다.</p>
 <blockquote><p>합성 야간 2000장을 넣었다. 야간이 오르고 주간이 유지되는지 보려는 실험. Run 15 대비 야간은 +4.3, 주간은 -0.3. 주간이 낮아진 이유는 아직 모른다. 비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지. 다음 실험은 1000장으로 줄이거나, 재분할이 낮은 장만 빼고 2000장을 유지하거나. GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다.</p></blockquote>
 <p>한 문단에 <strong>측정된 사실, 추측, 아직 정하지 않은 판단이 섞여 있습니다.</strong> Skill이 하는 일은 이것을 풀어서 칸이 나뉜 기록으로 저장하는 것입니다. 풀기 전에 사람이 먼저 분류해 봐야 Skill이 무엇을 하는지 알 수 있습니다.</p>
 
 <div class="drill">
 <p class="drill-title">눌러 보기: 메모의 문장을 칸으로 나누기</p>
-<p class="drill-lead">Run 17 메모의 문장 다섯 개입니다. 각각 어느 칸에 들어가야 할지 고르세요.</p>
+<p class="drill-lead">Run 17 메모의 문장 일곱 개입니다. 각각 기록의 어느 칸에 들어가야 할지 고르세요.</p>
 <div class="drill-item" data-answer="fact"><p class="drill-q">"합성 야간 2000장을 넣었다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>설정 사실. 단, 원천은 메모가 아니라 config입니다. 메모의 "2000장"과 <code>run17.yaml</code>의 값이 같은지 Skill이 대조하고, 다르면 config 쪽을 적고 불일치를 표시합니다.</p></div>
-<div class="drill-item" data-answer="fact"><p class="drill-q">"Run 15 대비 야간은 +4.3, 주간은 -0.3"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>측정 사실. 원천은 결과표(<code>results.csv</code>)입니다. 기록에는 차이값만이 아니라 두 run의 절대값과 평가 조건이 같았다는 확인까지 함께 적습니다.</p></div>
-<div class="drill-item" data-answer="guess"><p class="drill-q">"비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>가설. "가설·열린 질문" 칸에 두 후보를 그대로 적습니다. Skill이 어느 쪽이 맞는지 판정하면 범위 밖("실패 원인 확정")입니다.</p></div>
+<div class="drill-item" data-answer="fact"><p class="drill-q">"Run 15 대비 야간은 +4.3, 주간은 -0.3"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>측정 사실이지만 <strong>메모에 적힌 숫자는 "연구자 서술"로 관찰 칸에</strong> 넣고, 대비 칸에는 결과표(<code>results.csv</code>)에서 직접 계산한 값만 적습니다. 두 run의 절대값과 평가 조건이 같았다는 확인도 함께 남깁니다.</p></div>
+<div class="drill-item" data-answer="guess"><p class="drill-q">"비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>가설(원인 후보). 후보마다 <strong>확인 방법을 한 줄씩 붙여</strong> 적습니다. 비율 0.4 → "합성을 1000장으로 줄여 본다", 라벨 어긋남 → "재분할 낮은 장만 빼고 2000장 유지". 어느 쪽이 맞는지 Skill이 판정하면 범위 밖입니다.</p></div>
+<div class="drill-item" data-answer="goal"><p class="drill-q">"야간이 오르고 주간이 유지되는지 보려는 실험"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="goal">실험 목적</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button></div><p class="drill-why" hidden>실험 목적. 기록 맨 위의 "목적" 칸에 그대로 들어갑니다. 결과가 아니라 "무엇을 보려 했는가"라서 사실도 가설도 아닙니다. 이 칸이 있어야 나중에 "그래서 봤는가"를 판정할 수 있습니다.</p></div>
+<div class="drill-item" data-answer="next"><p class="drill-q">"다음 실험은 1000장으로 줄이거나, 재분할이 낮은 장만 빼고 2000장을 유지하거나"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="next">다음 실험 후보</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button></div><p class="drill-why" hidden>다음 실험 후보. "승인 대기 후보" 칸에 <strong>두 건을 나란히, 우선순위 없이</strong> 적습니다. 어느 것을 먼저 할지는 바로 아래 문장에서 연구자가 자기 몫이라고 선언했으므로 Skill은 순서를 매기지 않습니다.</p></div>
 <div class="drill-item" data-answer="decide"><p class="drill-q">"GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>사람이 정할 일. 기록에는 "다음 후보 두 가지"까지만 적고 우선순위는 비워 둡니다. Skill이 "1000장부터 하자"고 적으면 계약 위반입니다.</p></div>
 <div class="drill-item" data-answer="guess"><p class="drill-q">"주간이 낮아진 이유는 아직 모른다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>열린 질문. "모른다"는 그 자체로 기록할 가치가 있는 상태입니다. 비워 두지 말고 "원인 미확인"으로 적어야 3주 뒤에 다시 볼 수 있습니다.</p></div>
 <div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
-</div>
-
-<div class="qa" id="qa-05-1">
-<p class="qa-q"><span class="qa-label">Q 5-1</span>위 메모의 문장들을 네 묶음으로 나눠 보세요. (가) 설정 또는 변경 변수, (나) 관찰된 값이나 연구자 서술, (다) 원인 후보, (라) 다음 실험 후보. 그리고 네 묶음 어디에도 넣으면 안 되는 문장이 하나 있다면 무엇일까요?</p>
-<textarea class="qa-input" rows="3" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
-<div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
-<div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
-<div class="table-scroll"><table class="compact"><thead><tr><th>문장</th><th>묶음</th><th>기록의 어느 칸으로</th></tr></thead><tbody>
-<tr><td>합성 야간 2000장을 넣었다</td><td>(가) 변경 변수</td><td>변경 변수. 단, 진짜 값은 config에서 확인</td></tr>
-<tr><td>야간이 오르고 주간이 유지되는지 보려는 실험</td><td>목적</td><td>목적</td></tr>
-<tr><td>Run 15 대비 야간 +4.3, 주간 -0.3</td><td>(나) 연구자 서술</td><td>관찰 칸에 "연구자 서술"로. 대비 칸에는 결과표로 직접 계산한 값만</td></tr>
-<tr><td>비율 0.4 때문인지</td><td>(다) 원인 후보 1</td><td>원인 후보 + 확인 방법(합성을 1000장으로 줄여 본다)</td></tr>
-<tr><td>라벨 어긋남 때문인지</td><td>(다) 원인 후보 2</td><td>원인 후보 + 확인 방법(재분할 낮은 장만 빼고 2000장 유지)</td></tr>
-<tr><td>1000장으로 줄이거나 / 낮은 장만 빼거나</td><td>(라) 다음 실험 후보</td><td>승인 대기 후보 두 건. 우선순위 없음</td></tr>
-</tbody></table></div>
-<p><strong>넣으면 안 되는 문장은 마지막 줄입니다.</strong> "어느 쪽을 먼저 할지는 내가 고를 일이다"는 연구자의 결정 영역을 선언한 것이고, Skill은 이것을 기록의 어느 칸에도 옮기지 않습니다. 우선순위를 매기지 않고 후보를 나란히 두는 것으로 이 문장을 존중합니다.</p>
-</div></div></div>
 </section><section class="content-section">
 <h2 id="chapter-05--section-3">입력 네 종류와 신뢰 수준, 그리고 원본 불변<a class="heading-anchor" href="#chapter-05--section-3" aria-label="이 제목으로 이동">#</a></h2>
 <p>이 Skill의 입력은 네 종류이고 각각 믿을 수 있는 정도가 다릅니다. <strong>메모에 "2000장"이라고 적혀 있어도 진짜 조건은 config에 있습니다.</strong></p>
@@ -1390,7 +1558,7 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 
 <rect x="320" y="20" width="540" height="70" rx="10" class="d-box blue"/>
 <text x="336" y="44" class="d-t">관찰된 사실 (값 + 근거 위치)</text>
-<text x="336" y="64" class="d-t small">변경 변수 2000장 [run17.yaml:L12] · dj_val 야간 22.9 [results.csv:r3] · 대비 +4.3 (평가 조건 동일 확인)</text>
+<text x="336" y="64" class="d-t small">2000장 [run17.yaml:L12] · 야간 22.9 [results.csv:r3] · +4.3 (평가 조건 동일)</text>
 <text x="336" y="80" class="d-t small">주간 -0.3은 "연구자 서술"로 관찰 칸에. Cityscapes 대비는 평가 조건 미확인 → 확인 필요</text>
 <rect x="320" y="110" width="540" height="70" rx="10" class="d-box"/>
 <text x="336" y="134" class="d-t">설명이 필요한 관찰 → 원인 후보 → 확인 방법</text>
@@ -1414,8 +1582,8 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 <p>실행 요청은 "run15, run17을 정리해 줘"였습니다. 프로젝트를 지정하지 않았는데, 에이전트는 config에 적힌 프로젝트명을 읽어 그 프로젝트를 찾아 진행했습니다. 의존 순서대로 run15(baseline)를 먼저 구조화한 뒤 run17을 처리했고, 대비를 계산한 지표는 dark-junction validation mIoU 하나뿐이었습니다. 나머지는 config의 evaluation 블록에 야간 데이터셋만 적혀 있어 평가 조건이 같다고 말할 수 없으므로 "확인 필요"로 남겼습니다. 실제로 config에는 dark-junction만 있는데 결과 CSV에는 Cityscapes 값도 들어 있어 원본 간 불일치가 있는 상태였습니다. run15는 기준선이라 다음 실험 후보를 만들지 않았고, run17에는 메모의 후보 두 건이 우선순위 없이 승인 대기로 남았습니다.</p>
 <p>프로젝트를 묻지 않고 config에서 읽어 진행한 부분은 06장에서 다시 봅니다.</p></div>
 
-<div class="qa" id="qa-05-2">
-<p class="qa-q"><span class="qa-label">Q 5-2</span>결과 CSV에는 run15와 run17 모두 Cityscapes validation mIoU 값이 있습니다. config의 evaluation 블록에는 dark-junction만 적혀 있습니다. 에이전트가 Cityscapes 대비(run17 − run15)를 계산해 대비 칸에 넣어도 될까요?</p>
+<div class="qa" id="qa-05-1">
+<p class="qa-q"><span class="qa-label">Q 5-1</span>결과 CSV에는 run15와 run17 모두 Cityscapes validation mIoU 값이 있습니다. config의 evaluation 블록에는 dark-junction만 적혀 있습니다. 에이전트가 Cityscapes 대비(run17 − run15)를 계산해 대비 칸에 넣어도 될까요?</p>
 <textarea class="qa-input" rows="2" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
 <div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
 <div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
@@ -1423,11 +1591,65 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 <p>이것은 중지 사유도 아닙니다. 그 지표의 대비 칸만 비우고 나머지 기록은 그대로 진행합니다. 다만 "config에는 없는 지표가 CSV에 있다"는 원본 간 불일치는 완료 보고의 "원본에서 확인하지 못한 값"에 적어 연구자가 보게 합니다. 메모에 연구자가 적어 둔 "주간 -0.3"은 대비 칸이 아니라 관찰 칸에 연구자 서술로 옮깁니다.</p>
 </div></div></div>
 
+
 <div class="practice">
-<div class="practice-head"><span class="badge">실습 5</span><h3>experiment-log 계약 → SKILL.md → 실행</h3><span class="time">약 25분</span></div>
+<div class="practice-head"><span class="badge">실습 5</span><h3>내 업무로 두 번째 Skill 만들기</h3><span class="time">약 30분</span></div>
 <div class="practice-body">
 <h4>목표</h4>
-<p>paper-reading에서 쓴 사이클을 그대로 반복합니다. 시간이 짧으므로 계약은 복사해서 고치고, 생성과 실행에 시간을 씁니다. 실행은 두 번 합니다. 프로젝트를 빼고 보내 중지를 확인한 뒤, 프로젝트를 지정해 보냅니다.</p>
+<p>01장 선정 기준표에서 고른 <strong>두 번째 업무</strong>로 계약 → SKILL.md → 실행을 한 번 더 합니다. 이번에는 교재가 계약을 대신 써 주지 않습니다. 대신 위 표의 여섯 질문을 먼저 답하고, 그 답으로 paper-reading 계약을 고칩니다. 절차와 요청문은 02~04장 것을 그대로 다시 씁니다.</p>
+<div class="callout callout-key"><span class="callout-title">정 막막하다면</span>
+<p>내 업무가 아직 흐릿하거나 원본 파일이 손에 없다면, 이 실습 맨 아래의 <strong>"B. experiment-log를 이어서 실습하기"</strong>를 펼쳐 강의의 두 번째 Skill을 가상 원본으로 따라 만듭니다. 결과물과 체크리스트 재료는 같습니다. 다만 A를 먼저 10분이라도 시도해 보고 넘어가기를 권합니다. 여섯 질문에 답해 보는 것 자체가 이 장의 핵심입니다.</p></div>
+
+<h4>A-1. 업무 정하고 여섯 질문에 답하기 (8분, 사람)</h4>
+<p>01장 판정기에서 "1순위감"이나 "설계 더 필요"가 나온 업무 중 paper-reading이 아닌 것을 하나 고릅니다. 이름은 "실험 로그 정리"처럼 넓게 쓰지 말고 "실험 메모·config·결과표를 experiments/ 기록 한 장으로"처럼 어디까지 자동화인지 드러나게 적습니다. 그다음 표의 질문에 한 줄씩 답합니다. 이 카드가 계약에서 고칠 곳의 목록이 됩니다.</p>
+<div class="table-scroll"><table class="compact fill-card"><thead><tr><th>질문</th><th>내 업무의 답 (자동 저장)</th></tr></thead><tbody>
+<tr><td>Skill 이름과 한 줄 범위</td><td><textarea class="fill" rows="1" placeholder="예: experiment-log — 메모·config·결과표를 experiments/run_id.md 한 장으로"></textarea></td></tr>
+<tr><td>① 입력을 무엇으로 특정하나? 외부에서 확인 가능한가?</td><td><textarea class="fill" rows="1" placeholder="예: run ID. 외부 확인 불가, 기존 기록과 ID 충돌만 검사"></textarea></td></tr>
+<tr><td>② 원본이 여럿이면 어느 값은 어디서? 충돌하면?</td><td><textarea class="fill" rows="1" placeholder="예: 설정값은 config, 수치는 결과표, 서술은 메모. 다르면 멈추고 묻기"></textarea></td></tr>
+<tr><td>③ 결과는 어디에? 공통 자산인가 프로젝트 소유인가?</td><td><textarea class="fill" rows="1" placeholder="예: research/[프로젝트]/experiments/. 프로젝트 없으면 중지"></textarea></td></tr>
+<tr><td>④ 같은 입력이 다시 오면 중복인가 보강인가?</td><td><textarea class="fill" rows="1" placeholder="예: 같은 run ID면 변경분만 갱신"></textarea></td></tr>
+<tr><td>⑤ Skill이 읽는 파일 중 사람이 직접 쓰는 것은? (원본 불변)</td><td><textarea class="fill" rows="1" placeholder="예: 메모·config·CSV 전부. 읽기만, 결과는 별도 파일"></textarea></td></tr>
+<tr><td>⑥ 중간에 끼어드는 연구자 판단은? 어떻게 비워 두나?</td><td><textarea class="fill" rows="1" placeholder="예: 실패 원인 확정, 다음 실험 순서. 후보만 나란히 적고 순위 없음"></textarea></td></tr>
+</tbody></table></div>
+<div class="fill-foot"><small>복사해서 계약 파일 맨 위에 붙여 두면 A-2에서 고칠 곳이 바로 보입니다.</small><button type="button" class="fill-copy">카드 내용 복사</button></div>
+
+<h4>A-2. 계약 고치기 (8분, 사람)</h4>
+<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>[skill-name]_실행계약.md</code>로 복사합니다. 처음부터 쓰지 않습니다. 카드의 답이 가리키는 필드만 고칩니다. ①②는 Input과 Stop / Ask, ③은 Output과 Stop / Ask, ④는 Process의 재실행 줄, ⑤는 Output의 "쓰지 않는 곳", ⑥은 Trigger의 범위 밖과 Output의 비워 두는 칸입니다. 고치지 않은 필드가 많아도 괜찮습니다. 그것이 "뼈대는 같다"의 뜻입니다. 끝나면 02장 2-3의 검토 요청문을 Skill 이름만 바꿔 보내 빈틈을 받습니다.</p>
+
+<h4>A-3. SKILL.md 생성과 승인 (7분)</h4>
+<p>03장 3-1의 생성 요청문에서 계약 파일명과 Skill 이름만 바꿉니다. 참조할 규칙 파일도 바뀔 수 있습니다. 결과가 프로젝트 안으로 가는 Skill이면 <code>llm_wiki/research/AGENTS.md</code>와 그 템플릿을, 공통 Wiki로 가는 Skill이면 <code>llm_wiki/AGENTS.md</code>를 적습니다.</p>
+<pre class="prompt"><code>작업공간 루트의 [skill-name]_실행계약.md 와 [참조할 규칙 파일·템플릿]을 바탕으로
+.agents/skills/[skill-name]/SKILL.md 를 만들어줘.
+
+조건:
+1. 규칙 파일과 템플릿의 내용은 복제하지 말고 필요한 순서에서 해당 절을 참조해.
+2. 생성 전에 만들 파일과 고칠 파일을 먼저 보여줘. 새 파일은 SKILL.md 하나여야 해.
+3. description에 호출하는 요청과 호출하지 않는 요청을 모두 담아줘.
+4. 계약에 없는 정책을 추가하지 말고, 계약이 정하지 않은 것은 "모호한 지점"으로 보고해.
+5. 만든 뒤 계약의 각 조항이 SKILL.md 어느 절에 반영됐는지 대조표를 보여주고,
+   계약과 규칙 파일이 서로 반대되는 조항이 있으면 알려줘.
+6. 내 승인 전에는 계약 파일을 지우지 마.</code></pre>
+<p>모호한 지점은 03장 3-3과 같은 요청문으로 결정·반영·승인하고, 계약은 <code>part4/[skill-name]_실행계약_생성시점.md</code>로 옮깁니다.</p>
+
+<h4>A-4. 두 번 실행하기 (7분)</h4>
+<p>04장의 세 시나리오 중 둘만 합니다. 요청문은 내 업무에 맞게 직접 씁니다.</p>
+<ol>
+<li><strong>중지 확인</strong>: 카드 ①이나 ③에서 "없으면 멈춘다"고 한 입력을 일부러 빼고 보냅니다. 묻고 멈추는지, 파일이 하나도 안 생기는지 봅니다.</li>
+<li><strong>정상 실행</strong>: 필수 입력을 다 넣어 보냅니다. 실행 전 계획과 실행 후 보고(생성·수정 파일, 확인하지 못한 값, 사람이 볼 항목)를 요구하는 것은 04장 요청문과 같습니다. 끝나면 보고와 실제 변경(<code>git status --short</code> 또는 스냅샷)을 대조하고, <strong>카드 ⑤의 원본 파일이 바뀌지 않았는지</strong> 따로 확인합니다.</li>
+</ol>
+<p>재실행 시나리오는 06장 체크리스트에서 두 Skill을 같이 볼 때 돌립니다.</p>
+
+<h4>확인할 것</h4>
+<ul class="check-list">
+<li>카드의 여섯 질문에 모두 답이 있고, 그 답이 계약의 어느 필드로 갔는지 말할 수 있다</li>
+<li>계약에서 고친 필드가 paper-reading과 다른 이유를 한 줄씩 설명할 수 있다</li>
+<li>중지 확인 실행에서 파일 변경이 0개였다</li>
+<li>정상 실행에서 보고 = 실제 변경이고, 원본 파일은 그대로다</li>
+<li>연구자 판단 자리(카드 ⑥)가 기록에서 비어 있거나 "후보"로만 적혀 있다</li>
+</ul>
+
+<details><summary>B. 막막하다면: experiment-log를 이어서 실습하기 (강의의 두 번째 Skill, 가상 원본 제공)</summary><div class="detail-body">
+<p>강의가 만든 experiment-log를 그대로 따라 만듭니다. 위 A와 같은 사이클이고, 계약을 고칠 곳은 이 장 첫 표의 experiment-log 열이 알려 줍니다. 실행은 두 번 합니다. 프로젝트를 빼고 보내 중지를 확인한 뒤, 프로젝트를 지정해 보냅니다.</p>
 <h4>준비: 실험 원본</h4>
 <p>자기 실험 기록이 있으면 그것을 씁니다. 메모 하나, config 하나, 결과표 하나, 그리고 비교할 기준 실험이 있으면 좋습니다. 없으면 아래 가상 원본을 <code>part4/fixtures/</code>에 저장해 씁니다. 숫자는 설명용이며 실제 실험이 아닙니다. 가상 원본은 작업공간의 기존 프로젝트 하나를 골라 그 프로젝트의 실험으로 다루고, 프로젝트가 없으면 research 규칙의 승인 절차로 연습용 프로젝트를 하나 만든 뒤 진행합니다.</p>
 <details><summary>가상 원본 네 파일 (펼치기)</summary><div class="detail-body">
@@ -1461,9 +1683,9 @@ evaluation:
 run15,18.6,76.4,71.2,
 run17,22.9,76.1,70.8,54.7</code></pre>
 </div></details>
-<h4>5-1. 계약 복사해서 고치기 (8분, 사람)</h4>
-<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>experiment-log_실행계약.md</code>로 복사하고 여섯 필드를 고칩니다. 바뀌는 것은 위 비교표의 오른쪽 열입니다. 그리고 "원본 불변" 절을 하나 더 둡니다. 필드가 일곱이 되어도 됩니다. Stop / Ask에는 이 장의 안전 규칙 중 4번과 5번, 그리고 "결과표 수치와 로그 서술이 다를 때", "핵심 설정을 어떤 입력에서도 찾을 수 없을 때", "실험 ID가 충돌하는데 같은 실험인지 판단할 수 없을 때"가 들어가야 합니다.</p>
-<h4>5-2. SKILL.md 생성 (5분)</h4>
+<h4>B-1. 계약 복사해서 고치기 (8분, 사람)</h4>
+<p><code>part4/paper-reading_실행계약_생성시점.md</code>를 루트에 <code>experiment-log_실행계약.md</code>로 복사하고 여섯 필드를 고칩니다. 바뀌는 것은 이 장 첫 표의 experiment-log 열입니다. 그리고 "원본 불변" 절을 하나 더 둡니다. 필드가 일곱이 되어도 됩니다. Stop / Ask에는 이 장의 안전 규칙 중 4번과 5번, 그리고 "결과표 수치와 로그 서술이 다를 때", "핵심 설정을 어떤 입력에서도 찾을 수 없을 때", "실험 ID가 충돌하는데 같은 실험인지 판단할 수 없을 때"가 들어가야 합니다.</p>
+<h4>B-2. SKILL.md 생성 (5분)</h4>
 <pre class="prompt"><code>작업공간 루트의 experiment-log_실행계약.md 를 바탕으로
 .agents/skills/experiment-log/SKILL.md 를 만들어줘.
 
@@ -1478,13 +1700,13 @@ run17,22.9,76.1,70.8,54.7</code></pre>
    서로 반대되는 조항이 있으면 알려줘. 계약에 없는 정책은 추가하지 말고 보고해.
 7. 내 승인 전에는 계약 파일을 지우지 마.</code></pre>
 <p>충돌 보고가 오면 어느 쪽이 더 정형화된 절차인지 보고 결정합니다. 대개 규칙 파일에 맞춥니다. 승인 후 계약은 <code>part4/experiment-log_실행계약_생성시점.md</code>로 옮깁니다.</p>
-<h4>5-3. 중지 확인 실행: 프로젝트 없이 (5분)</h4>
+<h4>B-3. 중지 확인 실행: 프로젝트 없이 (5분)</h4>
 <pre class="prompt"><code>run15와 run17을 정리해줘.
 원본은 part4/fixtures/run15_memo.md, part4/fixtures/run17_memo.md,
 part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv 야.
 비교할 기준 실험은 run15야.</code></pre>
 <p>기대 행동은 "저장할 프로젝트를 정할 수 없으니 어느 프로젝트인지 알려 달라"고 묻고 멈추는 것입니다. 단, 가상 config에 <code>project:</code> 줄이 있으므로 에이전트가 그것을 읽어 진행할 수 있습니다. 강의에서도 그랬습니다. 그렇게 되면 멈추지 않은 이유를 묻고 결과를 기록해 둡니다. 이것이 06장의 재료입니다. 어느 쪽이든 원본 파일이 바뀌지 않았는지 확인합니다.</p>
-<h4>5-4. 프로젝트를 지정해 실행 (7분)</h4>
+<h4>B-4. 프로젝트를 지정해 실행 (7분)</h4>
 <pre class="prompt"><code>run15와 run17을 정리해줘. 프로젝트는 [프로젝트명]이야.
 원본은 part4/fixtures/run15_memo.md, part4/fixtures/run17_memo.md,
 part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv 야.
@@ -1509,7 +1731,9 @@ part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv
 <h4>참고본과 비교하기</h4>
 <p><code>part4/참고/experiment-log_실행계약.md</code>와 <code>experiment-log_SKILL.md</code>를 엽니다. 입력 절의 "사실 원천" 표와 Process 2번(baseline 의존 순서), 그리고 "원본에 후보가 없거나 후보를 만들지 않는다고 적혀 있으면 <code>없음</code>과 근거 위치를 남긴다"는 조항을 확인합니다. 내 것에 없으면 계약을 거쳐 반영합니다.</p>
 <h4>실패하면</h4>
-<p>Cityscapes 대비가 계산돼 들어왔으면 Process 4번(평가 조건 확인)이 SKILL.md에 약하게 옮겨진 것입니다. 그 문장만 고치고 5-4를 다시 돌립니다. 후보에 우선순위가 매겨졌거나 "추천"이 붙었으면 Scope 위반입니다. 원본이 수정됐으면 다른 모든 것에 앞서 원본 불변 절을 고치고, 가능하면 원본을 백업에서 복구합니다. 가상 원본이라면 위 코드 블록에서 다시 저장하면 됩니다.</p>
+<p>Cityscapes 대비가 계산돼 들어왔으면 Process 4번(평가 조건 확인)이 SKILL.md에 약하게 옮겨진 것입니다. 그 문장만 고치고 B-4를 다시 돌립니다. 후보에 우선순위가 매겨졌거나 "추천"이 붙었으면 Scope 위반입니다. 원본이 수정됐으면 다른 모든 것에 앞서 원본 불변 절을 고치고, 가능하면 원본을 백업에서 복구합니다. 가상 원본이라면 위 코드 블록에서 다시 저장하면 됩니다.</p>
+
+</div></details>
 </div></div>
 </section>
 </div>
@@ -1590,7 +1814,7 @@ part4/fixtures/run15.yaml, part4/fixtures/run17.yaml, part4/fixtures/results.csv
 <div class="practice-head"><span class="badge">실습 6</span><h3>두 Skill 점검하고 한 번 고치기</h3><span class="time">약 20분</span></div>
 <div class="practice-body">
 <h4>목표</h4>
-<p><code>part4/skill_품질_체크리스트.md</code>의 평가표를 paper-reading과 experiment-log 각각에 대해 채우고, "보완 필요"가 나온 항목 하나를 수정 루프로 고쳐 재검증까지 기록합니다.</p>
+<p><code>part4/skill_품질_체크리스트.md</code>의 평가표를 paper-reading과 두 번째 Skill(experiment-log 또는 내 업무) 각각에 대해 채우고, "보완 필요"가 나온 항목 하나를 수정 루프로 고쳐 재검증까지 기록합니다.</p>
 <h4>6-1. 체크리스트 채우기 (8분, 사람)</h4>
 <p>평가표를 두 번 복사해 Skill 이름을 붙입니다. 여덟 행의 결과와 근거를 채웁니다. 근거는 04장 기록표의 행, 05장 실행 보고, 실제 파일 경로여야 합니다. experiment-log의 Input gate와 Stop / Ask에는 5-3의 결과를 그대로 적습니다. 묻지 않고 진행했다면 "보완 필요"입니다.</p>
 <h4>6-2. 애매한 사례 결정하기 (3분, 사람)</h4>
@@ -1890,6 +2114,20 @@ part4/experiment-log_실행계약_생성시점.md 에는 "SKILL.md v2에서 변�
         const rows = rater.querySelectorAll('.rater-row');
         const out = rater.querySelector('.rater-out');
         const val = { '상': 2, '중': 1, '하': 0 };
+        // subject line: type a task name, Enter -> becomes the card title
+        const subj = rater.querySelector('.rater-subject');
+        if (subj) {
+            const input = subj.querySelector('input');
+            const title = subj.querySelector('.rater-title');
+            const key = 'part4-rater-subject:' + (rater.closest('.page')?.id || 'x');
+            const show = name => { title.innerHTML = '<small>판정 대상</small>'; title.appendChild(document.createTextNode(name)); title.hidden = false; input.hidden = true; if (store) store.setItem(key, name); };
+            const edit = () => { input.value = title.textContent.replace('판정 대상', '').trim(); title.hidden = true; input.hidden = false; input.focus(); };
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const v = input.value.trim(); if (v) show(v); } });
+            input.addEventListener('blur', () => { const v = input.value.trim(); if (v) show(v); });
+            title.addEventListener('click', edit);
+            const saved = store && store.getItem(key);
+            if (saved) show(saved); else title.hidden = true;
+        }
         function update() {
             const picks = [...rows].map(r => r.querySelector('.is-picked')?.dataset.value);
             if (picks.some(p => !p)) { out.textContent = '다섯 기준을 모두 고르면 판정이 나옵니다.'; out.className = 'rater-out'; return; }
@@ -1908,6 +2146,79 @@ part4/experiment-log_실행계약_생성시점.md 에는 "SKILL.md v2에서 변�
         })));
         update();
     });
+
+    // ---- fill-in fields: autosave every textarea.fill (per page + order)
+    const grow = t => { t.style.height = 'auto'; t.style.height = (t.scrollHeight + 2) + 'px'; };
+    document.querySelectorAll('.page').forEach(page => {
+        page.querySelectorAll('textarea.fill').forEach((t, i) => {
+            const key = `part4-fill:${page.id}:${i}`;
+            if (store && store.getItem(key)) t.value = store.getItem(key);
+            grow(t);
+            t.addEventListener('input', () => { grow(t); if (store) store.setItem(key, t.value); });
+            // Enter (no shift) or the 확인 button with text -> reveal the sample answer for this field, if any
+            const fieldBox = t.closest('.field');
+            const sample = fieldBox ? fieldBox.querySelector('.field-sample') : null;
+            if (sample) {
+                const skey = key + ':sample';
+                const reveal = () => { if (t.value.trim()) { sample.hidden = false; if (store) store.setItem(skey, '1'); } else { t.classList.add('shake'); setTimeout(() => t.classList.remove('shake'), 400); t.focus(); } };
+                t.addEventListener('keydown', e => {
+                    if (e.key !== 'Enter' || e.shiftKey || e.isComposing) return;
+                    e.preventDefault(); reveal();
+                });
+                const btn = fieldBox.querySelector('.field-check');
+                if (btn) btn.addEventListener('click', reveal);
+                if (store && store.getItem(skey)) sample.hidden = false;
+            }
+        });
+        // git / snapshot mode switch (chapter 04 practice)
+        page.querySelectorAll('.mode-switch').forEach(sw => {
+            const body = sw.closest('[data-mode]');
+            const key = `part4-mode:${page.id}`;
+            const set = m => { body.dataset.mode = m; sw.querySelectorAll('button').forEach(b => b.classList.toggle('is-picked', b.dataset.mode === m)); if (store) store.setItem(key, m); };
+            sw.querySelectorAll('button').forEach(b => b.addEventListener('click', () => set(b.dataset.mode)));
+            if (store && store.getItem(key)) set(store.getItem(key));
+        });
+        // verdict pills (통과 / 실패 / 보완 필요)
+        page.querySelectorAll('.verdict').forEach((v, i) => {
+            const key = `part4-verdict:${page.id}:${i}`;
+            const btns = v.querySelectorAll('button');
+            const set = val => { btns.forEach(b => b.classList.toggle('is-picked', b.dataset.value === val)); v.dataset.value = val || ''; if (store) { val ? store.setItem(key, val) : store.removeItem(key); } };
+            btns.forEach(b => b.addEventListener('click', () => set(v.dataset.value === b.dataset.value ? '' : b.dataset.value)));
+            if (store && store.getItem(key)) set(store.getItem(key));
+        });
+    });
+    // fill-card copy button
+    document.querySelectorAll('.fill-card').forEach(card => {
+        const wrap = card.closest('.table-scroll') || card;
+        const copy = wrap.nextElementSibling?.classList.contains('fill-foot') ? wrap.nextElementSibling.querySelector('.fill-copy') : null;
+        if (copy) copy.addEventListener('click', async () => {
+            const lines = [...card.querySelectorAll('tbody tr')].map(tr => {
+                const k = tr.children[0].innerText.trim();
+                const t = tr.querySelector('textarea.fill');
+                const v = t ? t.value.trim() : tr.children[1].innerText.trim();
+                return `- ${k}: ${v || '(비어 있음)'}`;
+            });
+            try { await navigator.clipboard.writeText(lines.join('\n')); copy.textContent = '복사됨'; }
+            catch (_) { copy.textContent = '복사 실패'; }
+            setTimeout(() => { copy.textContent = '카드 내용 복사'; }, 1600);
+        });
+    });
+    // test log export (chapter 04): scenarios -> markdown
+    document.querySelectorAll('.testlog-export').forEach(btn => btn.addEventListener('click', async () => {
+        const root = btn.closest('.practice-body');
+        const today = new Date().toISOString().slice(0, 10);
+        const md = ['# paper-reading 테스트 기록', `날짜: ${today}`, ''];
+        root.querySelectorAll('.scenario').forEach(sc => {
+            md.push(`## ${sc.dataset.name}`);
+            sc.querySelectorAll('.fill').forEach(t => md.push(`- ${t.dataset.label}: ${t.value.trim() || '(비어 있음)'}`));
+            const v = sc.querySelector('.verdict');
+            if (v) md.push(`- 판정: ${v.dataset.value || '(미정)'}`);
+            md.push('');
+        });
+        try { await navigator.clipboard.writeText(md.join('\n')); btn.textContent = '복사됨 — part4/paper-reading_테스트기록.md 에 붙여 넣기'; }
+        catch (_) { btn.textContent = '복사 실패'; }
+        setTimeout(() => { btn.textContent = '기록 내보내기 (markdown 복사)'; }, 2600);
+    }));
 
     route({ initial: true });
 })();
