@@ -1,0 +1,114 @@
+<p>Skill을 만들었으면 돌려 봐야 합니다. 그런데 "돌려 보고 결과가 그럴듯하면 통과"는 테스트가 아닙니다. <strong>실행하기 전에 기대 행동과 실패 신호를 적어 두고, 실행 후 실제 행동과 대조하는 것</strong>이 테스트입니다. 이 장에서는 세 시나리오로 paper-reading을 시험하고 <code>part4/paper-reading_테스트기록.md</code>를 남깁니다.</p>
+
+<!-- toc -->
+
+<h2>테스트는 예측에서 시작한다</h2>
+<p>Part 3의 퀴즈가 "실습 직전에 상황 판단을 묻는" 장치였다면, Part 4의 테스트는 그것을 "실행 직전에 기대 행동을 적는" 것으로 바꾼 것입니다. 적어 두지 않으면 에이전트가 무엇을 하든 사후에 "그럴 만하네"라고 받아들이게 됩니다. 예측이 있어야 차이가 보이고, 차이가 있어야 고칠 곳이 보입니다.</p>
+<p>시험할 것은 결과물의 품질이 아닙니다. 요약이 잘 됐는지는 Part 2~3에서 만든 내용 검증 규칙(근거 위치, 원문 대조, 상태값)이 맡습니다. 여기서 묻는 것은 실행의 안전성입니다. <strong>필요할 때 호출되는가, 재료가 없을 때 멈추는가, 같은 입력을 다시 넣어도 중복이 생기지 않는가.</strong></p>
+
+<h2>세 시나리오</h2>
+<div class="table-scroll"><table><thead><tr><th>시나리오</th><th>입력</th><th>통과 조건</th><th>실패 신호</th></tr></thead><tbody>
+<tr><td>정상</td><td>식별 가능한 논문(arXiv ID 또는 DOI)과 "요약하고 [프로젝트]에 추가해 줘"</td><td>서지 대조, 원문 검증, 페이지 생성, 허브·index·log 갱신, 지정 프로젝트의 <code>literature.md</code> 갱신, 완료 보고가 실제 변경과 일치</td><td>잘못된 위치에 저장, 허브·index·log 갱신 누락, 완료 보고에 없는 파일이 바뀜</td></tr>
+<tr><td>누락</td><td>"어제 학회에서 들은 저조도 탐지 논문 추가해 줘" (식별 정보 없음)</td><td>어떤 논문인지 묻고 그 자리에서 멈춤. 페이지를 만들지 않음. 실행 전후 Wiki 파일이 그대로</td><td>추측으로 논문을 골라 진행, 확인하지 않은 메타데이터 기록, 질문 없이 빈 파일 생성</td></tr>
+<tr><td>재실행</td><td>정상 시나리오와 완전히 같은 요청을 한 번 더</td><td>기존 페이지부터 확인, 새 정보가 없으면 "변경 없음"으로 종료. 중복 페이지·링크·log 항목 없음</td><td>페이지 파일이 하나 더 생김, 허브에 같은 링크 두 줄, <code>log.md</code>에 새 항목</td></tr>
+</tbody></table></div>
+<p>정상 입력에는 자기 연구와 관련된 논문 한 편을 씁니다. 테스트 전에 예상 파일명(<code>연도_저자_키워드.md</code> 규칙으로 직접 만들어 봅니다)과 도달할 상태를 적어 둡니다. 누락 입력에는 PDF도 식별 정보도 없는 요청을 씁니다. 재실행은 정상 요청을 그대로 다시 보냅니다.</p>
+
+<div class="callout callout-lecture"><span class="callout-title">강의에서 확인한 결과</span>
+<p>강의 실습은 NightLab 논문의 arXiv ID로 진행했습니다. 정상 시나리오에서 에이전트는 Crossref API로 2022년 정식 게재를 확인해 arXiv 판과 대조했고, 논문 페이지를 만들면서 저자 페이지 4개를 새로 만들고 토픽 페이지 5개를 갱신했습니다. 도달 상태는 <code>critically_reviewed / verified</code>, 프로젝트의 <code>literature.md</code>와 <code>log.md</code>까지 갱신됐습니다.</p>
+<p>누락 시나리오에서는 "논문을 특정할 정보가 없어서 파일을 만들지 않고 멈췄습니다"라며 arXiv ID, 서지 정보, 정확한 제목, PDF 중 하나를 요청했고, "이번 요청으로 Wiki와 프로젝트 문서는 아무것도 바꾸지 않았습니다"라고 보고했습니다. 재실행에서는 "동일한 논문을 이미 처리했습니다. 중복 생성 없이 현재 상태부터 확인하겠습니다"라고 한 뒤 새로 만들거나 고친 파일이 없었고 <code>log.md</code>에도 새 항목이 없었습니다.</p>
+<p>세 시나리오 모두 관측된 실패가 없어 SKILL.md는 그대로 두고 다음 장으로 넘어갔습니다. 여러분의 결과는 다를 수 있고, 다르면 그것이 이 장의 수확입니다.</p></div>
+
+<h2>완료 보고를 읽는 법</h2>
+<p>에이전트의 완료 보고는 네 묶음으로 옵니다. 생성한 파일, 수정한 파일, 건너뛴 항목과 이유, 사람 확인이 필요한 항목. 이 보고를 읽는 방법은 하나입니다. <strong>보고와 실제 파일을 대조하는 것</strong>입니다.</p>
+<ul>
+<li>git을 쓰고 있다면 실행 전후에 <code>git status</code>를 찍어 변경 파일 목록을 보고와 맞춥니다. 보고에 없는 파일이 바뀌었으면 출력 계약 위반입니다.</li>
+<li>git이 없으면 실행 전에 에이전트에게 "<code>llm_wiki/</code> 아래 파일 목록과 수정 시각을 저장해 둬"라고 하고, 실행 후 비교하게 합니다.</li>
+<li>논문 페이지를 열어 frontmatter의 두 상태값이 보고한 도달 상태와 같은지 봅니다. 보고는 <code>verified</code>인데 페이지는 <code>unreviewed</code>면 Validation이 작동하지 않은 것입니다.</li>
+<li><code>log.md</code>의 마지막 항목이 이번 실행 한 건인지 봅니다. 두 건이면 재실행 규칙이나 일괄 처리 규칙에 문제가 있습니다.</li>
+</ul>
+
+<div class="qa" id="qa-04-1">
+<p class="qa-q"><span class="qa-label">Q 4-1</span>누락 시나리오에서 에이전트가 "저조도 탐지 관련 논문 후보 세 편을 찾았습니다. 어느 것인가요?"라고 묻고 멈췄습니다. 그런데 후보 세 편의 서지를 <code>llm_wiki/papers/_candidates.md</code>라는 파일에 적어 두었습니다. 통과일까요?</p>
+<textarea class="qa-input" rows="2" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
+<div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
+<div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
+<p><strong>실패입니다.</strong> 묻고 멈춘 것은 맞지만, 답을 받기 전에 Wiki 안에 파일을 만들었습니다. 계약의 Stop / Ask는 "답을 받기 전에는 Wiki 페이지를 만들거나 고치지 않는다"이고, 허용된 예외는 사용자가 준 PDF를 <code>_unidentified/</code>에 보관하는 것뿐입니다. 게다가 <code>_candidates.md</code>는 규칙 파일에 생성 규칙이 없는 페이지입니다.</p>
+<p>후보 목록은 대화창에 보여 주면 충분합니다. 이 실패는 "저장 위치" 또는 "출력 계약" 범주로 분류하고, SKILL.md의 중지 절에 "묻는 동안 후보나 메모를 Wiki 안에 파일로 남기지 않는다"를 추가한 뒤 같은 입력으로 다시 돌립니다. 질문 자체는 잘한 것이라 그 부분은 고치지 않습니다.</p>
+</div></div></div>
+
+<div class="qa" id="qa-04-2">
+<p class="qa-q"><span class="qa-label">Q 4-2</span>재실행 시나리오에서 페이지와 허브는 그대로였는데, <code>log.md</code>에 "2026-10-11 paper-reading 재실행, 변경 없음"이라는 한 줄이 추가됐습니다. 통과로 볼 수 있을까요? 이 한 줄이 쌓이면 어떤 문제가 생길까요?</p>
+<textarea class="qa-input" rows="2" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
+<div class="qa-row"><p class="qa-hint">답을 적으면 해설이 열립니다.</p><button type="button" class="qa-submit">확인</button><button type="button" class="qa-reset">다시 쓰기</button></div>
+<div class="qa-answer" hidden><p class="qa-mine"></p><div class="qa-model">
+<p><strong>판단이 갈리는 지점이라 "애매한 통과"로 넘기면 안 됩니다.</strong> 계약의 Validation은 "<code>log.md</code> 항목이 중복되지 않았는지"이고, 재실행 규칙은 "새 정보가 없으면 변경 없음으로 끝낸다"입니다. <code>log.md</code>는 변경 기록인데 변경이 없는 실행을 기록하면 로그의 뜻이 흐려지고, 수십 편을 일괄 재실행할 때 로그가 의미 없는 줄로 채워집니다.</p>
+<p>결정은 사람이 합니다. "변경 없음은 로그에 남기지 않는다"로 정하는 쪽이 Part 3의 로그 규칙("수정된 내용에 대한 기록")과 맞습니다. 결정했으면 계약과 SKILL.md에 한 줄로 못 박고 재실행을 다시 돌립니다. 06장의 체크리스트에서 이런 경우를 "통과"가 아니라 "보완 필요"로 적는 연습을 합니다. 애매한 것을 통과로 적기 시작하면 체크리스트가 작동하지 않습니다.</p>
+</div></div></div>
+
+<div class="practice">
+<div class="practice-head"><span class="badge">실습 4</span><h3>세 시나리오로 paper-reading 시험하기</h3><span class="time">약 30분</span></div>
+<div class="practice-body">
+<h4>목표</h4>
+<p><code>part4/paper-reading_테스트기록표.md</code>를 <code>part4/paper-reading_테스트기록.md</code>로 복사해 기대 행동을 먼저 적고, 세 시나리오를 실행한 뒤 실제 행동과 통과 여부, 수정 내용을 채웁니다.</p>
+<h4>4-1. 예측표 쓰기 (5분, 사람)</h4>
+<p>기록표의 "기대 행동" 칸을 자기 말로 채웁니다. 정상 시나리오에는 예상 파일명과 도달할 상태를 적습니다. 누락과 재실행에는 "바뀌면 안 되는 파일"을 적습니다. 그다음 실행 전 스냅샷을 남깁니다.</p>
+<pre class="prompt"><code>테스트 전 스냅샷을 만들어줘. llm_wiki/ 아래 모든 파일의 경로와 수정 시각,
+그리고 llm_wiki/log.md 의 마지막 항목을 part4/테스트_스냅샷_before.md 에 저장해.
+다른 파일은 건드리지 마.</code></pre>
+<h4>4-2. 정상 시나리오 (10분)</h4>
+<pre class="prompt"><code>다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
+논문 식별자: [arXiv ID 또는 DOI]
+
+실행하기 전에 먼저 보여줘:
+1. 어떤 Skill을 쓸 것인지
+2. 읽을 파일
+3. 만들거나 수정할 파일 (예상 파일명 포함)
+4. 실행을 멈출 조건
+
+실행 후에는 보고해줘:
+1. 생성한 파일, 수정한 파일, 건너뛴 항목과 이유
+2. 도달한 processing_status / evidence_status 와 그 근거
+3. 서지를 어느 DB에서 대조했는지, 어느 판본을 읽었는지
+4. 마지막 점검 항목별 결과
+5. 사람이 확인해야 할 항목</code></pre>
+<p>실행 전 계획에서 Skill 이름이 paper-reading으로 나오는지 봅니다. 다른 이름이 나오거나 Skill 없이 진행하겠다고 하면 트리거 실패입니다. 실행 후에는 보고의 파일 목록과 실제 변경(<code>git status</code> 또는 스냅샷 비교)을 맞춥니다.</p>
+<h4>4-3. 누락 시나리오 (5분)</h4>
+<pre class="prompt"><code>어제 학회에서 들은 저조도 탐지 논문을 Wiki에 추가해줘.</code></pre>
+<p>통과 기준은 넷입니다. 논문을 추측하지 않는다, 파일을 만들지 않는다, 필요한 식별 정보를 묻는다, 질문 전까지 저장소를 수정하지 않는다. 에이전트가 물으면 답하지 말고 스냅샷과 비교합니다.</p>
+<pre class="prompt"><code>방금 요청은 테스트였어. 답은 하지 않을게.
+part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
+새로 생기거나 바뀐 파일이 있는지 알려줘. 비교만 하고 아무것도 고치지 마.</code></pre>
+<h4>4-4. 재실행 시나리오 (5분)</h4>
+<p>4-2의 요청문을 한 글자도 바꾸지 않고 다시 보냅니다. 끝나면 변경 파일 목록을 받고, <code>log.md</code>의 마지막 항목이 4-2 때와 같은지 봅니다.</p>
+<pre class="prompt"><code>방금 재실행의 결과를 확인하려고 해. 4-2 실행 직후와 비교해서
+새로 생긴 파일, 수정된 파일, log.md 에 추가된 항목이 있는지 알려줘.
+논문 페이지의 frontmatter 두 상태값도 보여줘. 고치지는 마.</code></pre>
+<h4>4-5. 기록표 채우기 (5분, 사람)</h4>
+<p>세 행의 "실제 행동", "통과", "수정" 칸을 채웁니다. 통과하지 못한 행은 실패 원인을 넷 중 하나로 분류합니다. 호출 조건, 입력 게이트, 저장 위치, 완료 보고. <code>part4/paper-reading_테스트기록_완성예시.md</code>가 적는 방식의 예시입니다.</p>
+<h4>확인할 것</h4>
+<ul class="check-list">
+<li>정상: 보고한 파일 목록과 실제 변경이 일치하고, 페이지의 상태값이 보고와 같다</li>
+<li>정상: 프로젝트를 지정했으므로 <code>literature.md</code>에 행이 추가됐고, 다른 프로젝트는 그대로다</li>
+<li>누락: 스냅샷 대비 변경 파일이 0개다</li>
+<li>재실행: 변경 파일이 0개이고 <code>log.md</code> 마지막 항목이 4-2 때와 같다</li>
+<li>기록표의 "통과" 칸에 "애매함"이 없다. 애매하면 "보완 필요"로 적었다</li>
+</ul>
+<h4>실패하면: 수정 루프</h4>
+<ol>
+<li>기대 행동과 실제 파일을 비교해 차이를 한 문장으로 적습니다.</li>
+<li>실패 원인을 호출 조건, 입력 게이트, 저장 위치, 완료 보고 중 하나로 특정합니다.</li>
+<li>SKILL.md에서 그 원인에 해당하는 문장만 최소 수정합니다. 다른 절은 건드리지 않습니다. 계약 사본(<code>part4/paper-reading_실행계약_생성시점.md</code>)에는 "SKILL.md v2에서 변경"이라고만 적어 둡니다.</li>
+<li>실패한 시나리오만 같은 입력으로 다시 실행합니다.</li>
+<li>결과를 기록표의 "수정"과 "재검증" 칸에 적습니다. 다시 실패하면 1번으로 돌아갑니다.</li>
+</ol>
+<pre class="prompt"><code>테스트에서 다음 차이가 나왔어.
+시나리오: [정상/누락/재실행]
+기대: [기대 행동]
+실제: [실제 행동]
+원인 분류: [호출 조건/입력 게이트/저장 위치/완료 보고]
+
+.agents/skills/paper-reading/SKILL.md 에서 이 원인에 해당하는 문장을 찾아
+최소한으로 고치는 수정안을 보여줘. 다른 절은 건드리지 마.
+내가 승인하면 적용하고, 적용한 뒤 어떤 줄이 바뀌었는지 보여줘.</code></pre>
+</div></div>

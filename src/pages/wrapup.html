@@ -1,0 +1,74 @@
+<p>여기까지 왔으면 작업공간에 Skill 두 개, 테스트 기록 두 벌, 체크리스트 한 장이 있습니다. 그리고 세 번째 Skill부터는 업무만 갈아 끼우면 되는 패턴이 손에 남았습니다. 이 페이지는 그 패턴을 한 장으로 정리하고, 다음 Part로 넘어가기 전에 해 둘 일을 적습니다.</p>
+
+<!-- toc -->
+
+<h2>한 장으로 정리하는 Skill 제작 패턴</h2>
+<figure class="diagram">
+<svg viewBox="0 0 880 250" role="img" aria-label="Skill 제작 패턴">
+<defs><marker id="arrow7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#8a96a3"/></marker></defs>
+<rect x="20" y="20" width="150" height="70" rx="12" class="d-box human"/><text x="36" y="46" class="d-t">1. 고르기</text><text x="36" y="66" class="d-t small">다섯 기준 선정표</text><text x="36" y="82" class="d-t small">이름을 좁게</text>
+<rect x="195" y="20" width="150" height="70" rx="12" class="d-box human"/><text x="211" y="46" class="d-t">2. 경계 긋기</text><text x="211" y="66" class="d-t small">Trigger · Input</text><text x="211" y="82" class="d-t small">Stop / Ask 먼저</text>
+<rect x="370" y="20" width="150" height="70" rx="12" class="d-box human"/><text x="386" y="46" class="d-t">3. 계약 쓰기</text><text x="386" y="66" class="d-t small">여섯 필드</text><text x="386" y="82" class="d-t small">규칙은 참조로</text>
+<rect x="545" y="20" width="150" height="70" rx="12" class="d-box dark"/><text x="561" y="46" class="d-t white">4. 변환</text><text x="561" y="66" class="d-t small" style="fill:#c8d2dc">에이전트가 SKILL.md</text><text x="561" y="82" class="d-t small" style="fill:#c8d2dc">대조 · 모호 보고</text>
+<rect x="720" y="20" width="140" height="70" rx="12" class="d-box"/><text x="736" y="46" class="d-t">5. 시험</text><text x="736" y="66" class="d-t small">정상 · 누락</text><text x="736" y="82" class="d-t small">재실행</text>
+<rect x="370" y="140" width="325" height="70" rx="12" class="d-box accent"/><text x="386" y="166" class="d-t">6. 점검과 수정</text><text x="386" y="186" class="d-t small">여덟 기준 체크리스트 · 보완 필요 → 최소 수정 → 재실행</text><text x="386" y="202" class="d-t small">애매한 것은 통과가 아니라 결정</text>
+<path d="M170 55 H193" class="d-line" style="marker-end:url(#arrow7)"/>
+<path d="M345 55 H368" class="d-line" style="marker-end:url(#arrow7)"/>
+<path d="M520 55 H543" class="d-line" style="marker-end:url(#arrow7)"/>
+<path d="M695 55 H718" class="d-line" style="marker-end:url(#arrow7)"/>
+<path d="M790 90 V175 H697" class="d-line" style="marker-end:url(#arrow7)"/>
+<path d="M368 175 H300 V92" class="d-line dashed" style="marker-end:url(#arrow7)"/>
+<text x="20" y="238" class="d-t small">파란 상자는 사람이, 검은 상자는 에이전트가 주도한다. 점선은 수정이 계약까지 거슬러 올라가는 경우다.</text>
+</svg>
+<figcaption>그림 끝-1. 1~3과 6은 사람의 일, 4는 에이전트의 일, 5는 함께 합니다. 세 번째 Skill부터는 1번의 업무만 바꿔 같은 길을 갑니다.</figcaption>
+</figure>
+<p>매 단계에서 네 가지가 보여야 합니다. <strong>이번에 배우는 개념, 이번에 만들 파일, 복사해서 실행할 요청문, 통과 여부를 판단하는 기준.</strong> 이 수업의 각 장이 그 순서로 되어 있었던 것은 Skill 자체가 그 순서로 되어 있기 때문입니다.</p>
+
+<h2>자주 어긋나는 지점 여섯 가지</h2>
+<div class="table-scroll"><table><thead><tr><th>증상</th><th>원인</th><th>고치는 곳</th></tr></thead><tbody>
+<tr><td>Skill이 아무 요청에나 열린다 / 필요할 때 안 열린다</td><td>description에 "호출하지 않는 요청"이 없다</td><td>SKILL.md frontmatter</td></tr>
+<tr><td>재료가 없는데 추측으로 진행한다</td><td>필수 입력이 없을 때의 동작이 적혀 있지 않다</td><td>계약 Input → SKILL.md 입력 절</td></tr>
+<tr><td>규칙 파일을 고쳤는데 Skill이 옛 규칙대로 한다</td><td>규칙을 참조하지 않고 복사해 넣었다</td><td>SKILL.md에서 복사본을 지우고 참조로</td></tr>
+<tr><td>재실행하면 파일이 하나 더 생긴다</td><td>기존 기록 확인 단계가 Process에 없다</td><td>계약 Process 1번</td></tr>
+<tr><td>에이전트가 계약에 없는 정책을 넣는다</td><td>생성 프롬프트에 "결정하지 말고 보고하라"가 약하다</td><td>생성 프롬프트 4번 조건</td></tr>
+<tr><td>체크리스트가 전부 통과인데 불안하다</td><td>근거 칸이 인상으로 채워졌다</td><td>근거를 파일 경로와 기록표 행으로 다시 쓴다</td></tr>
+</tbody></table></div>
+
+<h2>작업공간에 남은 것</h2>
+<pre class="file-tree"><code>작업공간/
+├── AGENTS.md
+├── .agents/skills/
+│   ├── <span class="new">paper-reading/SKILL.md</span>
+│   └── <span class="new">experiment-log/SKILL.md</span>
+├── llm_wiki/
+│   ├── AGENTS.md  <span class="mod">(개념 페이지 조건 등 공용 규칙 보강)</span>
+│   ├── papers/  <span class="mod">(테스트로 추가한 논문 페이지)</span>
+│   └── research/
+│       ├── AGENTS.md
+│       ├── _template/ … experiment.md · plan.md
+│       └── [프로젝트]/
+│           ├── index.md  <span class="mod">(실험 기록 목록)</span>
+│           ├── literature.md  <span class="mod">(테스트 논문 행)</span>
+│           └── <span class="new">experiments/run15.md · run17.md</span>
+└── part4/
+    ├── skill_선정기준표.md  <span class="mod">(채움)</span>
+    ├── paper-reading_실행계약_생성시점.md · experiment-log_실행계약_생성시점.md
+    ├── paper-reading_테스트기록.md
+    ├── skill_품질_체크리스트.md  <span class="mod">(두 Skill 분량)</span>
+    └── fixtures/ · 참고/</code></pre>
+<p>루트에 계약 파일이 남아 있지 않은지, <code>part4/fixtures/</code>의 원본이 그대로인지 마지막으로 한 번 봅니다. 테스트로 넣은 논문 페이지는 실제 연구 논문이면 그대로 두고, 연습용이었으면 paper-reading을 통해 지우지 말고 사람이 직접 지운 뒤 <code>log.md</code>에 한 줄 남깁니다. <strong>Skill의 범위에 삭제는 없습니다.</strong></p>
+
+<h2>다음 Part 전에 해 둘 일</h2>
+<ol>
+<li><strong>세 번째 Skill 후보 메모.</strong> 01장의 선정 기준표에서 3순위였던 업무를 한 줄로 적어 둡니다. 다음에 시간이 나면 02장부터 같은 순서로 갑니다. 계약 템플릿과 생성 프롬프트는 <code>part4/</code>에 그대로 있습니다.</li>
+<li><strong>plan.md는 아직 쓰지 않습니다.</strong> 세팅에서 추가한 <code>research/_template/plan.md</code>는 실험 후보를 비교해 순위를 매기는 양식입니다. 이 Part에서 experiment-log는 후보를 승인 대기로 나란히 두는 데서 멈췄습니다. 후보를 비교하고 순위를 제안하는 일은 다음 Part의 실험 플래너 에이전트가 이 양식으로 합니다.</li>
+<li><strong>역할 분담표를 다시 읽어 둡니다.</strong> 다음 Part는 서브 에이전트입니다. 지금까지는 메인 에이전트가 모든 일을 직접 했지만, 다음부터는 원문 검토, 실험 계획, 글쓰기, 검토 같은 역할을 나눠 위임합니다. 오늘 만든 두 Skill과 검증 절차를 각 역할이 어떻게 나눠 쓰는지가 그 내용입니다. 01장의 "Skill로 만들지 않는 일" 목록이 그대로 역할 경계가 됩니다.</li>
+</ol>
+
+<h2>자료</h2>
+<ul>
+<li>실습 파일: 이 저장소의 <code>실습파일/</code>. 실행 계약 템플릿, 두 Skill의 계약·SKILL.md 완성본, 생성 프롬프트, 테스트 기록표, 선정 기준표, 품질 체크리스트, Part 4 템플릿 다섯 파일.</li>
+<li>강의 교안: <code>강의교안/</code>의 클립별 PDF 여덟 개. 이 자료의 장 번호와 클립 번호는 다릅니다. Ch01이 01장, Ch02가 02~04장, Ch03이 05~06장에 해당합니다.</li>
+<li>강의 전사와 정리본: <code>전체 스크립트.md</code>, <code>정리본.md</code>. 강의에서 실제로 한 말과 실행 결과를 확인하고 싶을 때 엽니다.</li>
+<li>Part 3 자료: 복습 페이지에서 가리킨 장들. 상태값 정의, 2-pass 검증, Literature Matrix 규칙은 그쪽이 원본입니다.</li>
+</ul>

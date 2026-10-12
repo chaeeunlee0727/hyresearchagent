@@ -1,0 +1,196 @@
+<p>이 페이지에서는 수업이 끝났을 때 손에 남는 것을 먼저 정하고, Part 3에서 만든 작업공간을 열고, Part 4용 세팅을 합니다. 세팅은 10분이면 끝나지만 빠뜨리면 03장부터 경로가 어긋나므로 실습 전에 반드시 마칩니다.</p>
+
+<div class="goal-box">
+<p><strong>수업 흐름</strong></p>
+<p>Skill로 만들 업무 고르기 → 실행 경계와 실행 계약 → 계약을 SKILL.md로 → 세 가지 시나리오(정상·누락·재실행) 테스트 → Skill의 품질 체크리스트. 05장에서 같은 흐름을 두 번째 업무(실험 로그)에 한 번 더 돕니다.</p>
+</div>
+
+<!-- toc -->
+
+<h2>최종 산출물</h2>
+<p>수업 중 만드는 파일입니다. 앞 장의 산출물이 뒤 장의 입력이 됩니다.</p>
+<div class="table-scroll"><table class="compact artifacts"><thead><tr><th>장</th><th>산출물</th><th>무엇인가</th></tr></thead><tbody>
+<tr><td>01</td><td><code>part4/skill_선정기준표.md</code></td><td>내 반복 업무를 다섯 기준으로 평가한 표</td></tr>
+<tr><td>02</td><td><code>paper-reading_실행계약.md</code></td><td>논문 읽기 Skill의 여섯 필드 계약 (승인 후 <code>part4/</code>로 이동)</td></tr>
+<tr><td>03</td><td><code>.agents/skills/paper-reading/SKILL.md</code></td><td>첫 번째 Skill</td></tr>
+<tr><td>04</td><td><code>part4/paper-reading_테스트기록.md</code></td><td>정상·누락·재실행 테스트 기록</td></tr>
+<tr><td rowspan="2">05</td><td><code>experiment-log_실행계약.md</code> → <code>.agents/skills/experiment-log/SKILL.md</code></td><td>두 번째 Skill</td></tr>
+<tr><td><code>llm_wiki/research/[프로젝트]/experiments/run15.md</code>, <code>run17.md</code></td><td>두 번째 Skill로 만든 실험 기록</td></tr>
+<tr><td>06</td><td><code>part4/skill_품질_체크리스트.md</code></td><td>두 Skill을 여덟 기준으로 점검한 표와 수정 기록</td></tr>
+</tbody></table></div>
+
+<h3>SKILL.md는 어디에 두나</h3>
+<p>Skill 파일은 두 곳 중 하나에 둘 수 있습니다. 사용자 전역 폴더에 두면 어느 프로젝트에서나 열리고, 프로젝트 폴더 안에 두면 그 프로젝트에서만 열립니다. 이 수업의 Skill은 <code>llm_wiki/</code>의 규칙과 템플릿을 참조하므로 그 작업공간에서만 뜻이 있습니다. 그래서 <strong>프로젝트 폴더 안의 <code>.agents/skills/&lt;이름&gt;/SKILL.md</code></strong>에 둡니다. Codex와 Hermes 둘 다 이 경로를 프로젝트 전용 Skill로 읽습니다.</p>
+<div class="table-scroll"><table class="compact"><thead><tr><th>범위</th><th>Codex</th><th>Hermes</th><th>언제 쓰나</th></tr></thead><tbody>
+<tr><td>프로젝트 전용</td><td><code>&lt;프로젝트&gt;/.agents/skills/</code> (현재 폴더부터 저장소 루트까지 올라가며 찾음)</td><td><code>&lt;프로젝트&gt;/.agents/skills/</code> 또는 <code>&lt;프로젝트&gt;/.hermes/skills/</code></td><td>이 수업. 작업공간의 규칙 파일을 참조하는 Skill</td></tr>
+<tr><td>사용자 전역</td><td><code>~/.codex/skills/</code>, <code>~/.agents/skills/</code></td><td><code>~/.hermes/skills/</code> (Windows: <code>%LOCALAPPDATA%\hermes\skills\</code>)</td><td>어느 프로젝트에서나 쓰는 범용 Skill</td></tr>
+</tbody></table></div>
+<p>전역 폴더에 이미 Skill이 있어도 상관없습니다. 이름이 같지 않으면 둘 다 뜨고, 이 수업의 두 이름(paper-reading, experiment-log)은 전역에 없을 것입니다.</p>
+
+<h2>Part 3에서 만든 작업공간 열기</h2>
+<p>Part 3이 끝난 작업공간은 아래 모양입니다. 논문은 a, b, c로 적었고 실제로는 <code>연도_저자_키워드</code> 이름입니다. 이 트리와 내 폴더가 다르면(예: 규칙 파일 이름이 아직 <code>CLAUDE.md</code>) 세팅 1에서 맞춥니다.</p>
+<div class="file-tree grid">
+<span class="t">작업공간/</span><span class="c">에이전트와 편집기, Obsidian이 모두 여는 루트</span>
+<span class="t">├── AGENTS.md</span><span class="c">공통 원칙. llm_wiki/AGENTS.md를 읽으라는 안내가 있다</span>
+<span class="t">├── .obsidian/</span><span class="c">Obsidian 설정 (에이전트는 읽지 않음)</span>
+<span class="t">└── llm_wiki/</span><span class="c"></span>
+<span class="t">    ├── AGENTS.md</span><span class="c">논문 페이지·상태·원문 대조·허브 규칙</span>
+<span class="t">    ├── index.md</span><span class="c">Wiki 전체 목차. 논문·개념·프로젝트 목록</span>
+<span class="t">    ├── log.md</span><span class="c">변경 기록. 요청 단위로 한 줄</span>
+<span class="t">    ├── sources/</span><span class="c">원문. 읽기만 한다</span>
+<span class="t">    │   ├── a.pdf · b.pdf · c.html</span><span class="c">논문 a, b, c의 원문 (형식은 제각각)</span>
+<span class="t">    │   └── a.json</span><span class="c">서지 내보내기 파일 등 부속 원본</span>
+<span class="t">    ├── papers/</span><span class="c"></span>
+<span class="t">    │   ├── _template.md</span><span class="c">논문 페이지 양식 (복사해서 쓴다)</span>
+<span class="t">    │   └── a.md · b.md · c.md</span><span class="c">논문 페이지. frontmatter에 두 상태값</span>
+<span class="t">    ├── concepts/</span><span class="c"></span>
+<span class="t">    │   └── _template.md</span><span class="c">개념 페이지 양식. 아직 개념 페이지는 없을 수 있다</span>
+<span class="t">    ├── topics/  years/  venues/  authors/</span><span class="c"></span>
+<span class="t">    │   ├── index.md</span><span class="c">허브별 목차</span>
+<span class="t">    │   └── (허브 페이지들).md</span><span class="c">논문 서지에서 자동으로 파생된 허브</span>
+<span class="t">    ├── methods/  datasets/</span><span class="c"></span>
+<span class="t">    │   └── AGENTS.md</span><span class="c">해당 폴더의 페이지 규칙 (쓰지 않았다면 비어 있음)</span>
+<span class="t">    └── research/</span><span class="c"></span>
+<span class="t">        ├── AGENTS.md</span><span class="c">프로젝트·Literature Matrix 규칙</span>
+<span class="t">        ├── _template/</span><span class="c"></span>
+<span class="t">        │   ├── index.md</span><span class="c">프로젝트 문서 양식</span>
+<span class="t">        │   └── literature.md</span><span class="c">문헌 비교표 양식</span>
+<span class="t">        └── [내 프로젝트]/</span><span class="c"></span>
+<span class="t">            ├── index.md</span><span class="c">연구 아이디어·질문·자원·제약</span>
+<span class="t">            └── literature.md</span><span class="c">Literature Matrix. 행은 논문 a, b, c</span>
+</div>
+<p>저번 실습과 같은 방식으로 세 도구를 켭니다. 셋이 같은 폴더를 보게 하는 것이 전부입니다.</p>
+<ol class="steps">
+<li><strong>에이전트: 작업공간을 소스 폴더로 지정해 프로젝트 열기</strong><p>Codex는 터미널에서 작업공간 루트(<code>AGENTS.md</code>가 있는 폴더)로 이동한 뒤 <code>codex</code>를 실행합니다. Codex 앱이나 Hermes 데스크톱이라면 새 프로젝트를 만들 때 이 폴더를 소스 폴더로 지정합니다. 이 페이지의 요청문은 모두 그 에이전트의 대화 입력란에 붙여 넣는 글입니다. 터미널 명령이 아닙니다.</p>
+<pre><code class="language-powershell">cd "C:\Users\사용자이름\...\작업공간"
+codex</code></pre></li>
+<li><strong>VS Code: 같은 폴더 열기</strong><p>파일 → 폴더 열기로 작업공간 루트를 엽니다. 계약 파일을 쓰고 SKILL.md를 검토하는 데 씁니다. 에이전트가 파일을 만들면 탐색기에 바로 나타납니다.</p></li>
+<li><strong>Obsidian: 같은 폴더를 보관함으로 열기</strong><p>"폴더를 보관함으로 열기"에서 작업공간 루트(또는 <code>llm_wiki/</code>)를 고릅니다. 논문 페이지, 실험 기록, 로그를 읽고 링크를 따라가는 데 씁니다. 템플릿의 <code>&lt;!-- --&gt;</code> 안내는 읽기 화면에서 숨겨지므로 편집 화면에서 봅니다. 처리는 에이전트가 하고 Obsidian은 결과를 보는 창입니다.</p></li>
+</ol>
+
+<h2>세팅 1. 규칙 파일 이름을 AGENTS.md로 맞추기</h2>
+<p>Part 3 자료는 루트를 <code>CLAUDE.md</code>, 폴더별 규칙을 <code>README.md</code>로 불렀습니다. 이 수업에서는 셋 다 <code>AGENTS.md</code>로 바꿉니다. 이유는 읽히는 방식의 차이입니다.</p>
+<ul>
+<li><strong>에이전트는 <code>AGENTS.md</code>를 무조건 읽고 지나갑니다.</strong> <code>README.md</code>는 규칙 파일 안에 "반드시 읽어라"고 명시해 둬야 읽히고, 그 안내가 빠지거나 에이전트가 건너뛰면 규칙이 적용되지 않습니다. 이름을 <code>AGENTS.md</code>로 바꾸면 안내 없이도 읽힙니다.</li>
+<li><strong>폴더가 여러 층이면 작업 폴더에 가장 가까운 <code>AGENTS.md</code>가 우선합니다.</strong> 사용자가 <code>llm_wiki/research/</code> 안의 작업을 시키면 그 폴더의 <code>AGENTS.md</code>가 먼저, 그다음 상위 폴더 <code>llm_wiki/AGENTS.md</code>, 그다음 루트 <code>AGENTS.md</code> 순으로 적용됩니다. 그래서 폴더별 규칙을 <code>AGENTS.md</code>로 두면 "지금 작업하는 폴더의 규칙이 공통 규칙보다 앞선다"는 구조가 저절로 생깁니다.</li>
+<li>이름을 바꿔도 역할은 Part 3과 같습니다. 루트는 공통 원칙, <code>llm_wiki/</code>는 논문 규칙, <code>research/</code>는 프로젝트 규칙입니다.</li>
+</ul>
+<div class="table-scroll"><table class="compact"><thead><tr><th>Part 3 이름</th><th>이 수업의 이름</th><th>역할</th></tr></thead><tbody>
+<tr><td><code>CLAUDE.md</code></td><td><code>AGENTS.md</code></td><td>공통 원칙. 아래 두 파일을 읽으라는 안내</td></tr>
+<tr><td><code>llm_wiki/README.md</code></td><td><code>llm_wiki/AGENTS.md</code></td><td>논문 페이지·상태·원문 대조·허브 규칙</td></tr>
+<tr><td><code>llm_wiki/research/README.md</code></td><td><code>llm_wiki/research/AGENTS.md</code></td><td>프로젝트·문헌 비교·실험 기록 규칙</td></tr>
+</tbody></table></div>
+<p>이름만 바꾸고 참조를 두면 "<code>llm_wiki/README.md</code>를 따른다"는 문장이 없는 파일을 가리키게 됩니다. 이름과 참조를 함께 고칩니다. 이미 <code>AGENTS.md</code>로 되어 있으면 아래 요청문으로 남은 참조만 확인합니다.</p>
+<pre class="prompt"><code>이 작업공간의 규칙 파일 이름을 바꾸려고 해.
+
+대상:
+- CLAUDE.md → AGENTS.md
+- llm_wiki/README.md → llm_wiki/AGENTS.md
+- llm_wiki/research/README.md → llm_wiki/research/AGENTS.md
+
+먼저 작업공간 전체(markdown 파일)에서 위 세 경로를 가리키는 문장을 찾아
+파일별로 몇 군데인지 목록으로 보여줘. 논문 페이지와 프로젝트 문서도 포함해.
+이미 이름이 AGENTS.md인 파일은 건너뛰고 참조만 확인해.
+내가 승인하면 이름을 바꾸고 참조 문장을 새 경로로 고쳐줘.
+규칙의 내용은 한 글자도 바꾸지 마. 경로 문자열만 바꿔.
+승인 전에는 아무 파일도 수정하지 마.</code></pre>
+<p>목록을 보고 승인한 뒤, 에이전트가 끝났다고 하면 편집기 검색으로 <code>README.md</code>와 <code>CLAUDE.md</code>가 남아 있지 않은지 직접 확인합니다. <strong>에이전트의 "완료" 보고를 그대로 믿지 않고 파일을 열어 보는 습관</strong>은 04장 테스트까지 계속 이어집니다.</p>
+
+<h2>세팅 2. Part 4 템플릿 다섯 파일 반영하기</h2>
+<p><code>실습파일/LLM_Wiki_템플릿/llm_wiki/</code> 아래에는 Part 3 규칙을 Part 4에 맞게 고친 파일 다섯 개가 있습니다. 두 개는 기존 규칙 파일을 갱신하고, 세 개는 템플릿을 갱신하거나 새로 추가합니다. <strong>작업공간 전체를 이 폴더로 덮어쓰지 않습니다.</strong> 기존 논문, 프로젝트, 로그는 그대로 두고 아래 다섯 파일만 반영합니다.</p>
+<div class="table-scroll"><table class="compact"><thead><tr><th>실습파일 안의 경로</th><th>작업공간의 적용 위치</th><th>구분</th><th>무엇이 달라지나</th></tr></thead><tbody>
+<tr><td><code>llm_wiki/README.md</code></td><td><code>llm_wiki/AGENTS.md</code></td><td>갱신</td><td>파일명 규칙, 서지·원문 확인 상태, 허브 등록 범위, 개념 페이지 생성 조건, PDF 사본 보관 규칙이 구체화됨</td></tr>
+<tr><td><code>llm_wiki/research/README.md</code></td><td><code>llm_wiki/research/AGENTS.md</code></td><td>갱신</td><td>실험 기록과 후보표의 저장 위치, 원본 불변, baseline 누락 시 중지 규칙이 추가됨</td></tr>
+<tr><td><code>research/_template/index.md</code></td><td>같은 경로</td><td>갱신</td><td>프로젝트 문서에 "실험 기록" 목록 절이 생김</td></tr>
+<tr><td><code>research/_template/experiment.md</code></td><td>같은 경로</td><td>추가</td><td>05장 experiment-log가 참조하는 실험 기록 양식</td></tr>
+<tr><td><code>research/_template/plan.md</code></td><td>같은 경로</td><td>추가</td><td>실험 후보를 비교하는 양식. 이번 수업에서는 쓰지 않고 다음 Part에서 씀</td></tr>
+</tbody></table></div>
+<div class="callout callout-warn"><span class="callout-title">주의</span>
+<p>실습파일의 다섯 파일 안에는 <code>CLAUDE.md</code>와 <code>README.md</code>라는 이름이 그대로 적혀 있습니다. 반영할 때 이 문자열을 <code>AGENTS.md</code>로 바꿔 넣어야 세팅 1과 어긋나지 않습니다. 원문 폴더 이름도 다릅니다. Part 3 작업공간은 <code>sources/</code>, Part 4 템플릿은 <code>attachments/</code>를 씁니다. 기존 <code>sources/</code>를 유지하려면 반영 시 <code>attachments/</code>를 <code>sources/</code>로 바꿔 넣습니다. 아래 요청문에 두 지시가 모두 들어 있습니다.</p></div>
+<pre class="prompt"><code>Part 4 실습파일을 이 작업공간에 반영하려고 해.
+원본 폴더는 [실습파일/LLM_Wiki_템플릿/llm_wiki 의 경로]야.
+
+적용 대상과 위치:
+1. 원본 README.md → 작업공간 llm_wiki/AGENTS.md (기존 파일 갱신)
+2. 원본 research/README.md → 작업공간 llm_wiki/research/AGENTS.md (기존 파일 갱신)
+3. 원본 research/_template/index.md → 같은 경로 (갱신)
+4. 원본 research/_template/experiment.md → 같은 경로 (새 파일)
+5. 원본 research/_template/plan.md → 같은 경로 (새 파일)
+
+먼저 1~3번에 대해 현재 파일과 원본의 차이를 절 단위로 보여줘.
+내가 Part 3 때 직접 고친 규칙이 있으면 그 부분을 따로 표시해줘.
+원본 안의 "CLAUDE.md"는 "AGENTS.md"로, "README.md"는 "AGENTS.md"로,
+"attachments/"는 이 작업공간의 원문 폴더 이름인 "sources/"로 바꿔서 적용해.
+기존 논문 페이지, 연구 프로젝트, Literature Matrix, log.md는 건드리지 마.
+llm_wiki/index.md에 "research/_template/ 전체를 복사"한다는 안내가 있으면
+그 문장만 "새 프로젝트 생성은 research/AGENTS.md의 절차를 따른다"로 바꿔줘.
+내가 승인하기 전에는 적용하지 마.</code></pre>
+<p>차이 목록에서 내가 Part 3 때 직접 바꾼 규칙이 지워지지 않는지 봅니다. 그 부분만 유지하라고 지정한 뒤 나머지를 적용합니다. 이미 만든 프로젝트의 <code>index.md</code>에는 "실험 기록" 절만 추가하고, 프로젝트명이나 연구 질문을 빈 템플릿으로 덮어쓰지 않습니다. 상태값 <code>fulltext_available</code>을 쓰던 페이지가 있으면 상태명만 일괄 치환하지 말고 실제 요약·검증 진행 상태를 확인한 뒤 갱신합니다.</p>
+
+<h2>세팅 3. 작업 문서 폴더 만들기</h2>
+<p>실행 계약 템플릿, 선정 기준표, 체크리스트, 생성 프롬프트, 테스트 기록표는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
+<pre class="file-tree"><code>작업공간/
+├── AGENTS.md
+├── <span class="new">.agents/skills/</span>              ← 03장과 05장에서 SKILL.md가 생긴다 (지금은 비어 있음)
+├── llm_wiki/
+│   ├── AGENTS.md
+│   ├── sources/ · papers/ · concepts/ · topics/ · …
+│   └── research/
+│       ├── AGENTS.md
+│       └── _template/ index.md · literature.md · <span class="new">experiment.md</span> · <span class="new">plan.md</span>
+└── <span class="new">part4/</span>
+    ├── 실행계약_템플릿.md
+    ├── skill_선정기준표.md
+    ├── skill_후보목록_예시.md
+    ├── skill_품질_체크리스트.md
+    ├── paper-reading_생성프롬프트.md
+    ├── paper-reading_테스트기록표.md
+    ├── paper-reading_테스트기록_완성예시.md
+    ├── experiment-log_생성프롬프트.md
+    └── 참고/                    ← 강의에서 완성한 계약과 SKILL.md. 내 것을 만든 뒤에만 연다
+        ├── paper-reading_실행계약.md · paper-reading_SKILL.md
+        └── experiment-log_실행계약.md · experiment-log_SKILL.md</code></pre>
+<p><code>참고/</code> 폴더의 완성본은 03장과 05장에서 내 결과와 비교하는 용도입니다. <strong>처음부터 열어 두고 베끼면 "왜 이 조항이 필요한지"를 지나치게 됩니다.</strong> 복사는 파일 탐색기로 직접 해도 되고, 에이전트에게 맡겨도 됩니다.</p>
+<pre class="prompt"><code>작업공간 루트에 part4/ 폴더와 .agents/skills/ 폴더를 만들고
+[실습파일 폴더 경로]에서 다음을 복사해줘.
+
+- 실행계약_템플릿.md → part4/
+- 공통/ 아래 세 파일 → part4/
+- paper-reading/생성_프롬프트.md → part4/paper-reading_생성프롬프트.md
+- paper-reading/테스트_기록표.md → part4/paper-reading_테스트기록표.md
+- paper-reading/테스트_기록_완성예시.md → part4/paper-reading_테스트기록_완성예시.md
+- experiment-log/생성_프롬프트.md → part4/experiment-log_생성프롬프트.md
+- paper-reading/paper-reading_실행계약.md, paper-reading/SKILL.md,
+  experiment-log/experiment-log_실행계약.md, experiment-log/SKILL.md
+  → part4/참고/ (SKILL.md는 각각 paper-reading_SKILL.md, experiment-log_SKILL.md로)
+
+복사한 파일 안의 "CLAUDE.md"는 "AGENTS.md"로, "llm_wiki/README.md"는
+"llm_wiki/AGENTS.md"로, "llm_wiki/research/README.md"는
+"llm_wiki/research/AGENTS.md"로, ".claude/skills/"는 ".agents/skills/"로,
+"attachments/"는 "sources/"로 바꿔줘.
+그 외의 내용은 바꾸지 마. 복사가 끝나면 part4/ 트리를 보여줘.</code></pre>
+
+<h2>세팅 4. 구조 확인시키기</h2>
+<p>세 세팅이 끝났으면 에이전트에게 작업공간을 실제로 읽게 해 구조를 점검시킵니다. 아직 Skill을 만들거나 논문을 처리하지 않습니다. 없는 파일, 서로 어긋나는 문장, 남아 있는 옛 이름을 지금 잡아 두는 것이 목적입니다.</p>
+<pre class="prompt"><code>이 작업공간의 AGENTS.md, llm_wiki/AGENTS.md, llm_wiki/research/AGENTS.md와
+llm_wiki 아래 모든 _template.md를 실제로 읽어줘.
+
+확인할 것:
+1. 세 규칙 파일이 서로를 가리키는 경로가 모두 실제 파일을 가리키는가
+2. CLAUDE.md, README.md라는 문자열이 어디에든 남아 있는가
+3. research/_template/ 에 index.md, literature.md, experiment.md, plan.md 네 개가 있는가
+4. 루트 AGENTS.md에 "논문을 다룰 때는 llm_wiki/AGENTS.md를, 프로젝트를 다룰 때는
+   llm_wiki/research/AGENTS.md도 읽는다"는 뜻의 안내가 있는가
+5. .agents/skills/ 폴더가 있는가 (비어 있어도 됨)
+6. 원문 폴더 이름이 규칙 파일 전체에서 한 가지(sources/)로 통일되어 있는가
+
+문제가 있으면 파일과 줄을 적어서 알려주고, 고치지는 마.
+논문이나 프로젝트, Skill은 만들지 마.</code></pre>
+<p>보고에서 1·2·6번에 문제가 없고 3·5번의 파일이 있으면 세팅 끝입니다. 4번 안내가 없으면 루트 <code>AGENTS.md</code>에 두 줄을 직접 추가합니다. 이 안내가 있어야 에이전트가 Skill 없이도 규칙 파일을 찾아 읽고, 03장에서 Skill이 그 규칙을 "복사하지 않고 참조"할 수 있습니다.</p>
+<div class="callout callout-key"><span class="callout-title">여기까지 확인할 것</span>
+<ul class="check-list">
+<li>규칙 파일 세 개의 이름이 모두 <code>AGENTS.md</code>이고 서로 가리키는 경로가 맞는다</li>
+<li><code>research/_template/</code>에 <code>experiment.md</code>와 <code>plan.md</code>가 들어왔다</li>
+<li><code>part4/</code>에 작업 문서가 있고 <code>참고/</code>는 아직 열지 않았다</li>
+<li>기존 논문 페이지와 프로젝트 문서는 바뀌지 않았다 (git을 쓴다면 <code>git status</code>로 확인)</li>
+</ul></div>
