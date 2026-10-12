@@ -82,7 +82,7 @@
 <tr><td><code>processing_status</code></td><td>이 페이지가 어느 작업 단계까지 갔는가. 자동 처리를 계속해도 되는가</td><td><code>metadata_only</code> → <code>fulltext_available</code> → <code>summarized</code> → <code>critically_reviewed</code>, 멈추면 <code>needs_review</code></td></tr>
 <tr><td><code>evidence_status</code></td><td>페이지의 핵심 판단이 원문으로 얼마나 뒷받침되는가</td><td><code>unreviewed</code> · <code>verified</code> · <code>partial</code> · <code>unsupported</code> · <code>needs_review</code></td></tr>
 </tbody></table></div>
-<p><code>fulltext_available</code>은 원문을 확보했지만 아직 요약 전인 상태입니다. Part 4 템플릿에서는 이 값을 별도 완료 상태로 쓰지 않고 요약·검증 진행 상태로 바로 넘어가므로, 세팅 2를 적용한 뒤에는 이전 페이지의 상태를 실제 진행 상태에 맞춰 갱신합니다.</p>
+<p><code>fulltext_available</code>은 분석 가능한 원문을 확보했지만 아직 요약 전인 상태입니다. Part 4 템플릿 파일에는 이 값이 빠져 있어 세팅에서 다시 넣습니다.</p>
 <p><code>verified</code>는 조심해서 읽어야 합니다. 논문의 주장이 옳다는 뜻도, 실험을 재현했다는 뜻도 아닙니다. <strong>기록한 판단에 원문 근거가 붙어 있고 그 위치를 다시 확인했다는 뜻</strong>뿐입니다. 반대로 표의 열이 뒤섞여 추출됐거나, 원문을 못 구했거나, 요약과 원문이 다르거나, 근거끼리 충돌하면 추측으로 메우지 않고 <code>needs_review</code>로 남깁니다. <strong>비워 둔 칸은 실패가 아니라 사람이 봐야 할 자리</strong>를 표시한 것입니다.</p>
 
 <div class="qa" id="qa-r-2">

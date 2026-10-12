@@ -166,6 +166,49 @@ figure.diagram figcaption{margin:12px 4px 4px}
 .prose pre.file-tree{font-family:Consolas,"Cascadia Mono","D2Coding",monospace;font-size:14.5px}
 .artifacts td:first-child{font-weight:800;color:var(--accent-dark);text-align:center;white-space:nowrap}.artifacts td code{white-space:normal}
 
+/* interactive checklists */
+ul.check-list:not(.forbid) li{cursor:pointer;user-select:none;border-radius:6px;transition:color .15s}
+ul.check-list:not(.forbid) li:hover{background:#f3f6f8}
+ul.check-list:not(.forbid) li:hover::before{border-color:var(--accent)}
+ul.check-list li.is-done{color:#8a96a3;text-decoration:line-through;text-decoration-color:#b5bec7;text-decoration-thickness:1.5px}
+ul.check-list li.is-done::before{background:var(--accent);border-color:var(--accent)}
+ul.check-list li.is-done::after{content:"";position:absolute;left:6px;top:calc(.42em + 2px);width:4px;height:8px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+ul.check-list.forbid li.is-done::after{display:none}
+.check-counter{margin-left:auto;padding:3px 10px;border:1px solid #ead3ce;border-radius:999px;background:#fff;font-size:12px;letter-spacing:.04em;text-transform:none}
+.check-counter.is-complete{background:var(--accent);border-color:var(--accent);color:#fff}
+.hero-meta{gap:14px}.hero-meta span:nth-child(2){margin-left:auto}.hero-meta .check-counter{margin-left:0}
+/* drills */
+.drill{margin:30px 0;padding:22px 24px;border:1px solid #c9d3dc;border-radius:14px;background:#f7f9fb}
+.drill-title{margin:0 0 6px!important;font-weight:750}
+.drill-lead{margin:0 0 16px!important;color:var(--muted);font-size:15px}
+.drill-item{padding:14px 0;border-top:1px dashed #cbd5de}
+.drill-item:last-of-type{border-bottom:1px dashed #cbd5de}
+.drill-q{margin:0 0 10px!important;font-weight:600}
+.drill-opts{display:flex;flex-wrap:wrap;gap:8px}
+.drill-opt{padding:7px 14px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;color:var(--ink);font-size:14.5px;font-weight:650;cursor:pointer;transition:.15s}
+.drill-opt:hover:not(:disabled){border-color:var(--ink)}
+.drill-opt:disabled{cursor:default;opacity:.65}
+.drill-opt.is-right{background:#2f6f4f;border-color:#2f6f4f;color:#fff;opacity:1}
+.drill-opt.is-wrong{background:var(--accent);border-color:var(--accent);color:#fff;opacity:1}
+.drill-opt.is-answer:not(.is-right){border-color:#2f6f4f;color:#2f6f4f;opacity:1;box-shadow:inset 0 0 0 1px #2f6f4f}
+.drill-why{margin:12px 0 0!important;padding:10px 14px;border-left:3px solid var(--bluegray);background:#fff;font-size:15px}
+.drill-foot{display:flex;align-items:center;gap:14px;margin-top:14px}
+.drill-score{flex:1;margin:0!important;color:var(--muted);font-size:14px}
+.drill-reset{padding:7px 14px;border:1px solid #b9c5d0;border-radius:9px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+/* rater */
+.rater{margin:30px 0;padding:22px 24px;border:1px solid #c9d3dc;border-radius:14px;background:#f7f9fb}
+.rater-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:9px 0;border-top:1px dashed #cbd5de}
+.rater-row:first-of-type{border-top:0}
+.rater-row span{font-size:15.5px}.rater-row small{display:block;color:var(--muted);font-size:13px}
+.rater-opts{display:flex;gap:6px}
+.rater-opt{width:44px;height:34px;border:1px solid #b9c5d0;border-radius:8px;background:#fff;font-size:14px;font-weight:700;cursor:pointer}
+.rater-opt.is-picked{background:var(--ink);border-color:var(--ink);color:#fff}
+.rater-out{margin:16px 0 0!important;padding:12px 16px;border-radius:10px;background:#fff;border:1px solid #d6dee5;font-size:15.5px}
+.rater-out.is-yes{border-color:#2f6f4f;background:#eef7f1}
+.rater-out.is-maybe{border-color:#c9a34a;background:#fcf7e8}
+.rater-out.is-no{border-color:var(--accent);background:var(--accent-soft)}
+@media(max-width:760px){.rater-row{grid-template-columns:1fr}.hero-meta{flex-wrap:wrap}}
+
 </style>
 </head>
 <body>
@@ -278,7 +321,7 @@ figure.diagram figcaption{margin:12px 4px 4px}
 <tr><td><code>processing_status</code></td><td>이 페이지가 어느 작업 단계까지 갔는가. 자동 처리를 계속해도 되는가</td><td><code>metadata_only</code> → <code>fulltext_available</code> → <code>summarized</code> → <code>critically_reviewed</code>, 멈추면 <code>needs_review</code></td></tr>
 <tr><td><code>evidence_status</code></td><td>페이지의 핵심 판단이 원문으로 얼마나 뒷받침되는가</td><td><code>unreviewed</code> · <code>verified</code> · <code>partial</code> · <code>unsupported</code> · <code>needs_review</code></td></tr>
 </tbody></table></div>
-<p><code>fulltext_available</code>은 원문을 확보했지만 아직 요약 전인 상태입니다. Part 4 템플릿에서는 이 값을 별도 완료 상태로 쓰지 않고 요약·검증 진행 상태로 바로 넘어가므로, 세팅 2를 적용한 뒤에는 이전 페이지의 상태를 실제 진행 상태에 맞춰 갱신합니다.</p>
+<p><code>fulltext_available</code>은 분석 가능한 원문을 확보했지만 아직 요약 전인 상태입니다. Part 4 템플릿 파일에는 이 값이 빠져 있어 세팅에서 다시 넣습니다.</p>
 <p><code>verified</code>는 조심해서 읽어야 합니다. 논문의 주장이 옳다는 뜻도, 실험을 재현했다는 뜻도 아닙니다. <strong>기록한 판단에 원문 근거가 붙어 있고 그 위치를 다시 확인했다는 뜻</strong>뿐입니다. 반대로 표의 열이 뒤섞여 추출됐거나, 원문을 못 구했거나, 요약과 원문이 다르거나, 근거끼리 충돌하면 추측으로 메우지 않고 <code>needs_review</code>로 남깁니다. <strong>비워 둔 칸은 실패가 아니라 사람이 봐야 할 자리</strong>를 표시한 것입니다.</p>
 
 <div class="qa" id="qa-r-2">
@@ -445,20 +488,7 @@ codex</code></pre></li>
 <tr><td><code>llm_wiki/research/README.md</code></td><td><code>llm_wiki/research/AGENTS.md</code></td><td>프로젝트·문헌 비교·실험 기록 규칙</td></tr>
 </tbody></table></div>
 <p>이름만 바꾸고 참조를 두면 "<code>llm_wiki/README.md</code>를 따른다"는 문장이 없는 파일을 가리키게 됩니다. 이름과 참조를 함께 고칩니다. 이미 <code>AGENTS.md</code>로 되어 있으면 아래 요청문으로 남은 참조만 확인합니다.</p>
-<pre class="prompt"><code>이 작업공간의 규칙 파일 이름을 바꾸려고 해.
-
-대상:
-- CLAUDE.md → AGENTS.md
-- llm_wiki/README.md → llm_wiki/AGENTS.md
-- llm_wiki/research/README.md → llm_wiki/research/AGENTS.md
-
-먼저 작업공간 전체(markdown 파일)에서 위 세 경로를 가리키는 문장을 찾아
-파일별로 몇 군데인지 목록으로 보여줘. 논문 페이지와 프로젝트 문서도 포함해.
-이미 이름이 AGENTS.md인 파일은 건너뛰고 참조만 확인해.
-내가 승인하면 이름을 바꾸고 참조 문장을 새 경로로 고쳐줘.
-규칙의 내용은 한 글자도 바꾸지 마. 경로 문자열만 바꿔.
-승인 전에는 아무 파일도 수정하지 마.</code></pre>
-<p>목록을 보고 승인한 뒤, 에이전트가 끝났다고 하면 편집기 검색으로 <code>README.md</code>와 <code>CLAUDE.md</code>가 남아 있지 않은지 직접 확인합니다. <strong>에이전트의 "완료" 보고를 그대로 믿지 않고 파일을 열어 보는 습관</strong>은 04장 테스트까지 계속 이어집니다.</p>
+<p>실제 변경은 세팅 3의 통합 요청문 한 번으로 세팅 1~3을 함께 처리합니다. 여기서는 무엇이 왜 바뀌는지만 확인하고 넘어갑니다.</p>
 </section><section class="content-section">
 <h2 id="setup--section-4">세팅 2. Part 4 템플릿 다섯 파일 반영하기<a class="heading-anchor" href="#setup--section-4" aria-label="이 제목으로 이동">#</a></h2>
 <p><code>실습파일/LLM_Wiki_템플릿/llm_wiki/</code> 아래에는 Part 3 규칙을 Part 4에 맞게 고친 파일 다섯 개가 있습니다. 두 개는 기존 규칙 파일을 갱신하고, 세 개는 템플릿을 갱신하거나 새로 추가합니다. <strong>작업공간 전체를 이 폴더로 덮어쓰지 않습니다.</strong> 기존 논문, 프로젝트, 로그는 그대로 두고 아래 다섯 파일만 반영합니다.</p>
@@ -471,25 +501,10 @@ codex</code></pre></li>
 </tbody></table></div>
 <div class="callout callout-warn"><span class="callout-title">주의</span>
 <p>실습파일의 다섯 파일 안에는 <code>CLAUDE.md</code>와 <code>README.md</code>라는 이름이 그대로 적혀 있습니다. 반영할 때 이 문자열을 <code>AGENTS.md</code>로 바꿔 넣어야 세팅 1과 어긋나지 않습니다. 원문 폴더 이름도 다릅니다. Part 3 작업공간은 <code>sources/</code>, Part 4 템플릿은 <code>attachments/</code>를 씁니다. 기존 <code>sources/</code>를 유지하려면 반영 시 <code>attachments/</code>를 <code>sources/</code>로 바꿔 넣습니다. 아래 요청문에 두 지시가 모두 들어 있습니다.</p></div>
-<pre class="prompt"><code>Part 4 실습파일을 이 작업공간에 반영하려고 해.
-원본 폴더는 [실습파일/LLM_Wiki_템플릿/llm_wiki 의 경로]야.
 
-적용 대상과 위치:
-1. 원본 README.md → 작업공간 llm_wiki/AGENTS.md (기존 파일 갱신)
-2. 원본 research/README.md → 작업공간 llm_wiki/research/AGENTS.md (기존 파일 갱신)
-3. 원본 research/_template/index.md → 같은 경로 (갱신)
-4. 원본 research/_template/experiment.md → 같은 경로 (새 파일)
-5. 원본 research/_template/plan.md → 같은 경로 (새 파일)
-
-먼저 1~3번에 대해 현재 파일과 원본의 차이를 절 단위로 보여줘.
-내가 Part 3 때 직접 고친 규칙이 있으면 그 부분을 따로 표시해줘.
-원본 안의 "CLAUDE.md"는 "AGENTS.md"로, "README.md"는 "AGENTS.md"로,
-"attachments/"는 이 작업공간의 원문 폴더 이름인 "sources/"로 바꿔서 적용해.
-기존 논문 페이지, 연구 프로젝트, Literature Matrix, log.md는 건드리지 마.
-llm_wiki/index.md에 "research/_template/ 전체를 복사"한다는 안내가 있으면
-그 문장만 "새 프로젝트 생성은 research/AGENTS.md의 절차를 따른다"로 바꿔줘.
-내가 승인하기 전에는 적용하지 마.</code></pre>
-<p>차이 목록에서 내가 Part 3 때 직접 바꾼 규칙이 지워지지 않는지 봅니다. 그 부분만 유지하라고 지정한 뒤 나머지를 적용합니다. 이미 만든 프로젝트의 <code>index.md</code>에는 "실험 기록" 절만 추가하고, 프로젝트명이나 연구 질문을 빈 템플릿으로 덮어쓰지 않습니다. 상태값 <code>fulltext_available</code>을 쓰던 페이지가 있으면 상태명만 일괄 치환하지 말고 실제 요약·검증 진행 상태를 확인한 뒤 갱신합니다.</p>
+<div class="callout callout-warn"><span class="callout-title">빠진 상태값 하나</span>
+<p>Part 4 템플릿의 상태 필드 목록은 <code>metadata_only</code> → <code>summarized</code> → <code>critically_reviewed</code>로 되어 있어 Part 3에서 쓰던 <code>fulltext_available</code>(분석 가능한 원문을 확보함)이 빠져 있습니다. 템플릿을 갱신하다 누락된 것으로 보입니다. 이 값이 없으면 "원문은 구했는데 아직 요약 전"인 페이지를 표시할 자리가 없어지므로, 반영할 때 <code>metadata_only</code> 다음에 다시 넣습니다. 상태 필드 정의 목록과 페이지 상태 종합표 두 곳입니다. 아래 통합 요청문에 이 지시가 들어 있습니다.</p></div>
+<p>차이 목록에서 내가 Part 3 때 직접 바꾼 규칙이 지워지지 않는지 봅니다. 그 부분만 유지하라고 지정한 뒤 나머지를 적용합니다. 이미 만든 프로젝트의 <code>index.md</code>에는 "실험 기록" 절만 추가하고, 프로젝트명이나 연구 질문을 빈 템플릿으로 덮어쓰지 않습니다.</p>
 </section><section class="content-section">
 <h2 id="setup--section-5">세팅 3. 작업 문서 폴더 만들기<a class="heading-anchor" href="#setup--section-5" aria-label="이 제목으로 이동">#</a></h2>
 <p>실행 계약 템플릿, 선정 기준표, 체크리스트, 생성 프롬프트, 테스트 기록표는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
@@ -514,28 +529,52 @@ llm_wiki/index.md에 "research/_template/ 전체를 복사"한다는 안내가 �
     └── 참고/                    ← 강의에서 완성한 계약과 SKILL.md. 내 것을 만든 뒤에만 연다
         ├── paper-reading_실행계약.md · paper-reading_SKILL.md
         └── experiment-log_실행계약.md · experiment-log_SKILL.md</code></pre>
-<p><code>참고/</code> 폴더의 완성본은 03장과 05장에서 내 결과와 비교하는 용도입니다. <strong>처음부터 열어 두고 베끼면 "왜 이 조항이 필요한지"를 지나치게 됩니다.</strong> 복사는 파일 탐색기로 직접 해도 되고, 에이전트에게 맡겨도 됩니다.</p>
-<pre class="prompt"><code>작업공간 루트에 part4/ 폴더와 .agents/skills/ 폴더를 만들고
-[실습파일 폴더 경로]에서 다음을 복사해줘.
+<p><code>참고/</code> 폴더의 완성본은 03장과 05장에서 내 결과와 비교하는 용도입니다. <strong>처음부터 열어 두고 베끼면 "왜 이 조항이 필요한지"를 지나치게 됩니다.</strong></p>
+<p>세팅 1~3을 요청문 하나로 처리합니다. 단계마다 변경 목록을 먼저 보여 주고 승인을 기다리게 했으므로 실제로는 세 번 승인하게 됩니다.</p>
+<pre class="prompt"><code>Part 4 수업을 위해 이 작업공간을 세팅하려고 해. 세 단계로 진행하고,
+각 단계마다 변경 목록을 먼저 보여 준 뒤 내 승인을 받고 적용해.
+실습파일 폴더는 [실습파일 폴더 경로]야.
 
-- 실행계약_템플릿.md → part4/
-- 공통/ 아래 세 파일 → part4/
-- paper-reading/생성_프롬프트.md → part4/paper-reading_생성프롬프트.md
-- paper-reading/테스트_기록표.md → part4/paper-reading_테스트기록표.md
-- paper-reading/테스트_기록_완성예시.md → part4/paper-reading_테스트기록_완성예시.md
-- experiment-log/생성_프롬프트.md → part4/experiment-log_생성프롬프트.md
-- paper-reading/paper-reading_실행계약.md, paper-reading/SKILL.md,
-  experiment-log/experiment-log_실행계약.md, experiment-log/SKILL.md
-  → part4/참고/ (SKILL.md는 각각 paper-reading_SKILL.md, experiment-log_SKILL.md로)
+[1단계: 규칙 파일 이름]
+- CLAUDE.md → AGENTS.md, llm_wiki/README.md → llm_wiki/AGENTS.md,
+  llm_wiki/research/README.md → llm_wiki/research/AGENTS.md
+- 이미 AGENTS.md인 파일은 건너뛰고, 작업공간 전체 markdown에서 옛 경로를
+  가리키는 문장을 찾아 새 경로로 고쳐. 규칙 내용은 바꾸지 말고 경로 문자열만 바꿔.
 
-복사한 파일 안의 "CLAUDE.md"는 "AGENTS.md"로, "llm_wiki/README.md"는
-"llm_wiki/AGENTS.md"로, "llm_wiki/research/README.md"는
-"llm_wiki/research/AGENTS.md"로, ".claude/skills/"는 ".agents/skills/"로,
-"attachments/"는 "sources/"로 바꿔줘.
-그 외의 내용은 바꾸지 마. 복사가 끝나면 part4/ 트리를 보여줘.</code></pre>
+[2단계: Part 4 템플릿 다섯 파일]
+- 실습파일/LLM_Wiki_템플릿/llm_wiki/README.md → llm_wiki/AGENTS.md (갱신)
+- …/research/README.md → llm_wiki/research/AGENTS.md (갱신)
+- …/research/_template/index.md (갱신), experiment.md, plan.md (새 파일)
+- 갱신 두 파일은 현재 파일과의 차이를 절 단위로 보여 주고, 내가 Part 3 때 직접
+  고친 규칙이 있으면 따로 표시해. 그 부분은 유지해.
+- 적용할 때 "CLAUDE.md"와 "README.md"는 "AGENTS.md"로, "attachments/"는
+  이 작업공간의 원문 폴더 이름인 "sources/"로 바꿔 넣어.
+- llm_wiki/AGENTS.md의 상태 필드 정의 목록과 페이지 상태 종합표에
+  `fulltext_available`: 분석 가능한 원문을 확보함 (요약 전) 을
+  metadata_only 다음 순서로 추가해.
+- 기존 논문 페이지, 프로젝트, Literature Matrix, log.md는 건드리지 마.
+  llm_wiki/index.md에 "research/_template/ 전체를 복사"한다는 안내가 있으면
+  그 문장만 "새 프로젝트 생성은 research/AGENTS.md의 절차를 따른다"로 바꿔.
+
+[3단계: 작업 문서 폴더]
+- 루트에 part4/ 와 .agents/skills/ 폴더를 만들어.
+- 실습파일에서 복사: 실행계약_템플릿.md, 공통/ 아래 세 파일 → part4/
+  paper-reading/생성_프롬프트.md → part4/paper-reading_생성프롬프트.md
+  paper-reading/테스트_기록표.md → part4/paper-reading_테스트기록표.md
+  paper-reading/테스트_기록_완성예시.md → part4/paper-reading_테스트기록_완성예시.md
+  experiment-log/생성_프롬프트.md → part4/experiment-log_생성프롬프트.md
+  두 실행계약과 두 SKILL.md → part4/참고/ (SKILL.md는 paper-reading_SKILL.md,
+  experiment-log_SKILL.md 로 이름을 붙여)
+- 복사본 안의 "CLAUDE.md"→"AGENTS.md", "llm_wiki/README.md"→"llm_wiki/AGENTS.md",
+  "llm_wiki/research/README.md"→"llm_wiki/research/AGENTS.md",
+  ".claude/skills/"→".agents/skills/", "attachments/"→"sources/" 로 바꿔.
+  그 외 내용은 바꾸지 마.
+
+세 단계가 끝나면 바뀐 파일 전체 목록과 part4/ 트리를 보여줘.</code></pre>
+<p>끝나면 편집기 검색으로 <code>README.md</code>, <code>CLAUDE.md</code>, <code>attachments/</code>가 규칙 파일에 남아 있지 않은지, <code>llm_wiki/AGENTS.md</code>에 <code>fulltext_available</code>이 들어갔는지 직접 봅니다. <strong>에이전트의 "완료" 보고를 그대로 믿지 않고 파일을 열어 보는 습관</strong>은 04장 테스트까지 계속 이어집니다.</p>
 </section><section class="content-section">
 <h2 id="setup--section-6">세팅 4. 구조 확인시키기<a class="heading-anchor" href="#setup--section-6" aria-label="이 제목으로 이동">#</a></h2>
-<p>세 세팅이 끝났으면 에이전트에게 작업공간을 실제로 읽게 해 구조를 점검시킵니다. 아직 Skill을 만들거나 논문을 처리하지 않습니다. 없는 파일, 서로 어긋나는 문장, 남아 있는 옛 이름을 지금 잡아 두는 것이 목적입니다.</p>
+<p>통합 요청문이 끝났으면 에이전트에게 작업공간을 실제로 읽게 해 구조를 점검시킵니다. 아직 Skill을 만들거나 논문을 처리하지 않습니다. 없는 파일, 서로 어긋나는 문장, 남아 있는 옛 이름을 지금 잡아 두는 것이 목적입니다.</p>
 <pre class="prompt"><code>이 작업공간의 AGENTS.md, llm_wiki/AGENTS.md, llm_wiki/research/AGENTS.md와
 llm_wiki 아래 모든 _template.md를 실제로 읽어줘.
 
@@ -547,13 +586,15 @@ llm_wiki 아래 모든 _template.md를 실제로 읽어줘.
    llm_wiki/research/AGENTS.md도 읽는다"는 뜻의 안내가 있는가
 5. .agents/skills/ 폴더가 있는가 (비어 있어도 됨)
 6. 원문 폴더 이름이 규칙 파일 전체에서 한 가지(sources/)로 통일되어 있는가
+7. llm_wiki/AGENTS.md의 상태 필드에 fulltext_available 이 정의되어 있는가
 
 문제가 있으면 파일과 줄을 적어서 알려주고, 고치지는 마.
 논문이나 프로젝트, Skill은 만들지 마.</code></pre>
-<p>보고에서 1·2·6번에 문제가 없고 3·5번의 파일이 있으면 세팅 끝입니다. 4번 안내가 없으면 루트 <code>AGENTS.md</code>에 두 줄을 직접 추가합니다. 이 안내가 있어야 에이전트가 Skill 없이도 규칙 파일을 찾아 읽고, 03장에서 Skill이 그 규칙을 "복사하지 않고 참조"할 수 있습니다.</p>
+<p>보고에서 1·2·6·7번에 문제가 없고 3·5번의 파일이 있으면 세팅 끝입니다. 4번 안내가 없으면 루트 <code>AGENTS.md</code>에 두 줄을 직접 추가합니다. 이 안내가 있어야 에이전트가 Skill 없이도 규칙 파일을 찾아 읽고, 03장에서 Skill이 그 규칙을 "복사하지 않고 참조"할 수 있습니다.</p>
 <div class="callout callout-key"><span class="callout-title">여기까지 확인할 것</span>
 <ul class="check-list">
 <li>규칙 파일 세 개의 이름이 모두 <code>AGENTS.md</code>이고 서로 가리키는 경로가 맞는다</li>
+<li><code>llm_wiki/AGENTS.md</code>의 상태 필드에 <code>fulltext_available</code>이 다시 들어갔다</li>
 <li><code>research/_template/</code>에 <code>experiment.md</code>와 <code>plan.md</code>가 들어왔다</li>
 <li><code>part4/</code>에 작업 문서가 있고 <code>참고/</code>는 아직 열지 않았다</li>
 <li>기존 논문 페이지와 프로젝트 문서는 바뀌지 않았다 (git을 쓴다면 <code>git status</code>로 확인)</li>
@@ -662,6 +703,16 @@ llm_wiki 아래 모든 _template.md를 실제로 읽어줘.
 <tr><td>다음 실험 선택, 연구 질문 확정</td><td>—</td><td>—</td><td>—</td><td>—</td><td>상</td><td>연구자 몫</td></tr>
 </tbody></table></div>
 <p>표를 쓸 때 두 가지를 지킵니다. 첫째, <strong>업무 이름을 "논문 읽기"처럼 넓게 쓰지 않습니다.</strong> "원문을 페이지로 구조화하고 허브와 index를 갱신하기"처럼 어디까지가 자동화 대상인지 드러나게 좁혀 적어야 평가가 됩니다. 둘째, <strong>합계가 같으면 입력 안정성과 검증 가능성을 먼저 봅니다.</strong> 이 둘이 낮으면 02장에서 입력 게이트와 중지 조건을 훨씬 많이 설계해야 합니다.</p>
+<div class="rater">
+<p class="drill-title">눌러 보기: 내 업무 하나를 다섯 기준으로 판정하기</p>
+<p class="drill-lead">머릿속 업무 하나를 떠올리고 상·중·하를 고르세요. 실습 1에서 표를 채우기 전 예열입니다.</p>
+<div class="rater-row"><span>반복성<small>같은 형태의 요청이 계속 들어오는가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
+<div class="rater-row"><span>입력 안정성<small>시작에 필요한 입력의 종류·형식이 매번 비슷한가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
+<div class="rater-row"><span>출력 안정성<small>결과가 들어갈 파일·위치·형식이 정해져 있는가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
+<div class="rater-row"><span>검증 가능성<small>기대 행동과 대조해 시험할 수 있는가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
+<div class="rater-row"><span>사람 판단 필요도<small>절차 중간에 연구자의 가치 판단이 매번 필요한가</small></span><div class="rater-opts"><button type="button" class="rater-opt" data-value="상">상</button><button type="button" class="rater-opt" data-value="중">중</button><button type="button" class="rater-opt" data-value="하">하</button></div></div>
+<p class="rater-out"></p>
+</div>
 <p>강의가 paper-reading을 1순위로 고른 이유는 네 가지였습니다. 출력 형식이 이미 정해져 있다(Part 3의 논문 템플릿과 두 규칙 파일이 출력 계약을 거의 완성해 둔 상태), 절차가 실제 문헌에서 검증됐다(한 편 처리와 수십 편 일괄 이관을 돌려 봤다), 시험 방법이 분명하다(기대 행동이 문서에 있으니 결과를 대조하면 된다), 그래서 남은 일은 포장뿐이다. 2순위 실험 로그 정리는 범위를 "비정형 로그를 구조화하고 다음 판단에 쓸 후보까지만" 만드는 것으로 좁혔습니다. 후보 비교와 우선순위는 다음 Part의 실험 플래너가, 승인은 연구자가 맡습니다.</p>
 
 <div class="qa" id="qa-01-2">
@@ -766,6 +817,16 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <tr><td>"이 논문 좀 봐 줘"</td><td>모호</td><td>Wiki 파일이나 상태를 바꾸려는 건지 먼저 묻고 시작한다</td></tr>
 </tbody></table></div>
 <p><strong>모호한 요청을 "일단 추가"로 해석하지 않습니다.</strong> 의도가 정해진 뒤에만 다음 단계로 넘어갑니다. 논문 근거를 다시 확인해 달라는 요청은 먼저 답변으로 처리하고, 확인 결과 페이지를 고쳐야 할 때만 Skill을 부릅니다.</p>
+<div class="drill">
+<p class="drill-title">눌러 보기: 이 요청에 paper-reading이 열려야 할까</p>
+<p class="drill-lead">표에 없는 요청 다섯 개입니다. 하나씩 골라 보세요. 고르면 이유가 열립니다.</p>
+<div class="drill-item" data-answer="call"><p class="drill-q">"어제 넣은 2024_Wang 페이지, 원문 PDF 구했으니 요약까지 진행해 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출. 기존 페이지의 상태를 <code>metadata_only</code>에서 앞으로 진행시키는 요청이라 Trigger의 "기존 페이지의 보완이나 상태 진행"에 해당합니다.</p></div>
+<div class="drill-item" data-answer="no"><p class="drill-q">"topics/ 허브 페이지들을 알파벳순으로 다시 정렬해 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출하지 않음. 논문 추가가 없는 Wiki 구조·정리 작업입니다. <code>llm_wiki/AGENTS.md</code>를 직접 따릅니다.</p></div>
+<div class="drill-item" data-answer="ask"><p class="drill-q">"이 arXiv 링크 어때?" (링크만 붙어 있음)</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>먼저 묻기. 의견을 묻는 것인지 Wiki에 넣으라는 것인지 알 수 없습니다. "Wiki에 추가할까요, 내용만 말씀드릴까요?"라고 확인한 뒤 시작합니다.</p></div>
+<div class="drill-item" data-answer="no"><p class="drill-q">"2023_Yeom 페이지 Summary에 적힌 식각률 수치가 원문 표 3이랑 맞는지 봐 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출하지 않음(일단은). 근거 재확인 요청은 먼저 답변으로 처리합니다. 확인 결과 수치가 틀려서 페이지를 고쳐야 하면 그때 호출합니다.</p></div>
+<div class="drill-item" data-answer="call"><p class="drill-q">"papers 폴더에 파일명 규칙 안 맞는 게 몇 개 있는데 고쳐 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출. 참고본 계약은 파일명 정정을 Trigger에 넣었습니다. 파일명만 바꾸면 허브·index 링크가 깨지므로 Skill이 링크까지 함께 고칩니다. 단, 여러 편이면 변경 목록을 먼저 보여 주고 승인 후 적용합니다.</p></div>
+<div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
+</div>
 </section><section class="content-section">
 <h2 id="chapter-02--section-3">Input: 무엇이 있어야 시작하는가<a class="heading-anchor" href="#chapter-02--section-3" aria-label="이 제목으로 이동">#</a></h2>
 <p>필수 입력은 논문을 식별할 수 있는 정보입니다. DOI, arXiv ID, 공식 URL, 또는 제목과 공식 공개 페이지. 사용자가 원문 PDF를 직접 줄 수도 있습니다. 선택 입력은 연결할 연구 프로젝트, 비교하고 싶은 질문, 특별히 볼 부분이고, 없어도 진행합니다.</p>
@@ -789,7 +850,7 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <text x="36" y="161" class="d-t small">접근 가능한 판본 찾기</text>
 <rect x="20" y="220" width="200" height="50" rx="10" class="d-box"/>
 <text x="36" y="243" class="d-t">요약 → 원문 대조</text>
-<text x="36" y="261" class="d-t small">summarized를 거쳐 최종 상태로</text>
+<text x="36" y="261" class="d-t small">fulltext_available → summarized → 최종</text>
 <path d="M120 70 V118" class="d-line" style="marker-end:url(#arrow4)"/>
 <path d="M120 170 V218" class="d-line" style="marker-end:url(#arrow4)"/>
 
@@ -835,7 +896,8 @@ Skill 후보에서 빼야 한다고 알려줘.</code></pre>
 <tr><td>연도·제1저자 중 한 값만 확인</td><td>자리표시자 파일명으로 저장</td><td><code>needs_review / unreviewed</code></td></tr>
 <tr><td>서지는 확정, 원문 미확보</td><td>확인된 서지와 실패 사유만 저장</td><td><code>metadata_only / unreviewed</code></td></tr>
 <tr><td>원문 확보, 텍스트 추출 불가</td><td>실패 사유를 남기고 멈춤</td><td><code>needs_review / needs_review</code></td></tr>
-<tr><td>정상</td><td>요약 → 원문 대조까지 진행, 허브·index·log 갱신</td><td><code>critically_reviewed / verified</code> 또는 <code>partial</code>·<code>unsupported</code></td></tr>
+<tr><td>원문 확보, 아직 요약 전</td><td>중간 상태로 기록하고 계속 진행</td><td><code>fulltext_available / unreviewed</code></td></tr>
+<tr><td>정상</td><td>요약(<code>summarized</code>) → 원문 대조까지 진행, 허브·index·log 갱신</td><td><code>critically_reviewed / verified</code> 또는 <code>partial</code>·<code>unsupported</code></td></tr>
 </tbody></table></div>
 <p>출력과 갱신 범위도 계약에 적습니다. 논문 페이지는 <code>_template.md</code> 형식을 따르고, 연도·저장소·학회·토픽 허브와 index를 갱신하고, 프로젝트를 지정했을 때만 그 프로젝트의 <code>literature.md</code>를 갱신하고, <code>log.md</code>에 변경 기록을 남깁니다. <strong>이 목록에 없는 경로는 출력에 넣지 않습니다.</strong> 단, <code>_template.md</code>의 내용과 규칙 파일의 절차를 계약에 복사하지는 않습니다. 필요한 시점에 원본을 참조하도록 가리키기만 합니다. <strong>같은 규칙이 두 곳에 있으면 한쪽을 고쳤을 때 다른 쪽이 낡습니다.</strong></p>
 </section><section class="content-section">
@@ -1049,7 +1111,9 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
    빠진 조항이 있으면 적어줘.
 6. 호출 조건, 누락 입력 처리, 저장 위치, 중지 조건, 재실행 규칙 중 모호하거나
    규칙 파일과 충돌하는 부분을 스스로 점검해서 보고해줘.
-7. 작업용 계약 파일은 내 승인 전에는 지우지 마.</code></pre>
+7. 생성한 SKILL.md를 규칙 파일·템플릿과 비교해 같은 규칙이 두 곳에 적힌 부분을 찾고,
+   참조로 줄이는 수정안을 함께 제안해. 내 승인 전에는 고치지 마.
+8. 작업용 계약 파일은 내 승인 전에는 지우지 마.</code></pre>
 <h4>3-2. 생성 결과 검토 (사람)</h4>
 <p>생성된 <code>SKILL.md</code>를 열어 일곱 가지를 봅니다. <code>part4/paper-reading_생성프롬프트.md</code>의 검토 포인트와 같습니다.</p>
 <ul class="check-list">
@@ -1061,28 +1125,23 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
 <li>책임 중복: 템플릿 본문이나 규칙 파일의 절차 전문이 복사돼 들어오지 않았다</li>
 <li>단일 원본: 대조 표에서 빠진 조항이 없다</li>
 </ul>
-<h4>3-3. 중복 자체 점검 요청</h4>
-<p>책임 중복은 눈으로 찾기 어렵습니다. 에이전트에게 다시 시킵니다.</p>
-<pre class="prompt"><code>방금 만든 .agents/skills/paper-reading/SKILL.md 를 llm_wiki/AGENTS.md,
-llm_wiki/research/AGENTS.md, llm_wiki/papers/_template.md 와 비교해서
-같은 규칙이 두 곳에 적혀 있는 부분을 찾아줘.
-중복된 문장은 참조로 줄이는 수정안을 제안하고, 내 승인 전에는 고치지 마.</code></pre>
-<h4>3-4. 모호한 지점 결정하기</h4>
-<p>에이전트가 보고한 모호한 지점마다 셋 중 하나로 결정합니다. (가) 이 Skill만의 규칙이면 계약에 추가한다. (나) 여러 업무에 공통인 규칙이면 <code>llm_wiki/AGENTS.md</code>나 <code>research/AGENTS.md</code>에 추가한다. (다) 지금 정할 필요가 없으면 "미결"로 적고 넘어간다. 결정한 것은 계약에 반영하고 SKILL.md에 다시 반영하게 한 뒤 대조를 한 번 더 받습니다.</p>
-<pre class="prompt"><code>보고한 모호한 지점에 대해 다음과 같이 결정했어.
+<h4>3-3. 모호한 지점 결정하고 승인하기</h4>
+<p>에이전트가 보고한 모호한 지점과 중복 문장마다 셋 중 하나로 결정합니다. (가) 이 Skill만의 규칙이면 계약에 추가한다. (나) 여러 업무에 공통인 규칙이면 <code>llm_wiki/AGENTS.md</code>나 <code>research/AGENTS.md</code>에 추가한다. (다) 지금 정할 필요가 없으면 "미결"로 적고 넘어간다. 결정, 반영, 재대조, 승인, 계약 파일 정리를 요청문 하나로 보냅니다.</p>
+<pre class="prompt"><code>보고한 모호한 지점과 중복 문장에 대해 다음과 같이 결정했어.
 [번호]: [결정 내용]
 [번호]: [결정 내용]
+중복 문장: 제안한 대로 참조로 줄여.
 
-이 결정을 paper-reading_실행계약.md 에 먼저 반영하고, 그다음 SKILL.md에 반영해줘.
-공용 규칙으로 정한 것은 SKILL.md가 아니라 [해당 규칙 파일]의 [절]에 추가해줘.
-반영 후 계약과 SKILL.md를 다시 대조해서 빠진 조항이 없는지 확인해줘.</code></pre>
-<h4>3-5. 승인과 정리</h4>
-<p>대조에서 빠진 조항이 없으면 승인합니다. 계약 파일은 <code>part4/paper-reading_실행계약_생성시점.md</code>로 옮겨 두고 루트에서는 지웁니다.</p>
-<pre class="prompt"><code>승인할게. 루트의 paper-reading_실행계약.md 를
-part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위에
-"이 파일은 SKILL.md 생성 당시의 설계 문서다. 현재 실행 규칙은
-.agents/skills/paper-reading/SKILL.md 가 유일한 출처다." 한 줄을 추가해줘.
-그 외에는 아무것도 바꾸지 마. 끝나면 .agents/skills/ 트리와 루트 파일 목록을 보여줘.</code></pre>
+순서대로 해줘.
+1. 결정을 paper-reading_실행계약.md 에 먼저 반영하고, 그다음 SKILL.md에 반영해.
+   공용 규칙으로 정한 것은 SKILL.md가 아니라 [해당 규칙 파일]의 [절]에 추가해.
+2. 계약과 SKILL.md를 다시 대조해서 빠진 조항이 없는지 확인해.
+3. 빠진 조항이 없으면 루트의 paper-reading_실행계약.md 를
+   part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위에
+   "이 파일은 SKILL.md 생성 당시의 설계 문서다. 현재 실행 규칙은
+   .agents/skills/paper-reading/SKILL.md 가 유일한 출처다." 한 줄을 추가해.
+   빠진 조항이 있으면 옮기지 말고 멈춰서 알려줘.
+4. 끝나면 .agents/skills/ 트리와 루트 파일 목록을 보여줘.</code></pre>
 <h4>확인할 것</h4>
 <ul class="check-list">
 <li><code>.agents/skills/paper-reading/SKILL.md</code>가 있고, 그 외에 새로 생긴 파일이 없다</li>
@@ -1139,6 +1198,16 @@ part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위�
 <li><code>log.md</code>의 마지막 항목이 이번 실행 한 건인지 봅니다. 두 건이면 재실행 규칙이나 일괄 처리 규칙에 문제가 있습니다.</li>
 </ul>
 
+<div class="drill">
+<p class="drill-title">눌러 보기: 통과인가, 실패인가</p>
+<p class="drill-lead">테스트에서 나올 법한 결과 네 가지입니다. 통과·실패를 고르면 어느 범주의 실패인지 열립니다.</p>
+<div class="drill-item" data-answer="fail"><p class="drill-q">정상: 페이지·허브·log는 모두 갱신됐는데, 지정하지 않은 다른 프로젝트의 <code>literature.md</code>에도 행이 추가됐다.</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="pass">통과</button><button type="button" class="drill-opt" data-value="fail">실패</button></div><p class="drill-why" hidden>실패, 범주는 <strong>저장 위치</strong>. 계약의 Output은 "지정 프로젝트만 갱신"입니다. 결과물이 좋아 보여도 쓰면 안 되는 곳을 썼습니다.</p></div>
+<div class="drill-item" data-answer="pass"><p class="drill-q">누락: "어떤 논문인지 특정할 수 없습니다. arXiv ID나 DOI, 또는 PDF를 주세요"라고 묻고 멈췄다. 스냅샷 대비 변경 파일 0개.</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="pass">통과</button><button type="button" class="drill-opt" data-value="fail">실패</button></div><p class="drill-why" hidden>통과. 추측하지 않았고, 묻고 멈췄고, 저장소를 건드리지 않았습니다. 네 기준을 다 만족합니다.</p></div>
+<div class="drill-item" data-answer="fail"><p class="drill-q">정상: 완료 보고에 "생성 1, 수정 4"라고 적혔는데 <code>git status</code>에는 수정 파일이 6개다. 나머지 2개는 저자 허브 페이지였다.</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="pass">통과</button><button type="button" class="drill-opt" data-value="fail">실패</button></div><p class="drill-why" hidden>실패, 범주는 <strong>완료 보고</strong>. 저자 허브를 고친 것 자체는 규칙대로지만 보고에서 빠졌습니다. 보고가 실제와 다르면 다음 사람은 보고를 믿을 수 없습니다. SKILL.md의 보고 절에 "수정한 허브 페이지도 모두 나열"을 보강합니다.</p></div>
+<div class="drill-item" data-answer="fail"><p class="drill-q">재실행: 새 파일은 없지만 논문 페이지의 <code>evidence_status</code>가 <code>verified</code>에서 <code>unreviewed</code>로 바뀌었다.</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="pass">통과</button><button type="button" class="drill-opt" data-value="fail">실패</button></div><p class="drill-why" hidden>실패, 범주는 <strong>입력 게이트</strong>(재실행 규칙). 기존 페이지를 확인하지 않고 처음부터 다시 쓰면서 상태를 되돌렸습니다. "기존 페이지가 있으면 현재 상태부터 확인하고, 새 정보가 없으면 변경 없음"이 작동하지 않은 것입니다.</p></div>
+<div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
+</div>
+
 <div class="qa" id="qa-04-1">
 <p class="qa-q"><span class="qa-label">Q 4-1</span>누락 시나리오에서 에이전트가 "저조도 탐지 관련 논문 후보 세 편을 찾았습니다. 어느 것인가요?"라고 묻고 멈췄습니다. 그런데 후보 세 편의 서지를 <code>llm_wiki/papers/_candidates.md</code>라는 파일에 적어 두었습니다. 통과일까요?</p>
 <textarea class="qa-input" rows="2" placeholder="생각한 답을 적고 Enter (줄바꿈은 Shift+Enter)"></textarea>
@@ -1163,12 +1232,13 @@ part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위�
 <h4>목표</h4>
 <p><code>part4/paper-reading_테스트기록표.md</code>를 <code>part4/paper-reading_테스트기록.md</code>로 복사해 기대 행동을 먼저 적고, 세 시나리오를 실행한 뒤 실제 행동과 통과 여부, 수정 내용을 채웁니다.</p>
 <h4>4-1. 예측표 쓰기 (5분, 사람)</h4>
-<p>기록표의 "기대 행동" 칸을 자기 말로 채웁니다. 정상 시나리오에는 예상 파일명과 도달할 상태를 적습니다. 누락과 재실행에는 "바뀌면 안 되는 파일"을 적습니다. 그다음 실행 전 스냅샷을 남깁니다.</p>
-<pre class="prompt"><code>테스트 전 스냅샷을 만들어줘. llm_wiki/ 아래 모든 파일의 경로와 수정 시각,
-그리고 llm_wiki/log.md 의 마지막 항목을 part4/테스트_스냅샷_before.md 에 저장해.
-다른 파일은 건드리지 마.</code></pre>
+<p>기록표의 "기대 행동" 칸을 자기 말로 채웁니다. 정상 시나리오에는 예상 파일명과 도달할 상태를 적습니다. 누락과 재실행에는 "바뀌면 안 되는 파일"을 적습니다. </p>
+<p>스냅샷은 따로 요청하지 않고 4-2의 요청문 첫 줄에 넣습니다. git을 쓰고 있다면 그 줄은 지우고 실행 전후 <code>git status</code>로 대신해도 됩니다.</p>
 <h4>4-2. 정상 시나리오 (10분)</h4>
-<pre class="prompt"><code>다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
+<pre class="prompt"><code>시작하기 전에 llm_wiki/ 아래 모든 파일의 경로·수정 시각과 log.md 마지막 항목을
+part4/테스트_스냅샷_before.md 에 저장해 둬. 그다음 아래 요청을 처리해.
+
+다음 논문을 Wiki에 추가하고 [프로젝트명] 프로젝트의 문헌 목록에도 반영해줘.
 논문 식별자: [arXiv ID 또는 DOI]
 
 실행하기 전에 먼저 보여줘:
@@ -1182,7 +1252,8 @@ part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위�
 2. 도달한 processing_status / evidence_status 와 그 근거
 3. 서지를 어느 DB에서 대조했는지, 어느 판본을 읽었는지
 4. 마지막 점검 항목별 결과
-5. 사람이 확인해야 할 항목</code></pre>
+5. 사람이 확인해야 할 항목
+6. 스냅샷(또는 git status)과 비교한 실제 변경 파일 목록. 보고와 다르면 그 차이</code></pre>
 <p>실행 전 계획에서 Skill 이름이 paper-reading으로 나오는지 봅니다. 다른 이름이 나오거나 Skill 없이 진행하겠다고 하면 트리거 실패입니다. 실행 후에는 보고의 파일 목록과 실제 변경(<code>git status</code> 또는 스냅샷 비교)을 맞춥니다.</p>
 <h4>4-3. 누락 시나리오 (5분)</h4>
 <pre class="prompt"><code>어제 학회에서 들은 저조도 탐지 논문을 Wiki에 추가해줘.</code></pre>
@@ -1191,10 +1262,8 @@ part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위�
 part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 새로 생기거나 바뀐 파일이 있는지 알려줘. 비교만 하고 아무것도 고치지 마.</code></pre>
 <h4>4-4. 재실행 시나리오 (5분)</h4>
-<p>4-2의 요청문을 한 글자도 바꾸지 않고 다시 보냅니다. 끝나면 변경 파일 목록을 받고, <code>log.md</code>의 마지막 항목이 4-2 때와 같은지 봅니다.</p>
-<pre class="prompt"><code>방금 재실행의 결과를 확인하려고 해. 4-2 실행 직후와 비교해서
-새로 생긴 파일, 수정된 파일, log.md 에 추가된 항목이 있는지 알려줘.
-논문 페이지의 frontmatter 두 상태값도 보여줘. 고치지는 마.</code></pre>
+<p>4-2의 요청문을 한 글자도 바꾸지 않고 다시 보냅니다. 요청문에 이미 "실제 변경 파일 목록" 보고가 들어 있으므로 따로 묻지 않아도 됩니다. 보고에서 변경 파일이 0개인지, <code>log.md</code>의 마지막 항목이 4-2 때와 같은지, 논문 페이지의 두 상태값이 그대로인지 봅니다. 보고를 믿기 어려우면 Obsidian에서 <code>log.md</code>를 직접 엽니다.</p>
+
 <h4>4-5. 기록표 채우기 (5분, 사람)</h4>
 <p>세 행의 "실제 행동", "통과", "수정" 칸을 채웁니다. 통과하지 못한 행은 실패 원인을 넷 중 하나로 분류합니다. 호출 조건, 입력 게이트, 저장 위치, 완료 보고. <code>part4/paper-reading_테스트기록_완성예시.md</code>가 적는 방식의 예시입니다.</p>
 <h4>확인할 것</h4>
@@ -1257,6 +1326,17 @@ part4/테스트_스냅샷_before.md 와 지금의 llm_wiki/ 를 비교해서
 <p>이 Skill이 받는 입력은 이런 메모입니다. 실험을 끝낸 날 급하게 적은 글이라 그날의 나에게는 다 이해되지만 3주 뒤의 나에게는 그렇지 않고, 다른 실험과 비교할 수도 없습니다.</p>
 <blockquote><p>합성 야간 2000장을 넣었다. 야간이 오르고 주간이 유지되는지 보려는 실험. Run 15 대비 야간은 +4.3, 주간은 -0.3. 주간이 낮아진 이유는 아직 모른다. 비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지. 다음 실험은 1000장으로 줄이거나, 재분할이 낮은 장만 빼고 2000장을 유지하거나. GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다.</p></blockquote>
 <p>한 문단에 <strong>측정된 사실, 추측, 아직 정하지 않은 판단이 섞여 있습니다.</strong> Skill이 하는 일은 이것을 풀어서 칸이 나뉜 기록으로 저장하는 것입니다. 풀기 전에 사람이 먼저 분류해 봐야 Skill이 무엇을 하는지 알 수 있습니다.</p>
+
+<div class="drill">
+<p class="drill-title">눌러 보기: 메모의 문장을 칸으로 나누기</p>
+<p class="drill-lead">Run 17 메모의 문장 다섯 개입니다. 각각 어느 칸에 들어가야 할지 고르세요.</p>
+<div class="drill-item" data-answer="fact"><p class="drill-q">"합성 야간 2000장을 넣었다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>설정 사실. 단, 원천은 메모가 아니라 config입니다. 메모의 "2000장"과 <code>run17.yaml</code>의 값이 같은지 Skill이 대조하고, 다르면 config 쪽을 적고 불일치를 표시합니다.</p></div>
+<div class="drill-item" data-answer="fact"><p class="drill-q">"Run 15 대비 야간은 +4.3, 주간은 -0.3"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>측정 사실. 원천은 결과표(<code>results.csv</code>)입니다. 기록에는 차이값만이 아니라 두 run의 절대값과 평가 조건이 같았다는 확인까지 함께 적습니다.</p></div>
+<div class="drill-item" data-answer="guess"><p class="drill-q">"비율 0.4 때문인지, 재분할 54.7인 이미지의 라벨 어긋남 때문인지"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>가설. "가설·열린 질문" 칸에 두 후보를 그대로 적습니다. Skill이 어느 쪽이 맞는지 판정하면 범위 밖("실패 원인 확정")입니다.</p></div>
+<div class="drill-item" data-answer="decide"><p class="drill-q">"GPU 시간과 일정 때문에 어느 쪽을 먼저 할지는 내가 고를 일이다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>사람이 정할 일. 기록에는 "다음 후보 두 가지"까지만 적고 우선순위는 비워 둡니다. Skill이 "1000장부터 하자"고 적으면 계약 위반입니다.</p></div>
+<div class="drill-item" data-answer="guess"><p class="drill-q">"주간이 낮아진 이유는 아직 모른다"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="fact">측정·설정 사실</button><button type="button" class="drill-opt" data-value="guess">가설·추측</button><button type="button" class="drill-opt" data-value="decide">사람이 정할 일</button></div><p class="drill-why" hidden>열린 질문. "모른다"는 그 자체로 기록할 가치가 있는 상태입니다. 비워 두지 말고 "원인 미확인"으로 적어야 3주 뒤에 다시 볼 수 있습니다.</p></div>
+<div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
+</div>
 
 <div class="qa" id="qa-05-1">
 <p class="qa-q"><span class="qa-label">Q 5-1</span>위 메모의 문장들을 네 묶음으로 나눠 보세요. (가) 설정 또는 변경 변수, (나) 관찰된 값이나 연구자 서술, (다) 원인 후보, (라) 다음 실험 후보. 그리고 네 묶음 어디에도 넣으면 안 되는 문장이 하나 있다면 무엇일까요?</p>
@@ -1749,6 +1829,84 @@ part4/experiment-log_실행계약_생성시점.md 에는 "SKILL.md v2에서 변�
             setTimeout(() => { btn.textContent = '복사'; }, 1600);
         });
         pre.appendChild(btn);
+    });
+
+    // ---- clickable checklists (state kept per page + position)
+    document.querySelectorAll('.page').forEach(page => {
+        const lists = page.querySelectorAll('ul.check-list:not(.forbid)');
+        lists.forEach((list, li) => {
+            list.querySelectorAll('li').forEach((item, ii) => {
+                const key = `part4-check:${page.id}:${li}:${ii}`;
+                item.tabIndex = 0; item.setAttribute('role', 'checkbox');
+                const set = on => { item.classList.toggle('is-done', on); item.setAttribute('aria-checked', String(on)); if (store) { on ? store.setItem(key, '1') : store.removeItem(key); } updateCounter(page); };
+                item.addEventListener('click', () => set(!item.classList.contains('is-done')));
+                item.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); set(!item.classList.contains('is-done')); } });
+                if (store && store.getItem(key)) set(true);
+            });
+        });
+        updateCounter(page);
+    });
+    function updateCounter(page) {
+        const items = page.querySelectorAll('ul.check-list:not(.forbid) li');
+        if (!items.length) return;
+        let badge = page.querySelector('.check-counter');
+        if (!badge) { badge = document.createElement('span'); badge.className = 'check-counter'; page.querySelector('.hero-meta').appendChild(badge); }
+        const done = [...items].filter(i => i.classList.contains('is-done')).length;
+        badge.textContent = `확인 ${done}/${items.length}`;
+        badge.classList.toggle('is-complete', done === items.length);
+    }
+
+    // ---- drills: pick one option per item, reveal verdict
+    document.querySelectorAll('.drill').forEach(drill => {
+        const items = drill.querySelectorAll('.drill-item');
+        const score = drill.querySelector('.drill-score');
+        function tally() {
+            if (!score) return;
+            const answered = [...items].filter(i => i.dataset.state).length;
+            const right = [...items].filter(i => i.dataset.state === 'right').length;
+            score.textContent = answered ? `${items.length}개 중 ${answered}개 답함 · ${right}개 맞음` : '';
+        }
+        items.forEach(item => {
+            const answer = item.dataset.answer;
+            item.querySelectorAll('.drill-opt').forEach(btn => btn.addEventListener('click', () => {
+                if (item.dataset.state) return;
+                const ok = btn.dataset.value === answer;
+                item.dataset.state = ok ? 'right' : 'wrong';
+                btn.classList.add(ok ? 'is-right' : 'is-wrong');
+                item.querySelectorAll('.drill-opt').forEach(b => { b.disabled = true; if (b.dataset.value === answer) b.classList.add('is-answer'); });
+                item.querySelector('.drill-why').hidden = false;
+                tally();
+            }));
+        });
+        const reset = drill.querySelector('.drill-reset');
+        if (reset) reset.addEventListener('click', () => {
+            items.forEach(item => { delete item.dataset.state; item.querySelectorAll('.drill-opt').forEach(b => { b.disabled = false; b.className = 'drill-opt'; }); item.querySelector('.drill-why').hidden = true; });
+            tally();
+        });
+    });
+
+    // ---- rater: 5 criteria -> verdict (chapter 01)
+    document.querySelectorAll('.rater').forEach(rater => {
+        const rows = rater.querySelectorAll('.rater-row');
+        const out = rater.querySelector('.rater-out');
+        const val = { '상': 2, '중': 1, '하': 0 };
+        function update() {
+            const picks = [...rows].map(r => r.querySelector('.is-picked')?.dataset.value);
+            if (picks.some(p => !p)) { out.textContent = '다섯 기준을 모두 고르면 판정이 나옵니다.'; out.className = 'rater-out'; return; }
+            const human = picks[4];
+            let plus = picks.slice(0, 4).reduce((a, p) => a + val[p], 0);
+            let text, cls;
+            if (human === '상') { text = '연구자 판단으로 남깁니다. 절차 중간에 매번 가치 판단이 들어가면 입력을 반복할 수 없고 결과를 대조할 기준도 흔들립니다.'; cls = 'is-no'; }
+            else if (plus >= 7 && human === '하') { text = 'Skill 후보 1순위감입니다. 입력·출력이 안정적이고 검증 기준이 있습니다. 02장으로 바로 갈 수 있습니다.'; cls = 'is-yes'; }
+            else if (plus >= 5) { text = 'Skill 후보지만 설계가 더 필요합니다. "중"으로 고른 기준(특히 입력 안정성·검증 가능성)에서 입력 게이트와 중지 조건을 더 자세히 적어야 합니다.'; cls = 'is-maybe'; }
+            else { text = '아직 Skill로 만들기 어렵습니다. 업무 이름이 넓어서 여러 일이 섞여 있지 않은지 먼저 봅니다. 쪼개면 일부는 1순위가 될 수 있습니다.'; cls = 'is-no'; }
+            out.textContent = text; out.className = 'rater-out ' + cls;
+        }
+        rows.forEach(row => row.querySelectorAll('.rater-opt').forEach(btn => btn.addEventListener('click', () => {
+            row.querySelectorAll('.rater-opt').forEach(b => b.classList.remove('is-picked'));
+            btn.classList.add('is-picked'); update();
+        })));
+        update();
     });
 
     route({ initial: true });

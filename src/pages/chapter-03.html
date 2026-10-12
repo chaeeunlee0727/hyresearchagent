@@ -110,7 +110,9 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
    빠진 조항이 있으면 적어줘.
 6. 호출 조건, 누락 입력 처리, 저장 위치, 중지 조건, 재실행 규칙 중 모호하거나
    규칙 파일과 충돌하는 부분을 스스로 점검해서 보고해줘.
-7. 작업용 계약 파일은 내 승인 전에는 지우지 마.</code></pre>
+7. 생성한 SKILL.md를 규칙 파일·템플릿과 비교해 같은 규칙이 두 곳에 적힌 부분을 찾고,
+   참조로 줄이는 수정안을 함께 제안해. 내 승인 전에는 고치지 마.
+8. 작업용 계약 파일은 내 승인 전에는 지우지 마.</code></pre>
 <h4>3-2. 생성 결과 검토 (사람)</h4>
 <p>생성된 <code>SKILL.md</code>를 열어 일곱 가지를 봅니다. <code>part4/paper-reading_생성프롬프트.md</code>의 검토 포인트와 같습니다.</p>
 <ul class="check-list">
@@ -122,28 +124,23 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
 <li>책임 중복: 템플릿 본문이나 규칙 파일의 절차 전문이 복사돼 들어오지 않았다</li>
 <li>단일 원본: 대조 표에서 빠진 조항이 없다</li>
 </ul>
-<h4>3-3. 중복 자체 점검 요청</h4>
-<p>책임 중복은 눈으로 찾기 어렵습니다. 에이전트에게 다시 시킵니다.</p>
-<pre class="prompt"><code>방금 만든 .agents/skills/paper-reading/SKILL.md 를 llm_wiki/AGENTS.md,
-llm_wiki/research/AGENTS.md, llm_wiki/papers/_template.md 와 비교해서
-같은 규칙이 두 곳에 적혀 있는 부분을 찾아줘.
-중복된 문장은 참조로 줄이는 수정안을 제안하고, 내 승인 전에는 고치지 마.</code></pre>
-<h4>3-4. 모호한 지점 결정하기</h4>
-<p>에이전트가 보고한 모호한 지점마다 셋 중 하나로 결정합니다. (가) 이 Skill만의 규칙이면 계약에 추가한다. (나) 여러 업무에 공통인 규칙이면 <code>llm_wiki/AGENTS.md</code>나 <code>research/AGENTS.md</code>에 추가한다. (다) 지금 정할 필요가 없으면 "미결"로 적고 넘어간다. 결정한 것은 계약에 반영하고 SKILL.md에 다시 반영하게 한 뒤 대조를 한 번 더 받습니다.</p>
-<pre class="prompt"><code>보고한 모호한 지점에 대해 다음과 같이 결정했어.
+<h4>3-3. 모호한 지점 결정하고 승인하기</h4>
+<p>에이전트가 보고한 모호한 지점과 중복 문장마다 셋 중 하나로 결정합니다. (가) 이 Skill만의 규칙이면 계약에 추가한다. (나) 여러 업무에 공통인 규칙이면 <code>llm_wiki/AGENTS.md</code>나 <code>research/AGENTS.md</code>에 추가한다. (다) 지금 정할 필요가 없으면 "미결"로 적고 넘어간다. 결정, 반영, 재대조, 승인, 계약 파일 정리를 요청문 하나로 보냅니다.</p>
+<pre class="prompt"><code>보고한 모호한 지점과 중복 문장에 대해 다음과 같이 결정했어.
 [번호]: [결정 내용]
 [번호]: [결정 내용]
+중복 문장: 제안한 대로 참조로 줄여.
 
-이 결정을 paper-reading_실행계약.md 에 먼저 반영하고, 그다음 SKILL.md에 반영해줘.
-공용 규칙으로 정한 것은 SKILL.md가 아니라 [해당 규칙 파일]의 [절]에 추가해줘.
-반영 후 계약과 SKILL.md를 다시 대조해서 빠진 조항이 없는지 확인해줘.</code></pre>
-<h4>3-5. 승인과 정리</h4>
-<p>대조에서 빠진 조항이 없으면 승인합니다. 계약 파일은 <code>part4/paper-reading_실행계약_생성시점.md</code>로 옮겨 두고 루트에서는 지웁니다.</p>
-<pre class="prompt"><code>승인할게. 루트의 paper-reading_실행계약.md 를
-part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위에
-"이 파일은 SKILL.md 생성 당시의 설계 문서다. 현재 실행 규칙은
-.agents/skills/paper-reading/SKILL.md 가 유일한 출처다." 한 줄을 추가해줘.
-그 외에는 아무것도 바꾸지 마. 끝나면 .agents/skills/ 트리와 루트 파일 목록을 보여줘.</code></pre>
+순서대로 해줘.
+1. 결정을 paper-reading_실행계약.md 에 먼저 반영하고, 그다음 SKILL.md에 반영해.
+   공용 규칙으로 정한 것은 SKILL.md가 아니라 [해당 규칙 파일]의 [절]에 추가해.
+2. 계약과 SKILL.md를 다시 대조해서 빠진 조항이 없는지 확인해.
+3. 빠진 조항이 없으면 루트의 paper-reading_실행계약.md 를
+   part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위에
+   "이 파일은 SKILL.md 생성 당시의 설계 문서다. 현재 실행 규칙은
+   .agents/skills/paper-reading/SKILL.md 가 유일한 출처다." 한 줄을 추가해.
+   빠진 조항이 있으면 옮기지 말고 멈춰서 알려줘.
+4. 끝나면 .agents/skills/ 트리와 루트 파일 목록을 보여줘.</code></pre>
 <h4>확인할 것</h4>
 <ul class="check-list">
 <li><code>.agents/skills/paper-reading/SKILL.md</code>가 있고, 그 외에 새로 생긴 파일이 없다</li>

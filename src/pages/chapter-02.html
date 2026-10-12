@@ -45,6 +45,16 @@
 <tr><td>"이 논문 좀 봐 줘"</td><td>모호</td><td>Wiki 파일이나 상태를 바꾸려는 건지 먼저 묻고 시작한다</td></tr>
 </tbody></table></div>
 <p><strong>모호한 요청을 "일단 추가"로 해석하지 않습니다.</strong> 의도가 정해진 뒤에만 다음 단계로 넘어갑니다. 논문 근거를 다시 확인해 달라는 요청은 먼저 답변으로 처리하고, 확인 결과 페이지를 고쳐야 할 때만 Skill을 부릅니다.</p>
+<div class="drill">
+<p class="drill-title">눌러 보기: 이 요청에 paper-reading이 열려야 할까</p>
+<p class="drill-lead">표에 없는 요청 다섯 개입니다. 하나씩 골라 보세요. 고르면 이유가 열립니다.</p>
+<div class="drill-item" data-answer="call"><p class="drill-q">"어제 넣은 2024_Wang 페이지, 원문 PDF 구했으니 요약까지 진행해 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출. 기존 페이지의 상태를 <code>metadata_only</code>에서 앞으로 진행시키는 요청이라 Trigger의 "기존 페이지의 보완이나 상태 진행"에 해당합니다.</p></div>
+<div class="drill-item" data-answer="no"><p class="drill-q">"topics/ 허브 페이지들을 알파벳순으로 다시 정렬해 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출하지 않음. 논문 추가가 없는 Wiki 구조·정리 작업입니다. <code>llm_wiki/AGENTS.md</code>를 직접 따릅니다.</p></div>
+<div class="drill-item" data-answer="ask"><p class="drill-q">"이 arXiv 링크 어때?" (링크만 붙어 있음)</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>먼저 묻기. 의견을 묻는 것인지 Wiki에 넣으라는 것인지 알 수 없습니다. "Wiki에 추가할까요, 내용만 말씀드릴까요?"라고 확인한 뒤 시작합니다.</p></div>
+<div class="drill-item" data-answer="no"><p class="drill-q">"2023_Yeom 페이지 Summary에 적힌 식각률 수치가 원문 표 3이랑 맞는지 봐 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출하지 않음(일단은). 근거 재확인 요청은 먼저 답변으로 처리합니다. 확인 결과 수치가 틀려서 페이지를 고쳐야 하면 그때 호출합니다.</p></div>
+<div class="drill-item" data-answer="call"><p class="drill-q">"papers 폴더에 파일명 규칙 안 맞는 게 몇 개 있는데 고쳐 줘"</p><div class="drill-opts"><button type="button" class="drill-opt" data-value="call">호출</button><button type="button" class="drill-opt" data-value="no">호출하지 않음</button><button type="button" class="drill-opt" data-value="ask">먼저 묻기</button></div><p class="drill-why" hidden>호출. 참고본 계약은 파일명 정정을 Trigger에 넣었습니다. 파일명만 바꾸면 허브·index 링크가 깨지므로 Skill이 링크까지 함께 고칩니다. 단, 여러 편이면 변경 목록을 먼저 보여 주고 승인 후 적용합니다.</p></div>
+<div class="drill-foot"><p class="drill-score"></p><button type="button" class="drill-reset">다시 풀기</button></div>
+</div>
 
 <h2>Input: 무엇이 있어야 시작하는가</h2>
 <p>필수 입력은 논문을 식별할 수 있는 정보입니다. DOI, arXiv ID, 공식 URL, 또는 제목과 공식 공개 페이지. 사용자가 원문 PDF를 직접 줄 수도 있습니다. 선택 입력은 연결할 연구 프로젝트, 비교하고 싶은 질문, 특별히 볼 부분이고, 없어도 진행합니다.</p>
@@ -68,7 +78,7 @@
 <text x="36" y="161" class="d-t small">접근 가능한 판본 찾기</text>
 <rect x="20" y="220" width="200" height="50" rx="10" class="d-box"/>
 <text x="36" y="243" class="d-t">요약 → 원문 대조</text>
-<text x="36" y="261" class="d-t small">summarized를 거쳐 최종 상태로</text>
+<text x="36" y="261" class="d-t small">fulltext_available → summarized → 최종</text>
 <path d="M120 70 V118" class="d-line" style="marker-end:url(#arrow4)"/>
 <path d="M120 170 V218" class="d-line" style="marker-end:url(#arrow4)"/>
 
@@ -114,7 +124,8 @@
 <tr><td>연도·제1저자 중 한 값만 확인</td><td>자리표시자 파일명으로 저장</td><td><code>needs_review / unreviewed</code></td></tr>
 <tr><td>서지는 확정, 원문 미확보</td><td>확인된 서지와 실패 사유만 저장</td><td><code>metadata_only / unreviewed</code></td></tr>
 <tr><td>원문 확보, 텍스트 추출 불가</td><td>실패 사유를 남기고 멈춤</td><td><code>needs_review / needs_review</code></td></tr>
-<tr><td>정상</td><td>요약 → 원문 대조까지 진행, 허브·index·log 갱신</td><td><code>critically_reviewed / verified</code> 또는 <code>partial</code>·<code>unsupported</code></td></tr>
+<tr><td>원문 확보, 아직 요약 전</td><td>중간 상태로 기록하고 계속 진행</td><td><code>fulltext_available / unreviewed</code></td></tr>
+<tr><td>정상</td><td>요약(<code>summarized</code>) → 원문 대조까지 진행, 허브·index·log 갱신</td><td><code>critically_reviewed / verified</code> 또는 <code>partial</code>·<code>unsupported</code></td></tr>
 </tbody></table></div>
 <p>출력과 갱신 범위도 계약에 적습니다. 논문 페이지는 <code>_template.md</code> 형식을 따르고, 연도·저장소·학회·토픽 허브와 index를 갱신하고, 프로젝트를 지정했을 때만 그 프로젝트의 <code>literature.md</code>를 갱신하고, <code>log.md</code>에 변경 기록을 남깁니다. <strong>이 목록에 없는 경로는 출력에 넣지 않습니다.</strong> 단, <code>_template.md</code>의 내용과 규칙 파일의 절차를 계약에 복사하지는 않습니다. 필요한 시점에 원본을 참조하도록 가리키기만 합니다. <strong>같은 규칙이 두 곳에 있으면 한쪽을 고쳤을 때 다른 쪽이 낡습니다.</strong></p>
 
