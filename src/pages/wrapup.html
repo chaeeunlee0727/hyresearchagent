@@ -1,4 +1,4 @@
-<p>여기까지 왔으면 작업공간에 Skill 두 개, 테스트 기록 두 벌, 체크리스트 한 장이 있습니다. 그리고 세 번째 Skill부터는 업무만 갈아 끼우면 되는 패턴이 손에 남았습니다. 이 페이지는 그 패턴을 한 장으로 정리하고, 다음 Part로 넘어가기 전에 해 둘 일을 적습니다.</p>
+<p>여기까지 왔으면 작업공간에 점검까지 마친 Skill 두 개와 각각의 테스트 결과가 있습니다. 그리고 세 번째 Skill부터는 업무만 갈아 끼우면 되는 패턴이 손에 남았습니다. 이 페이지는 그 패턴을 한 장으로 정리하고, 다음 Part로 넘어가기 전에 해 둘 일을 적습니다.</p>
 
 <!-- toc -->
 
@@ -11,7 +11,7 @@
 <rect x="370" y="20" width="150" height="70" rx="12" class="d-box human"/><text x="386" y="46" class="d-t">3. 계약 쓰기</text><text x="386" y="66" class="d-t small">여섯 필드</text><text x="386" y="82" class="d-t small">규칙은 참조로</text>
 <rect x="545" y="20" width="150" height="70" rx="12" class="d-box dark"/><text x="561" y="46" class="d-t white">4. 변환</text><text x="561" y="66" class="d-t small" style="fill:#c8d2dc">에이전트가 SKILL.md</text><text x="561" y="82" class="d-t small" style="fill:#c8d2dc">대조 · 모호 보고</text>
 <rect x="720" y="20" width="140" height="70" rx="12" class="d-box"/><text x="736" y="46" class="d-t">5. 시험</text><text x="736" y="66" class="d-t small">정상 · 누락</text><text x="736" y="82" class="d-t small">재실행</text>
-<rect x="370" y="140" width="325" height="70" rx="12" class="d-box accent"/><text x="386" y="166" class="d-t">6. 점검과 수정</text><text x="386" y="186" class="d-t small">여덟 기준 체크리스트 · 보완 필요 → 최소 수정 → 재실행</text><text x="386" y="202" class="d-t small">애매한 것은 통과가 아니라 결정</text>
+<rect x="370" y="140" width="325" height="70" rx="12" class="d-box accent"/><text x="386" y="166" class="d-t">6. 점검과 수정</text><text x="386" y="186" class="d-t small">여덟 기준 점검 · 보완 필요 → 최소 수정 → 재실행</text><text x="386" y="202" class="d-t small">근거가 없으면 통과가 아니라 보완 필요</text>
 <path d="M170 55 H193" class="d-line" style="marker-end:url(#arrow7)"/>
 <path d="M345 55 H368" class="d-line" style="marker-end:url(#arrow7)"/>
 <path d="M520 55 H543" class="d-line" style="marker-end:url(#arrow7)"/>
@@ -31,7 +31,7 @@
 <tr><td>규칙 파일을 고쳤는데 Skill이 옛 규칙대로 한다</td><td>규칙을 참조하지 않고 복사해 넣었다</td><td>SKILL.md에서 복사본을 지우고 참조로</td></tr>
 <tr><td>재실행하면 파일이 하나 더 생긴다</td><td>기존 기록 확인 단계가 Process에 없다</td><td>계약 Process 1번</td></tr>
 <tr><td>에이전트가 계약에 없는 정책을 넣는다</td><td>생성 프롬프트에 "결정하지 말고 보고하라"가 약하다</td><td>생성 프롬프트 4번 조건</td></tr>
-<tr><td>체크리스트가 전부 통과인데 불안하다</td><td>근거 칸이 인상으로 채워졌다</td><td>근거를 파일 경로와 기록표 행으로 다시 쓴다</td></tr>
+<tr><td>점검이 전부 통과인데 불안하다</td><td>근거 칸이 인상으로 채워졌다</td><td>근거를 시나리오와 파일 경로로 다시 쓴다</td></tr>
 </tbody></table></div>
 
 <h2>작업공간에 남은 것</h2>
@@ -39,7 +39,7 @@
 ├── AGENTS.md
 ├── .agents/skills/
 │   ├── <span class="new">paper-reading/SKILL.md</span>
-│   └── <span class="new">experiment-log/SKILL.md</span>
+│   └── <span class="new">[두 번째 Skill]/SKILL.md</span>
 ├── llm_wiki/
 │   ├── AGENTS.md  <span class="mod">(개념 페이지 조건 등 공용 규칙 보강)</span>
 │   ├── papers/  <span class="mod">(테스트로 추가한 논문 페이지)</span>
@@ -49,12 +49,11 @@
 │       └── [프로젝트]/
 │           ├── index.md  <span class="mod">(실험 기록 목록)</span>
 │           ├── literature.md  <span class="mod">(테스트 논문 행)</span>
-│           └── <span class="new">experiments/run15.md · run17.md</span>
+│           └── <span class="new">experiments/ (두 번째 Skill의 결과)</span>
 └── part4/
     ├── skill_선정기준표.md  <span class="mod">(채움)</span>
     ├── paper-reading_실행계약_생성시점.md · experiment-log_실행계약_생성시점.md
-    ├── paper-reading_테스트기록.md
-    ├── skill_품질_체크리스트.md  <span class="mod">(두 Skill 분량)</span>
+    ├── paper-reading_테스트기록.md  <span class="mod">(내보냈다면)</span>
     └── fixtures/ · 참고/</code></pre>
 <p>루트에 계약 파일이 남아 있지 않은지, <code>part4/fixtures/</code>의 원본이 그대로인지 마지막으로 한 번 봅니다. 테스트로 넣은 논문 페이지는 실제 연구 논문이면 그대로 두고, 연습용이었으면 paper-reading을 통해 지우지 말고 사람이 직접 지운 뒤 <code>log.md</code>에 한 줄 남깁니다. <strong>Skill의 범위에 삭제는 없습니다.</strong></p>
 
@@ -67,7 +66,7 @@
 
 <h2>자료</h2>
 <ul>
-<li>실습 파일: 이 저장소의 <code>실습파일/</code>. 실행 계약 템플릿, 두 Skill의 계약·SKILL.md 완성본, 생성 프롬프트, 테스트 기록표, 선정 기준표, 품질 체크리스트, Part 4 템플릿 다섯 파일.</li>
+<li>실습 파일: 이 저장소의 <code>실습파일/</code>. 실행 계약 템플릿, 두 Skill의 계약·SKILL.md 완성본, 생성 프롬프트, 선정 기준표, Part 4 템플릿 다섯 파일.</li>
 <li>강의 교안: <code>강의교안/</code>의 클립별 PDF 여덟 개. 이 자료의 장 번호와 클립 번호는 다릅니다. Ch01이 01장, Ch02가 02~04장, Ch03이 05~06장에 해당합니다.</li>
 <li>강의 전사와 정리본: <code>전체 스크립트.md</code>, <code>정리본.md</code>. 강의에서 실제로 한 말과 실행 결과를 확인하고 싶을 때 엽니다.</li>
 <li>Part 3 자료: 복습 페이지에서 가리킨 장들. 상태값 정의, 2-pass 검증, Literature Matrix 규칙은 그쪽이 원본입니다.</li>

@@ -262,3 +262,37 @@ ul.check-list.forbid li.is-done::after{display:none}
 [data-mode="snap"] .only-git{display:none!important}
 .mode-note{margin:0 0 14px!important;font-size:15px;color:#4a5560}
 .git-setup{flex-basis:100%;margin-top:6px;padding-top:14px;border-top:1px dashed #cbd5de}.git-setup .steps{margin:0}.git-setup .steps li p{font-size:15px}.git-setup pre{margin:8px 0 10px;font-size:14px}
+/* live slots in prompts */
+.slot{background:#fff3d6;border-radius:4px;padding:0 3px}
+.slot.is-empty{background:#fde2dc;color:#8f3a2c}
+/* cell hints in fill cards */
+.cell-hint{display:block;margin-top:3px;color:var(--muted);font-size:13px;font-weight:500;line-height:1.45}
+.cell-hints td:first-child{width:42%}
+/* prefill chip */
+.prefill{margin:0 0 16px!important;padding:10px 14px;border:1px dashed #c9a34a;border-radius:10px;background:#fcf7e8;font-size:15px}
+.prefill.is-set{border-style:solid}
+/* chapter 06 audit */
+.audit-tabs{display:flex;gap:8px;margin:0 0 14px}
+.audit-tabs button{padding:8px 18px;border:1px solid #b9c5d0;border-radius:999px;background:#fff;font-size:14.5px;font-weight:750;cursor:pointer}
+.audit-tabs button.is-picked{background:var(--ink);border-color:var(--ink);color:#fff}
+.audit{margin:0 0 30px;padding:6px 20px 18px;border:1px solid #c9d3dc;border-radius:14px;background:#fff}
+.audit[hidden],.audit-out[hidden]{display:none!important}
+.audit>.field{margin:14px 0 6px}
+.crit{padding:14px 0;border-top:1px dashed #cbd5de}
+.crit:first-of-type{border-top:0}
+.crit-title{margin:0 0 4px!important;font-size:15.5px;line-height:1.5}
+.crit-num{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:800}
+.crit-q{color:#4a5560}
+.crit-how{margin:0 0 10px!important;font-size:14px;color:var(--muted)}
+.crit-how span{margin-right:8px;padding:1px 7px;border-radius:5px;background:#eef2f5;color:#4a5560;font-size:12px;font-weight:750}
+.crit .verdict{margin-bottom:8px}
+.crit textarea.fill{min-height:38px}
+.verdict button.is-picked[data-value="해당 없음"]{background:#6b7782;border-color:#6b7782;color:#fff}
+.audit-sum{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px;padding-top:14px;border-top:2px solid var(--ink)}
+.audit-count{flex:1;margin:0!important;font-size:14.5px;font-weight:650}
+.audit-count.warn{color:var(--accent-dark)}
+.audit-make{padding:9px 16px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:14.5px;font-weight:750;cursor:pointer}
+.audit-out{margin-top:14px}
+.audit-rerun-title{margin:6px 0 4px!important;font-weight:750}
+.audit-rerun ul{margin:0;padding-left:20px;font-size:15px}
+.prompt .slot{color:#1f262d;font-weight:650}.prompt .slot.is-empty{color:#8f3a2c}

@@ -275,5 +275,84 @@
         setTimeout(() => { btn.textContent = '기록 내보내기 (markdown 복사)'; }, 2600);
     }));
 
+    // ---- live slots: text typed in a [data-req] field appears inside prompt blocks
+    function setSlots(src, value) {
+        document.querySelectorAll(`.slot[data-src="${src}"]`).forEach(sl => {
+            if (!sl.dataset.ph) sl.dataset.ph = sl.textContent;
+            const v = value.trim();
+            sl.textContent = v || sl.dataset.ph;
+            sl.classList.toggle('is-empty', !v);
+        });
+    }
+    let curTab = 'p';
+    function updateCurrentSkill() {
+        const n2 = document.querySelector('textarea[data-req="skill2-name"]');
+        const name = curTab === 'p' ? 'paper-reading' : ((n2 && n2.value.trim()) || '[skill-name]');
+        document.querySelectorAll('.slot[data-src="skill-current"]').forEach(sl => { sl.textContent = name; });
+    }
+    document.querySelectorAll('textarea[data-req]').forEach(t => {
+        const upd = () => { if (t.dataset.req === 'skill2-name') updateCurrentSkill(); else setSlots('req-' + t.dataset.req, t.value); };
+        t.addEventListener('input', upd); upd();
+    });
+
+    // ---- prefill chips: show what the user typed on an earlier page (e.g. chapter 01 rater)
+    document.querySelectorAll('[data-prefill]').forEach(el => {
+        const key = el.dataset.prefill;
+        const render = () => {
+            const v = store && store.getItem(key);
+            el.classList.toggle('is-set', !!v);
+            el.textContent = '';
+            if (v) { el.append('01장 판정기에 적은 업무: '); const b = document.createElement('strong'); b.textContent = v; el.append(b); }
+            else el.textContent = '01장 판정기에 적은 업무가 아직 없습니다. 01장의 판정기나 선정 기준표에서 업무를 하나 정해 오세요.';
+        };
+        render(); window.addEventListener('hashchange', render);
+    });
+
+    // ---- chapter 06 audit: tabs, summary line, fix-prompt generator
+    document.querySelectorAll('.audit-tabs').forEach(tabs => {
+        const wrap = tabs.parentElement;
+        const set = tab => {
+            curTab = tab;
+            tabs.querySelectorAll('button').forEach(b => b.classList.toggle('is-picked', b.dataset.tab === tab));
+            wrap.querySelectorAll('.audit').forEach(a => { a.hidden = a.dataset.skill !== tab; });
+            updateCurrentSkill();
+        };
+        tabs.querySelectorAll('button').forEach(b => b.addEventListener('click', () => set(b.dataset.tab)));
+        set('p');
+    });
+    document.querySelectorAll('.audit').forEach(au => {
+        const crits = [...au.querySelectorAll('.crit')];
+        const count = au.querySelector('.audit-count');
+        const val = c => c.querySelector('.verdict').dataset.value || '';
+        const note = c => c.querySelector('textarea').value.trim();
+        function refresh() {
+            let ok = 0, fix = 0, na = 0, noEv = 0;
+            crits.forEach(c => { const v = val(c); if (v === '통과') { ok++; if (!note(c)) noEv++; } else if (v === '보완 필요') fix++; else if (v === '해당 없음') na++; });
+            const done = ok + fix + na;
+            let txt = done ? `${crits.length}개 중 ${done}개 판정 · 통과 ${ok} · 보완 필요 ${fix} · 해당 없음 ${na}` : '아직 판정한 항목이 없습니다.';
+            if (noEv) txt += ` · 근거 없는 통과 ${noEv}개 (근거를 적거나 보완 필요로 바꾸세요)`;
+            count.textContent = txt; count.classList.toggle('warn', noEv > 0);
+        }
+        au.addEventListener('click', e => { if (e.target.closest('.verdict button')) setTimeout(refresh, 0); });
+        au.addEventListener('input', refresh);
+        refresh();
+        au.querySelector('.audit-make').addEventListener('click', () => {
+            const n2 = document.querySelector('textarea[data-req="skill2-name"]');
+            const skill = au.dataset.skill === 'p' ? 'paper-reading' : ((n2 && n2.value.trim()) || '[skill-name]');
+            const bad = crits.filter(c => val(c) === '보완 필요');
+            const out = au.querySelector('.audit-out');
+            const code = out.querySelector('code'); const re = out.querySelector('.audit-rerun');
+            out.hidden = false; re.textContent = '';
+            if (!bad.length) { code.textContent = '보완 필요로 표시한 항목이 없습니다. 통과로 표시한 항목의 근거가 인상으로 채워지지 않았는지 다시 확인하세요.'; return; }
+            const lines = bad.map((c, i) => `${i + 1}. ${c.dataset.name}: ${note(c) || '(메모 없음)'}`);
+            code.textContent = `${skill} Skill의 품질 점검에서 보완이 필요한 항목이 나왔어.\n\n${lines.join('\n')}\n\n.agents/skills/${skill}/SKILL.md 에서 각 항목에 해당하는 문장만 찾아 최소한으로 고치는 수정안을 보여줘.\n항목마다 어느 절의 어느 문장을 어떻게 바꾸는지 적고, 다른 절은 건드리지 마.\n내가 승인하면 적용하고 바뀐 줄을 보여줘.`;
+            const h = document.createElement('p'); h.className = 'audit-rerun-title'; h.textContent = '수정이 적용되면 다시 확인할 것';
+            const ul = document.createElement('ul');
+            bad.forEach(c => { const li = document.createElement('li'); li.textContent = `${c.dataset.name}: ${c.dataset.rerun}`; ul.appendChild(li); });
+            const last = document.createElement('li'); last.textContent = '정상 시나리오도 한 번 더 돌려 기존 동작이 그대로인지 확인'; ul.appendChild(last);
+            re.append(h, ul);
+        });
+    });
+
     route({ initial: true });
 })();

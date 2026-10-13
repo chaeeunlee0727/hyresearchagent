@@ -2,7 +2,7 @@
 
 <div class="goal-box">
 <p><strong>수업 흐름</strong></p>
-<p>Skill로 만들 업무 고르기 → 실행 경계와 실행 계약 → 계약을 SKILL.md로 → 세 가지 시나리오(정상·누락·재실행) 테스트 → Skill의 품질 체크리스트. 05장에서 같은 흐름을 두 번째 업무(실험 로그)에 한 번 더 돕니다.</p>
+<p>Skill로 만들 업무 고르기 → 실행 경계와 실행 계약 → 계약을 SKILL.md로 → 세 가지 시나리오(정상·누락·재실행) 테스트 → Skill의 품질 점검. 05장에서 같은 흐름을 두 번째 업무(내 업무)에 한 번 더 돕니다.</p>
 </div>
 
 <!-- toc -->
@@ -16,7 +16,7 @@
 <tr><td>04</td><td><code>part4/paper-reading_테스트기록.md</code></td><td>정상·누락·재실행 테스트 기록. 04장 페이지에 적고 내보내기로 저장</td></tr>
 <tr><td rowspan="2">05</td><td><code>[내 업무]_실행계약.md</code> → <code>.agents/skills/[내 업무]/SKILL.md</code></td><td>두 번째 Skill. 01장에서 고른 내 업무로 직접 설계 (막막하면 강의의 experiment-log를 따라 만듦)</td></tr>
 <tr><td>두 번째 Skill의 실행 결과 (experiment-log라면 <code>experiments/run15.md</code>, <code>run17.md</code>)</td><td>중지 확인 1회 + 정상 실행 1회</td></tr>
-<tr><td>06</td><td><code>part4/skill_품질_체크리스트.md</code></td><td>두 Skill을 여덟 기준으로 점검한 표와 수정 기록</td></tr>
+<tr><td>06</td><td>수정이 반영된 두 Skill의 <code>SKILL.md</code></td><td>여덟 기준 점검은 교재 안에서 하고, 보완 필요 항목을 고친 결과</td></tr>
 </tbody></table></div>
 
 <h3>SKILL.md는 어디에 두나</h3>
@@ -101,7 +101,7 @@ codex</code></pre></li>
 <p>차이 목록에서 내가 Part 3 때 직접 바꾼 규칙이 지워지지 않는지 봅니다. 그 부분만 유지하라고 지정한 뒤 나머지를 적용합니다. 이미 만든 프로젝트의 <code>index.md</code>에는 "실험 기록" 절만 추가하고, 프로젝트명이나 연구 질문을 빈 템플릿으로 덮어쓰지 않습니다.</p>
 
 <h2>세팅 3. 작업 문서 폴더 만들기</h2>
-<p>실행 계약 템플릿, 선정 기준표, 체크리스트, 생성 프롬프트는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
+<p>실행 계약 템플릿, 선정 기준표, 생성 프롬프트는 에이전트가 자동으로 읽는 규칙이 아니라 사람이 수업 중에 채우는 작업 문서입니다. <code>llm_wiki/</code>나 <code>.agents/</code> 안에 넣지 않고 루트에 <code>part4/</code> 폴더를 만들어 둡니다.</p>
 <pre class="file-tree"><code>작업공간/
 ├── AGENTS.md
 ├── <span class="new">.agents/skills/</span>              ← 03장과 05장에서 SKILL.md가 생긴다 (지금은 비어 있음)
@@ -115,7 +115,6 @@ codex</code></pre></li>
     ├── 실행계약_템플릿.md
     ├── skill_선정기준표.md
     ├── skill_후보목록_예시.md
-    ├── skill_품질_체크리스트.md
     ├── paper-reading_생성프롬프트.md
     ├── experiment-log_생성프롬프트.md
     └── 참고/                    ← 강의에서 완성한 계약과 SKILL.md. 내 것을 만든 뒤에만 연다
@@ -150,7 +149,7 @@ codex</code></pre></li>
 
 [3단계: 작업 문서 폴더]
 - 루트에 part4/ 와 .agents/skills/ 폴더를 만들어.
-- 실습파일에서 복사: 실행계약_템플릿.md, 공통/ 아래 세 파일 → part4/
+- 실습파일에서 복사: 실행계약_템플릿.md, 공통/skill_선정기준표.md, 공통/skill_후보목록_예시.md → part4/
   paper-reading/생성_프롬프트.md → part4/paper-reading_생성프롬프트.md
   experiment-log/생성_프롬프트.md → part4/experiment-log_생성프롬프트.md
   두 실행계약과 두 SKILL.md → part4/참고/ (SKILL.md는 paper-reading_SKILL.md,
