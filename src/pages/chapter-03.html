@@ -127,13 +127,13 @@ description: 논문 한 편을 llm_wiki에 넣거나 기존 논문 페이지를 
 <h4>3-3. 모호한 지점 결정하고 승인하기</h4>
 <p>에이전트가 보고한 모호한 지점과 중복 문장마다 셋 중 하나로 결정합니다. (가) 이 Skill만의 규칙이면 계약에 추가한다. (나) 여러 업무에 공통인 규칙이면 <code>llm_wiki/AGENTS.md</code>나 <code>research/AGENTS.md</code>에 추가한다. (다) 지금 정할 필요가 없으면 "미결"로 적고 넘어간다. 결정, 반영, 재대조, 승인, 계약 파일 정리를 요청문 하나로 보냅니다.</p>
 <pre class="prompt"><code>보고한 모호한 지점과 중복 문장에 대해 다음과 같이 결정했어.
-[번호]: [결정 내용]
-[번호]: [결정 내용]
+<span class="slot is-empty">[번호]</span>: <span class="slot is-empty">[결정 내용]</span>
+<span class="slot is-empty">[번호]</span>: <span class="slot is-empty">[결정 내용]</span>
 중복 문장: 제안한 대로 참조로 줄여.
 
 순서대로 해줘.
 1. 결정을 paper-reading_실행계약.md 에 먼저 반영하고, 그다음 SKILL.md에 반영해.
-   공용 규칙으로 정한 것은 SKILL.md가 아니라 [해당 규칙 파일]의 [절]에 추가해.
+   공용 규칙으로 정한 것은 SKILL.md가 아니라 <span class="slot is-empty">[해당 규칙 파일]</span>의 <span class="slot is-empty">[절]</span>에 추가해.
 2. 계약과 SKILL.md를 다시 대조해서 빠진 조항이 없는지 확인해.
 3. 빠진 조항이 없으면 루트의 paper-reading_실행계약.md 를
    part4/paper-reading_실행계약_생성시점.md 로 옮기고, 파일 맨 위에
